@@ -1,25 +1,42 @@
 #!/usr/bin/env bash
+# create_and_push.sh
+# Creates a branch, writes a docs/ GitHub Pages site (with per-section images folders),
+# commits everything and pushes to origin.
+#
+# Updated for repo: hendrisutrisno/statistics
 set -euo pipefail
 
+# Configuration
 BRANCH="add-gh-pages"
 COMMIT_MSG="Add docs site and GitHub Pages workflow; per-section resource folders"
+REPO_SSH="git@github.com:hendrisutrisno/statistics.git"
+# Optional HTTPS fallback:
+REPO_HTTPS="https://github.com/hendrisutrisno/statistics.git"
 
-# Ensure we're in a git repository
+# Ensure script is run from repository root (or at least a git repo)
 if [ ! -d ".git" ]; then
-  echo "Error: this script must be run from the root of a git repository."
-  exit 1
+  echo "No .git found. Initializing a new git repository in the current directory."
+  git init
+  # If origin isn't set later, we'll add it below.
 fi
 
-# Create branch
-git checkout -b "$BRANCH"
+# Ensure origin remote exists; if not, add SSH remote (fall back to HTTPS)
+if ! git remote get-url origin >/dev/null 2>&1; then
+  echo "No 'origin' remote found. Adding origin -> $REPO_SSH"
+  git remote add origin "$REPO_SSH" || git remote add origin "$REPO_HTTPS"
+fi
+
+# Create and switch to branch
+# If branch already exists locally, check it out; otherwise create it.
+if git show-ref --verify --quiet "refs/heads/$BRANCH"; then
+  git checkout "$BRANCH"
+else
+  git checkout -b "$BRANCH"
+fi
 
 # Create directories
 mkdir -p .github/workflows
 mkdir -p docs/assets
-mkdir -p docs/content/getting-started
-mkdir -p docs/content/foundations
-mkdir -p docs/content/applied-topics
-mkdir -p docs/content/tools-resources
 mkdir -p docs/content/getting-started/images
 mkdir -p docs/content/foundations/images
 mkdir -p docs/content/applied-topics/images
@@ -66,7 +83,7 @@ A small, ReadTheDocs-like static site to store learning resources on statistics.
 You can preview locally by starting a simple HTTP server from the repository root:
 
   $ python -m http.server 8000
-  # then open http://localhost:8000 in your browser
+  # then open http://localhost:8000/docs/ in your browser
 
 Or use any static hosting (GitHub Pages, Netlify, etc.).
 
@@ -104,7 +121,6 @@ cat > docs/index.html <<'EOF'
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Learning — Statistics</title>
   <link rel="stylesheet" href="assets/style.css">
-  <!-- marked: client-side markdown parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
@@ -217,7 +233,6 @@ body{
 .content code{background:#f2f6f9;padding:2px 6px;border-radius:4px;font-family:var(--monospace)}
 .content ul{margin-left:1.1rem}
 .site-footer{padding:16px 0;text-align:center;color:var(--muted)}
-/* Responsive */
 @media (max-width:900px){
   .layout{flex-direction:column;padding:12px}
   .sidebar{width:100%;max-height:none}
@@ -290,7 +305,6 @@ async function loadStructure(){
     const res = await fetch('content/structure.json');
     structure = await res.json();
     createSidebar(structure.sections);
-    // load default page (first page) or hash
     const initial = location.hash ? location.hash.slice(1) : (structure.sections[0].pages[0].file);
     await loadPage(initial);
     setActiveLink(initial);
@@ -301,7 +315,6 @@ async function loadStructure(){
   }
 }
 
-// simple search: filter page links by title and section
 function search(q){
   q = (q||'').trim().toLowerCase();
   const allLinks = SIDEBAR.querySelectorAll('a');
@@ -309,7 +322,6 @@ function search(q){
     const show = a.textContent.toLowerCase().includes(q);
     a.parentElement.style.display = show ? '' : 'none';
   });
-  // hide empty sections
   const sections = SIDEBAR.querySelectorAll('.nav-section');
   sections.forEach(sec => {
     const any = Array.from(sec.querySelectorAll('li')).some(li => li.style.display !== 'none');
@@ -319,7 +331,6 @@ function search(q){
 
 SEARCH.addEventListener('input', e => search(e.target.value));
 
-// handle back/forward
 window.addEventListener('popstate', ev => {
   const file = ev.state && ev.state.file ? ev.state.file : (location.hash ? location.hash.slice(1) : null);
   if(file) loadPage(file).then(()=>setActiveLink(file));
@@ -382,12 +393,6 @@ How to add content
 1. Add a markdown file in `content/<section>/` (for example `content/foundations/my-topic.md`)
 2. Add an entry for it in `content/structure.json` under the section you want
 3. Open the site and click the new page in the sidebar
-
-Example of what to include in a page:
-- short explanation
-- code snippets (R, Python, Julia)
-- links to papers, blog posts, and videos
-- small reproducible demos
 
 Place images for this section inside `content/getting-started/images/`.
 
