@@ -1,4 +1,5 @@
-# Deploy docs/ to GitHub Pages on push to main using the official Pages actions
+name: Deploy docs to GitHub Pages (gh-pages)
+
 on:
   push:
     branches:
@@ -10,20 +11,16 @@ permissions:
   id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload pages artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: Publish docs/ to gh-pages
+        uses: peaceiris/actions-gh-pages@v4
         with:
-          path: 'docs'
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./docs
+          allow_empty_commit: true
