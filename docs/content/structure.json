@@ -1,0 +1,37 @@
+{
+  "sections": [
+    {
+      "title": "Getting started",
+      "pages": [
+        { "title": "Introduction", "file": "getting-started/introduction.md" },
+        { "title": "Demos", "file": "getting-started/demos.md" }
+      ]
+    },
+    {
+      "title": "Foundations",
+      "pages": [
+        { "title": "Probability basics", "file": "foundations/probability-basics.md" },
+        { "title": "Random variables & distributions", "file": "foundations/distributions.md" },
+        { "title": "Statistical inference", "file": "foundations/inference.md" }
+      ]
+    },
+    {
+      "title": "Applied topics",
+      "pages": [
+        { "title": "Regression & GLMs", "file": "applied-topics/regression.md" },
+        { "title": "Time series", "file": "applied-topics/time-series.md" },
+        { "title": "Bayesian methods", "file": "applied-topics/bayesian.md" },
+        { "title": "Resampling & bootstrap", "file": "applied-topics/resampling.md" }
+      ]
+    },
+    {
+      "title": "Tools & resources",
+      "pages": [
+        { "title": "Visualization", "file": "tools-resources/visualization.md" },
+        { "title": "Multivariate analysis", "file": "tools-resources/multivariate.md" },
+        { "title": "Machine learning", "file": "tools-resources/ml.md" },
+        { "title": "Resources", "file": "tools-resources/resources.md" }
+      ]
+    }
+  ]
+}
