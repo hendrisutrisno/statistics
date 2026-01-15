@@ -1,0 +1,779 @@
+# Joint Probability Distributions
+
+### Learning Objectives
+
+After studying this handout, you should be able to:
+
+1. Explain what a joint probability distribution represents.
+2. Compute probabilities using a joint probability mass function (pmf).
+3. Compute probabilities using a joint probability density function (pdf).
+4. Obtain marginal distributions from a joint distribution.
+5. Interpret conditional distributions in an operational context.
+6. Determine whether two random variables are independent.
+
+## 1. Joint Probability Distributions
+
+Many real systems produce more than one outcome at the same time. These outcomes are observed from the same process, during the same period, and under the same operating conditions. Because they are generated together, the outcomes often influence each other. Analyzing each outcome separately can hide important relationships. Joint analysis focuses on how outcomes occur together.
+
+Consider the following situations.
+
+- A production process operates continuously throughout the day. During each shift, the operating condition of the machine is recorded, along with the number of defective items produced. On some days, the machine runs smoothly and only a few defects appear.  On other days, small changes in operating conditions are observed and defects increase noticeably.  This is a case of a **joint distribution**, because operating condition and product quality are observed together and may be related.
+
+- A company receives customer orders every day and records the number of units requested.  At the same time, it records how long deliveries take to arrive.  On certain days, high order volumes are followed by longer delivery times.  On other days, orders are fewer and deliveries arrive quickly.  This is a case of a **joint distribution**, because demand and delivery time describe the same system behavior and must be studied together.
+
+- Customers arrive at a service facility and wait for assistance.  For each customer, the waiting time before service and the time spent being served are recorded.  Some customers wait a long time even when service times are short.  Other customers experience long waits mainly when service times are long.  This is a case of a **joint distribution**, because waiting time and service time are measured for the same customer and may depend on each other.
+
+- A computer system processes user requests throughout the day. For each request, the system records the signal condition and the response time. When the signal is strong, responses are usually fast, but not always.  When the signal is weak, delays occur more frequently. This is a case of a **joint distribution**, because signal condition and response time describe the same request and are connected.
+
+In each situation above, it is possible to study only one outcome at a time. For example, delivery time can be analyzed without considering demand, or response time can be examined without considering signal condition. Such an analysis can describe typical behavior, such as an average delay, a usual waiting time, or the overall variability of a single outcome. This information is useful, but it is incomplete.
+
+The limitation becomes clear when we return to the situations described earlier. Suppose long delivery times are observed. Without considering demand, it is not clear whether these delays occur randomly or mainly on days when demand is high. Similarly, suppose a higher number of defects is observed. Without considering operating conditions, it is not clear whether defects increase uniformly or mainly when certain conditions are present. In the service example, knowing the average waiting time does not explain whether long waits occur even when service is fast, or mainly when service itself is slow. In the system example, knowing the overall response time does not explain whether slow responses are equally likely under all signal conditions.
+
+These questions all have the same structure. They ask whether two outcomes tend to occur **together** in the same observation. They ask whether one outcome changes when the other outcome takes a particular value. Answering such questions requires more than studying each outcome separately. It requires a way to describe how pairs of outcomes appear across repeated observations of the same system.
+
+A **joint probability distribution** addresses this limitation by describing how two random variables behave at the same time. Instead of assigning probabilities to individual outcomes, it assigns probabilities to **pairs of outcomes** that occur together in a single observation. For example, it can describe how often high demand occurs together with long delivery time, how often specific operating conditions occur together with high defect counts, or how often weak signal conditions occur together with slow system responses. By organizing probabilities around these pairs, a joint probability distribution provides a complete description of how two sources of uncertainty interact within the same system.
+
+## 2. Joint Probability Distributions for Two Random Variables
+### 2.1. Joint Probability Mass Function (Discrete Case)
+
+Let $X$ and $Y$ be two **discrete random variables**. Each time the system is observed, it produces one value of $X$ and one value of $Y$ at the same time. Because both values come from the same observation, they must be described together rather than separately.
+
+The **joint probability mass function (joint pmf)** is defined as
+
+$$
+f_{XY}(x,y) = P(X = x, Y = y)
+$$
+
+This notation should be read carefully. The expression $X = x$ means that the random variable $X$ takes the specific value $x$. The expression $Y = y$ means that the random variable $Y$ takes the specific value $y$. The comma indicates that both events occur together in the same observation. The probability operator $P(\cdot)$ assigns a probability to this joint event. Therefore, $f_{XY}(x,y)$ represents the probability that $X$ takes the value $x$ and, at the same time, $Y$ takes the value $y$.
+
+A joint pmf assigns a probability to every possible pair $(x,y)$ that the two variables can take. Each pair corresponds to one possible outcome of the system. For discrete variables, the joint pmf is often presented as a table, where rows correspond to values of one variable, columns correspond to values of the other variable, and each cell contains the probability of a specific pair. Each cell describes what happens when both variables take particular values together, not separately.
+
+The joint pmf must satisfy two basic properties.
+
+1. **Non-negativity.**  
+   For all values of $x$ and $y$, the joint pmf must satisfy
+   
+   $$
+   f_{XY}(x,y) \ge 0
+   $$
+   
+   This means that probabilities cannot be negative. A value of zero indicates that a particular pair $(x,y)$ never occurs, while larger values indicate pairs that occur more frequently in the observed system.
+
+2. **Total probability equals one.**  
+   The probabilities assigned to all possible pairs of values must add up to one:
+
+   $$
+   \sum_x \sum_y f_{XY}(x,y) = 1
+   $$
+
+   The inner sum adds probabilities across all possible values of $Y$ for a fixed value of $X$. The outer sum then adds across all possible values of $X$. Together, these sums account for every possible outcome of the system. This reflects the fact that, in each observation, one and only one pair $(x,y)$ must occur.
+
+When reading a joint pmf, attention should remain on **joint occurrence**. The value $f_{XY}(x,y)$ refers to a specific pair of values observed together in the same outcome. It does not describe how $X$ behaves on its own, and it does not describe how $Y$ behaves on its own. Each value of the joint pmf answers a localized question: how frequently does this particular combination appear among all observations? Understanding this point is essential before extracting any further information from the joint distribution.
+
+#### Illustration
+
+To make the idea of a joint pmf concrete, consider again the inspection scenario in which two outcomes are recorded at the same time during each inspection.
+
+- $X$ denotes the machine status during inspection:
+  - $X = 1$ for a normal state,
+  - $X = 2$ for a warning signal,
+  - $X = 3$ for an alarm signal.
+- $Y$ denotes the inspection result:
+  - $Y = 0$ if no defect is found,
+  - $Y = 1$ if a defect is found.
+
+Each inspection produces one **paired outcome** $(X,Y)$.
+
+**Observation-level view**. Before working with probabilities, it is useful to look at the data at the level of individual inspections. Each row in the table below corresponds to one inspection, and each inspection produces one pair of outcomes.
+
+| Inspection | Machine Status $X$ | Inspection Result $Y$ |
+|-----------:|:------------------:|:---------------------:|
+| 1 | 1 | 0 |
+| 2 | 2 | 0 |
+| 3 | 2 | 1 |
+| 4 | 3 | 1 |
+| 5 | 1 | 0 |
+| 6 | 3 | 1 |
+| ⋮ | ⋮ | ⋮ |
+
+The important point here is that the values of $X$ and $Y$ in each row are observed **together**. They describe the same inspection and should not be separated. Each row represents one realized pair $(x,y)$, such as $(2,1)$, which corresponds to a defect found when a warning signal is present.
+
+**Joint pmf table**. When the number of inspections is large, the individual observations can be summarized by counting how frequently each possible pair $(x,y)$ appears and then converting those counts into probabilities. The result is the joint pmf $f_{XY}(x,y)$, which can be displayed in a table.
+
+| $X \backslash Y$ | $Y = 0$ (No defect) | $Y = 1$ (Defect) |
+|:----------------:|:------------------:|:----------------:|
+| $X = 1$ (Normal) | 0.30 | 0.10 |
+| $X = 2$ (Warning) | 0.20 | 0.15 |
+| $X = 3$ (Alarm) | 0.10 | 0.15 |
+
+Each entry in this table represents a joint probability. For example, the value 0.15 in the row $X = 2$ and column $Y = 1$ is $f_{XY}(2,1)$, the probability that a defect is found during an inspection when the machine is in a warning state. Each cell corresponds to one specific combination of outcomes and should be interpreted as such.
+
+**Visual representation of the joint pmf**. The same joint pmf can also be represented visually. In the figure above, each bar corresponds to one cell of the joint pmf table. The horizontal position of a bar identifies the pair $(x,y)$, and the height of the bar represents the value of $f_{XY}(x,y)$.
+
+```{raw} html
+<iframe src="../_static/joint_pmf_interactive.html"
+        width="100%"
+        height="500px"
+        style="border:none;">
+</iframe>
+```
+
+Difficulties arise when this visual representation is not treated as a joint description. One common mistake is to focus on only one variable while ignoring the paired structure of the bars. For example, observing that bars associated with $X = 3$ are relatively tall may lead to the incorrect conclusion that an alarm state always results in a defect, even though some bars at $X = 3$ correspond to $Y = 0$. Similarly, focusing only on bars with $Y = 1$ may suggest that defects occur independently of machine status, without considering how those bars are distributed across different values of $X$.
+
+Another misleading approach is to draw conclusions by tracing a single line along one axis, as if the figure represented a one-variable distribution. Doing so removes the pairing $(x,y)$ that defines each bar. When conclusions are drawn from only one variable at a time, the interaction between machine status and inspection result is no longer represented, and the figure is effectively reduced to a different object than the joint pmf it is meant to display.
+
+### 2.2. Joint Probability Density Function (Continuous Case)
+
+When $X$ and $Y$ are **continuous random variables**, the way probabilities are described changes. Individual values of $X$ or $Y$ are no longer counted as separate outcomes. Instead, the variables can take any value within an interval. As a result, probabilities cannot be assigned to single points in the same way as in the discrete case.
+
+In this setting, the behavior of $X$ and $Y$ together is described by a **joint probability density function**, denoted by $f_{XY}(x,y)$. The function $f_{XY}(x,y)$ does not give the probability that $X = x$ and $Y = y$. For continuous variables, the probability of observing any exact pair $(x,y)$ is zero. Instead, the joint pdf describes how probability is distributed across different regions of the $(x,y)$ plane.
+
+To obtain a probability, the joint pdf must be integrated over a region of interest. If $R$ is a region in the $(x,y)$ plane, then the probability that the pair $(X,Y)$ falls within this region is given by
+
+$$
+P((X,Y) \in R) = \iint_R f_{XY}(x,y)\,dx\,dy
+$$
+
+The region $R$ represents all pairs of values that satisfy the conditions being studied. For example, it may represent all combinations where both variables are below certain thresholds, or where one variable lies within a specific range while the other varies more freely. The probability is obtained by accumulating the density over all such pairs.
+
+Geometrically, the joint pdf can be viewed as defining a surface above the $(x,y)$ plane. The double integral computes the volume under this surface and above the region $R$. This volume corresponds to the probability that the observed values of $X$ and $Y$ fall within that region. In this way, probabilities for continuous random variables are associated with **areas and regions**, not with individual points.
+
+Like the joint pmf, the joint pdf must satisfy basic properties that ensure it represents a valid probability model.
+
+1. **Non-negativity.**  
+   For all values of $x$ and $y$, the joint pdf must satisfy
+
+   $$
+   f_{XY}(x,y) \ge 0
+   $$
+
+   Although the joint pdf is not itself a probability, it represents how probability density is distributed across the $(x,y)$ plane. Negative values would have no physical or probabilistic meaning.
+
+2. **Total probability equals one.**  
+   When the joint pdf is integrated over all possible values of $X$ and $Y$, the result must be one:
+
+   $$
+   \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f_{XY}(x,y)\,dx\,dy = 1
+   $$
+   
+   This condition ensures that all possible pairs of values are accounted for. It reflects the fact that, in each observation, the pair $(X,Y)$ must fall somewhere in the plane.
+
+These properties mirror those of the joint pmf, but the interpretation is different. In the continuous case, probabilities are not attached to individual pairs $(x,y)$. Instead, they are attached to regions formed by many such pairs. The joint pdf describes how probability accumulates across these regions rather than how it is assigned to single outcomes.
+
+#### Illustration
+
+Consider a process in which two continuous measurements are recorded simultaneously. Let $X$ denote the processing time of a task, measured in seconds, and let $Y$ denote the operating temperature of the system, measured in degrees Celsius. Suppose that observations show the following behavior: processing times vary between 0 and 10 seconds, temperatures vary between 0 and 5 degrees, and all combinations within this range occur with equal likelihood.
+
+This situation can be modeled using a joint probability density function that is uniform over a rectangular region. The joint pdf is defined as
+
+$$
+f_{XY}(x,y) =
+\begin{cases}
+\frac{1}{50}, & 0 \le x \le 10,\; 0 \le y \le 5, \\
+0, & \text{otherwise}
+\end{cases}
+$$
+
+The constant value $\frac{1}{50}$ is chosen so that the total probability over the rectangle equals one, since the area of the region is $10 \times 5 = 50$.
+
+**Interpreting probability using regions**. In this continuous setting, probabilities are obtained by specifying regions rather than individual points. For example, the probability that the processing time is between 2 and 6 seconds and the temperature is between 1 and 3 degrees corresponds to a rectangular region inside the support of the joint pdf. The probability of this event is computed by integrating $f_{XY}(x,y)$ over that region.
+
+Because the joint pdf is constant within the rectangle, probabilities depend only on the area of the region being considered. Larger regions correspond to higher probabilities, while smaller regions correspond to lower probabilities.
+
+**Visual representation of the joint pdf**. The joint pdf can be visualized as a flat surface above the $(x,y)$ plane. The height of the surface represents the value of $f_{XY}(x,y)$, and probability is associated with the volume under the surface over a specified region.
+
+```{raw} html
+<iframe src="../_static/joint_pdf_interactive_nonuniform.html"
+        width="100%"
+        height="500px"
+        style="border:none;">
+</iframe>
+```
+
+In the figure above, the surface height represents the value of the joint pdf $f_{XY}(x,y)$. Higher regions of the surface correspond to pairs of values that occur more frequently, while lower regions correspond to pairs that occur less frequently. Probability is obtained by selecting a region in the $(x,y)$ plane and accumulating the density over that region. The shape of the surface reflects joint behavior. Because the density is higher along a diagonal direction, values of $X$ and $Y$ tend to increase or decrease together rather than independently.
+
+We also can observe that the joint pdf surface is stretched more in one direction than the other. This reflects the fact that the two variables do not vary on the same scale. One variable shows greater spread across its range, while the other is more tightly concentrated. The surface shape therefore encodes information about how widely each variable varies, in addition to how they vary together.
+
+```{toctree}
+:maxdepth: 2
+:caption: Worked Examples
+
+examples/example_joint_pdf_transport
+```
+
+### 2.3. Marginal Distributions 
+
+A joint distribution describes how two variables behave **together**. In many situations, however, interest lies in understanding the behavior of **one variable by itself**, without conditioning on or explicitly tracking the other. A **marginal distribution** provides exactly this view.
+
+The word *marginal* reflects the idea of moving from a two-dimensional description to a one-dimensional one by “summing out” or “integrating out” the other variable. The result is a distribution that describes variability in one variable alone, while still being derived from the joint model.
+
+#### Discrete Case
+
+Let $X$ and $Y$ be discrete random variables with joint probability mass function $f_{XY}(x,y)$. The marginal pmf of $X$ is obtained by summing the joint pmf over all possible values of $Y$:
+
+$$
+f_X(x) = \sum_y f_{XY}(x,y)
+$$
+
+Similarly, the marginal pmf of $Y$ is obtained by summing over all possible values of $X$:
+
+$$
+f_Y(y) = \sum_x f_{XY}(x,y)
+$$
+
+In each case, the summation collects the probabilities of **all joint outcomes** in which the variable of interest takes a specific value. The other variable is not fixed; instead, all of its possible values are accounted for. As a result, the marginal pmf describes how often a particular value of $X$ or $Y$ occurs overall, regardless of what happens to the other variable.
+
+#### Continuous Case
+
+When $X$ and $Y$ are continuous random variables with joint probability density function $f_{XY}(x,y)$, marginal distributions are obtained by integration rather than summation.
+
+The marginal pdf of $X$ is defined as
+
+$$
+f_X(x) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dy
+$$
+
+and the marginal pdf of $Y$ is defined as
+
+$$
+f_Y(y) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dx
+$$
+
+The integral accumulates probability density across **all possible values of the other variable**. Conceptually, this corresponds to projecting the joint density surface onto one axis. The resulting function describes the relative likelihood of different values of the variable of interest, without reference to the second variable.
+
+**Interpretation**. Marginal distributions answer questions about **one outcome at a time**, while still being grounded in the joint behavior of the system. Typical questions include:
+
+- What is the distribution of waiting time, without distinguishing between different completion times?
+- What is the distribution of total service time, without conditioning on how long the customer waited?
+- What is the distribution of demand, regardless of lead time or supply conditions?
+
+It is important to recognize what marginal distributions **do and do not** represent. They preserve information about the overall variability of a single variable, but they do not describe how two variables interact or depend on each other. That interaction is present in the joint distribution and can only be recovered by considering joint or conditional distributions.
+
+## 3. Conditional Probability Distributions and Independence
+### 3.1. Conditional Probability Distributions
+
+Marginal distributions are usually the first summaries we compute from a joint distribution. For example, the marginal distribution of $X$ describes the overall variability of $X$, without using any information about $Y$. This is useful for overall questions such as: “What values of $Y$ are common in general?” or “What is the average value of $X$ overall?”. However, many practical questions are **condition-specific**. They ask about $Y$ after we know something about $X$. For example:
+
+- “How does the number of conforming parts behave **given** that a certain number of nonconforming parts is observed?”
+- “What response time is likely **given** strong Wi-Fi signal?”
+- “What defect rate is likely **given** the machine alarm is ON?”
+
+These questions cannot be answered using marginal distributions alone. A marginal distribution mixes together all operating conditions. It does not separate the cases where $X$ is small from the cases where $X$ is large. If the behavior of $Y$ changes with $X$, then the marginal distribution of $Y$ hides this change.
+
+To answer condition-specific questions, we must use the **joint distribution** and focus on one condition at a time. Graphically, conditioning means:
+
+1. Start from the **joint distribution** of $(X,Y)$.
+2. Fix a value $X=x$.
+3. Keep only the part of the joint distribution compatible with that condition.
+4. **Renormalize** within that part so the total probability (discrete case) or total area (continuous case) becomes 1.
+
+This “select and renormalize” idea leads to a **conditional distribution**: the distribution of $Y$ when $X=x$ is known.
+
+#### Discrete case (pmf)
+
+If $X$ and $Y$ are **discrete**, the conditional probability mass function (pmf) of $Y$ given $X=x$ is
+
+$$
+f_{Y\mid X}(y\mid x)=P(Y=y\mid X=x)=\frac{f_{XY}(x,y)}{f_X(x)},\quad f_X(x)>0
+$$
+
+where,
+- $ f_{XY}(x,y)=P(X=x,\;Y=y) $ is the **joint pmf**.
+- $ f_X(x)=P(X=x)=\sum_y f_{XY}(x,y) $ is the **marginal pmf** of $X$.
+
+The division appears due to:
+-  The numerator selects outcomes with $(X=x,Y=y)$.
+- The denominator represents the total probability of the condition $X=x$.
+- Dividing rescales probabilities so that, for fixed $x$,
+
+$$
+\sum_y f_{Y\mid X}(y\mid x)=1
+$$
+
+**Interpretation**
+For a fixed $x$, the set $\{f_{Y\mid X}(y\mid x)\}$ over all $y$ forms a **new probability distribution** for $Y$, valid only under the condition $X=x$.
+
+#### Continuous case (pdf)
+
+If $X$ and $Y$ are **continuous** with joint probability density function (pdf) $f_{XY}(x,y)$, the conditional pdf of $Y$ given $X=x$ is
+
+$$
+f_{Y\mid X}(y\mid x)=\frac{f_{XY}(x,y)}{f_X(x)},\quad f_X(x)>0
+$$
+
+where the marginal pdf of $X$ is
+
+$$
+f_X(x)=\int_{-\infty}^{\infty} f_{XY}(x,y)\,dy
+$$
+
+using the correct integration limits based on where $f_{XY}(x,y)\neq 0$.
+
+**Important interpretation**
+
+- $f_{Y\mid X}(y\mid x)$ is a **density**, not a probability.
+- Conditional probabilities come from integration:
+
+$$
+P(Y\in B\mid X=x)=\int_B f_{Y\mid X}(y\mid x)\,dy
+$$
+
+**Properties**
+For each fixed $x$ with $f_X(x)>0$, $f_{Y\mid X}(y\mid x)$ must satisfythe following three properties:
+
+1. **Nonnegativity:**
+   Since $f_{Y\mid X}(y\mid x)$ is a probability density for $Y$ after fixing $X=x$, it cannot be negative. A negative value would imply a negative probability over some interval, which is not meaningful.
+
+   $$ f_{Y\mid X}(y\mid x)\ge 0 $$
+
+2. **Total area equals 1:**
+   After conditioning on $X=x$, $f_{Y\mid X}(y\mid x)$ must represent a complete distribution of $Y$ under that condition. Therefore, the total area under the curve must be 1:
+
+   $$
+   \int_{-\infty}^{\infty} f_{Y\mid X}(y\mid x)dy=1
+   $$
+
+3. **Probabilities come from integrating over a set:**
+   For continuous $Y$, a probability is obtained by integrating the conditional density over the set $B$. This gives the conditional probability that $Y$ falls in $B$ given $X=x$:
+
+   $$
+   P(Y\in B\mid X=x)=\int_B f_{Y\mid X}(y\mid x)dy
+   $$
+
+#### Note: always state the nonzero region (support)
+
+A joint pdf $f_{XY}(x,y)$ is often defined to be positive only for some allowed ((x,y)) values. This allowed set is called the **support**. Outside the support, the pdf is $0$.
+
+This matters because the support tells you: **which values of $y$ are possible when $X=x$ is fixed**, and **what limits to use when computing the marginal**.
+
+  $$
+  f_X(x)=\int f_{XY}(x,y) dy
+  $$
+
+If you ignore the support, you may integrate over values that are not possible. Then $f_X(x)$ and $f_{Y\mid X}(y\mid x)$ will be wrong.
+
+## Conditional Mean and Variance
+
+After we condition on $X=x$, the variable $Y$ has a new distribution: the conditional distribution $f_{Y\mid X}(y\mid x)$. The **conditional mean** and **conditional variance** summarize this conditional distribution.
+
+### Conditional mean
+
+The **conditional mean of $Y$ given $X=x$** is written as $E(Y\mid X=x)$. We also denote it by $\mu_{Y\mid x}$.
+
+$$
+\mu_{Y\mid x}=E(Y\mid X=x)=\int_{-\infty}^{\infty} y\, f_{Y\mid X}(y\mid x)dy
+$$
+
+### Conditional variance
+
+The **conditional variance of $Y$ given $X=x$** is written as $V(Y\mid X=x)$. It measures how far $Y$ typically is from the conditional mean $\mu_{Y\mid x}$.
+
+$$
+V(Y\mid X=x)=\int_{-\infty}^{\infty} (y-\mu_{Y\mid x})^2 f_{Y\mid X}(y\mid x)dy
+$$
+
+A common shortcut form is
+
+$$
+V(Y\mid X=x)=E(Y^2\mid X=x)-\mu_{Y\mid x}^2
+$$
+
+where
+
+$$
+E(Y^2\mid X=x)=\int_{-\infty}^{\infty} y^2\, f_{Y\mid X}(y\mid x)dy
+$$
+
+Once we have the conditional distribution of $Y$ given $X=x$, we can summarize it using a **conditional mean** and a **conditional variance**.
+
+- The **conditional mean** $E(Y\mid X=x)$ is the average value of $Y$ **under the condition** that $X=x$ is known.
+- The **conditional variance** $V(Y\mid X=x)$ measures how spread out $Y$ is **under the same condition**.
+
+These quantities are useful because they translate a full conditional distribution into two interpretable numbers: a typical level (mean) and uncertainty (variance), **at each condition $x$**.
+
+
+
+
+
+
+
+
+
+## Illustrative example (joint pdf → conditional pdf → conditional probability → conditional mean/variance)
+
+### Step 1: Define a simple joint pdf with a support region
+
+Let $(X,Y)$ have joint pdf
+
+$$
+f_{XY}(x,y)=
+\begin{cases}
+2, & 0<x<y<1,\\
+0, & \text{otherwise}.
+\end{cases}
+$$
+
+**How to read the support $0<x<y<1$:**  
+Only points above the line $y=x$ inside the unit square are possible. Outside that triangular region, the density is $0$.
+
+---
+
+### Step 2: Compute the marginal $f_X(x)$ (use the support to set limits)
+
+For a fixed $x$ with $0<x<1$, the allowed $y$ values are $x<y<1$. So
+
+$$
+f_X(x)=\int_x^1 2\,dy=2(1-x), \quad 0<x<1.
+$$
+
+---
+
+### Step 3: Compute the conditional pdf $f_{Y\mid X}(y\mid x)$
+
+For $0<x<1$ and $x<y<1$,
+
+$$
+f_{Y\mid X}(y\mid x)=\frac{f_{XY}(x,y)}{f_X(x)}
+=\frac{2}{2(1-x)}
+=\frac{1}{1-x}.
+$$
+
+So $Y\mid X=x$ is **uniform** on the interval $[x,1]$.
+
+---
+
+### Step 4: Example of a conditional probability (a condition-specific question)
+
+Compute $P(Y>0.8\mid X=x)$.
+
+- If $x\ge 0.8$, then $Y$ must be at least $x$, so $P(Y>0.8\mid X=x)=1$.
+- If $x<0.8$, integrate the conditional density from $0.8$ to $1$:
+
+$$
+P(Y>0.8\mid X=x)=\int_{0.8}^{1}\frac{1}{1-x}\,dy
+=\frac{1-0.8}{1-x}
+=\frac{0.2}{1-x},
+\quad 0<x<0.8.
+$$
+
+This shows why marginal distributions are not enough: the probability changes with the known condition $x$.
+
+---
+
+### Step 5: Conditional mean and variance
+
+Because $Y\mid X=x$ is uniform on $[x,1]$:
+
+$$
+E(Y\mid X=x)=\int_x^1 y\cdot \frac{1}{1-x}\,dy
+=\frac{x+1}{2}.
+$$
+
+For the conditional second moment:
+
+$$
+E(Y^2\mid X=x)=\int_x^1 y^2\cdot \frac{1}{1-x}\,dy
+=\frac{1-x^3}{3(1-x)}
+=\frac{1+x+x^2}{3}.
+$$
+
+Then
+
+$$
+V(Y\mid X=x)=E(Y^2\mid X=x)-\bigl(E(Y\mid X=x)\bigr)^2
+=\frac{(1-x)^2}{12}.
+$$
+
+**Interpretation**
+- As $x$ increases, the possible range for $Y$ becomes shorter ($[x,1]$ shrinks).
+- So the conditional mean increases toward $1$, and the conditional variance decreases toward $0$.
+
+---
+
+## Plotly visualization code (joint pdf + conditional slice + conditional mean/variance)
+
+> This code creates:
+> 1) a 3D surface view of the joint pdf support region,  
+> 2) a 2D plot of the conditional density slice at a chosen $x=x_0$, with the conditional mean marked,  
+> 3) a 2D plot showing how $E(Y\mid X=x)$ and $V(Y\mid X=x)$ change with $x$.
+
+```python
+import numpy as np
+import plotly.graph_objects as go
+
+# -----------------------
+# Joint pdf definition
+# f_{XY}(x,y) = 2 for 0 < x < y < 1, else 0
+# -----------------------
+def f_xy(x, y):
+    return np.where((x > 0) & (y > 0) & (x < 1) & (y < 1) & (x < y), 2.0, 0.0)
+
+# Marginal f_X(x) = 2(1-x) for 0<x<1
+def f_x(x):
+    return np.where((x > 0) & (x < 1), 2.0 * (1.0 - x), 0.0)
+
+# Conditional f_{Y|X}(y|x) = 1/(1-x) for x<y<1, else 0 (for 0<x<1)
+def f_y_given_x(y, x):
+    return np.where((x > 0) & (x < 1) & (y >= x) & (y <= 1), 1.0 / (1.0 - x), 0.0)
+
+# Conditional mean and variance
+def cond_mean(x):
+    return (x + 1.0) / 2.0
+
+def cond_var(x):
+    return ((1.0 - x) ** 2) / 12.0
+
+# -----------------------
+# Figure 1: 3D surface for joint pdf over a grid
+# -----------------------
+n = 80
+xg = np.linspace(0, 1, n)
+yg = np.linspace(0, 1, n)
+X, Y = np.meshgrid(xg, yg)
+Z = f_xy(X, Y)
+
+fig_joint = go.Figure(
+    data=[
+        go.Surface(x=X, y=Y, z=Z, showscale=False)
+    ]
+)
+fig_joint.update_layout(
+    title="Joint pdf f_XY(x,y): nonzero only on the triangular support 0<x<y<1",
+    scene=dict(
+        xaxis_title="x",
+        yaxis_title="y",
+        zaxis_title="f_XY(x,y)"
+    )
+)
+
+# -----------------------
+# Figure 2: Conditional slice at x = x0
+# -----------------------
+x0 = 0.30
+y_line = np.linspace(0, 1, 400)
+fy_line = f_y_given_x(y_line, x0)
+
+mu = cond_mean(x0)
+
+fig_cond = go.Figure()
+fig_cond.add_trace(go.Scatter(x=y_line, y=fy_line, mode="lines", name=f"f_Y|X(y|x={x0:.2f})"))
+fig_cond.add_trace(go.Scatter(x=[mu], y=[f_y_given_x(mu, x0)], mode="markers", name="Conditional mean"))
+
+fig_cond.update_layout(
+    title="Conditional density slice: Y | X = x0 (uniform on [x0, 1])",
+    xaxis_title="y",
+    yaxis_title="f_Y|X(y|x0)"
+)
+
+# -----------------------
+# Figure 3: Conditional mean and variance as functions of x
+# -----------------------
+x_line = np.linspace(0.001, 0.999, 300)
+mu_line = cond_mean(x_line)
+var_line = cond_var(x_line)
+
+fig_moments = go.Figure()
+fig_moments.add_trace(go.Scatter(x=x_line, y=mu_line, mode="lines", name="E(Y|X=x)"))
+fig_moments.add_trace(go.Scatter(x=x_line, y=var_line, mode="lines", name="V(Y|X=x)"))
+
+fig_moments.update_layout(
+    title="How conditioning changes the mean and variance of Y",
+    xaxis_title="x",
+    yaxis_title="Value"
+)
+
+# Show figures
+fig_joint.show()
+fig_cond.show()
+fig_moments.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 3.2. Independence
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+## 6. Independence
+
+Two random variables $X$ and $Y$ are **independent** if knowing one does **not** change the distribution of the other.
+
+Mathematically, independence means:
+
+$$
+f_{XY}(x,y) = f_X(x)\,f_Y(y) \quad \text{for all } x,y
+$$
+
+### Practical Meaning
+
+- Independence is a **strong assumption**
+- It should be **checked**, not assumed
+- Many operational variables are **not independent**
+
+---
+
+## 7. Worked Example (Discrete)
+
+### Context: Factory Wi-Fi and System Response Time
+
+A factory uses a web-based system to release work orders.  
+Operators report that slow response times reduce productivity.
+
+Two variables are recorded:
+
+- $X$: Wi-Fi signal strength (bars: 1, 2, 3)
+- $Y$: response time (seconds: 1, 2, 3, 4)
+
+The joint probability table is:
+
+| $Y \backslash X$ | 1 | 2 | 3 |
+|---|---:|---:|---:|
+| 4 | 0.15 | 0.10 | 0.05 |
+| 3 | 0.02 | 0.10 | 0.05 |
+| 2 | 0.02 | 0.03 | 0.20 |
+| 1 | 0.01 | 0.02 | 0.25 |
+
+---
+
+### Question A: Joint Probability
+
+Find $P(X = 3, Y = 1)$.
+
+$$
+P(X = 3, Y = 1) = 0.25
+$$
+
+**Interpretation**
+
+25% of sessions have strong signal and the fastest response.
+
+---
+
+### Question B: Marginal Probability
+
+Find $P(X = 3)$.
+
+$$
+P(X = 3) = 0.05 + 0.05 + 0.20 + 0.25 = 0.55
+$$
+
+**Interpretation**
+
+55% of sessions experience strong Wi-Fi signal.
+
+---
+
+### Question C: Conditional Probability
+
+Find $P(Y = 1 \mid X = 3)$.
+
+$$
+P(Y = 1 \mid X = 3) = \frac{0.25}{0.55} \approx 0.455
+$$
+
+**Interpretation**
+
+Given strong signal, the probability of a 1-second response is about 45.5%.
+
+---
+
+### Question D: Independence Check
+
+First compute:
+
+$$
+P(Y = 1) = 0.01 + 0.02 + 0.25 = 0.28
+$$
+
+Then compare:
+
+$$
+P(X = 3) P(Y = 1) = 0.55 \times 0.28 = 0.154
+$$
+
+Since $0.25 \neq 0.154$,  
+$X$ and $Y$ are **not independent**.
+
+**Operational meaning:** Improving Wi-Fi signal can improve response time.
+
+---
+
+## 8. Visual Thinking (Strongly Recommended)
+
+- **Discrete case:**  
+  Draw the joint table and shade cells with large probabilities.
+- **Continuous case:**  
+  Sketch the feasible region and the probability region $R$.
+
+Visual sketches help you:
+- Detect dependence
+- Set correct integration limits
+- Reduce calculation errors
+
+---
+
+## 9. Common Mistakes
+
+1. Confusing marginal and conditional distributions  
+2. Treating pdf values as probabilities  
+3. Ignoring feasible regions in continuous problems  
+4. Assuming independence without checking  
+5. Mixing up $P(Y \mid X)$ and $P(X \mid Y)$  
+
+---
+
+## 10. Key Takeaways
+
+- Joint distributions describe how two variables behave **together**.
+- Use **tables and sums** for discrete variables.
+- Use **regions and integrals** for continuous variables.
+- Marginal distributions ignore the other variable.
+- Conditional distributions incorporate known conditions.
+- Independence must be verified mathematically.
+- Always interpret results for **engineering and managerial decisions**.
+
+
+## Case Examples
+
+```{toctree}
+:maxdepth: 1
+
+../cases/discrete_joint_marginal_quality
+../cases/cont_joint_marginal_queue

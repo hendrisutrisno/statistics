@@ -1,0 +1,228 @@
+# Case Study: Joint and Marginal Distributions in Queue (Continuous Case)
+
+## Description
+
+A customer arrives at a service facility where requests are handled in two sequential stages. After arrival, the customer first waits until service begins. Once service starts, it continues until completion. Both times are measured from the moment the customer arrives at the system.
+
+Let:
+- $X$ denote the waiting time (in **minutes**) until the customer begins receiving service
+- $Y$ denote the total time (in **minutes**) until the service is completed
+
+Because service must begin before it can be completed, every observed customer satisfies
+
+$$
+X < Y
+$$
+
+Based on historical observations under stable operating conditions, the joint behavior of $X$ and $Y$ is modeled by the following joint probability density function
+
+$$
+f_{XY}(x,y)
+=
+6 \, e^{-x - 2y},
+\quad 0 \le x < y < \infty
+$$
+
+Outside this region, the joint pdf is zero.
+
+---
+
+## Questions
+
+1. Verify that the given function is a valid joint probability density function  
+2. Find the probability that a customer begins service within **5 minutes** and completes service within **10 minutes**  
+3. Derive the marginal probability density function of $X$  
+4. Derive the marginal probability density function of $Y$  
+
+---
+
+## Analysis
+
+### Step 1: Verifying the joint model
+
+The joint pdf is defined only for values satisfying
+
+$$
+0 \le x < y
+$$
+
+This restriction reflects the service process itself: service must begin before it can be completed. In the $(x,y)$ plane, the feasible outcomes lie above the diagonal line $y=x$ in the first quadrant. Integrating the joint pdf over this feasible region verifies whether the model assigns total probability one
+
+$$
+\int_{0}^{\infty}
+\int_{x}^{\infty}
+6 \, e^{-x - 2y}
+\, dy \, dx
+$$
+
+Evaluating the inner integral gives
+
+$$
+\int_{x}^{\infty} e^{-2y} \, dy
+=
+\frac{e^{-2x}}{2}
+$$
+
+Substituting into the outer integral yields
+
+$$
+3
+\int_{0}^{\infty}
+e^{-3x}
+\, dx
+$$
+
+Since this integral equals 1, the function is a valid joint probability density function.
+
+A first visualization shows the joint pdf using the original probability scale. In this view, color intensity corresponds directly to the magnitude of the probability density. The plot makes clear that most probability mass is concentrated near small waiting and completion times, with density decreasing rapidly as time increases.
+
+```{raw} html
+<iframe src="../_static/joint_pdf_linear_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe>
+```
+
+However, because the density decays quickly, large portions of the feasible region appear nearly empty on the original scale. To better visualize the full set of possible outcomes and the geometric structure imposed by the constraint $x<y$, the same joint pdf is also shown using a logarithmic color scale. This second view does not change the underlying probability model, but it makes the feasible region and boundaries easier to see.
+
+```{raw} html
+<iframe src="../_static/joint_pdf_log_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe>
+```
+
+A graphical representation of the joint pdf reinforces this conclusion. The feasible region $x<y$ is clearly separated from impossible outcomes, and probability density decreases smoothly as waiting and completion times increase.
+
+---
+
+### Step 2: Probability of meeting a service target
+
+Consider the event that a customer begins service within 5 minutes and completes service within 10 minutes
+
+$$
+X \le 5
+\quad \text{and} \quad
+Y \le 10
+$$
+
+Geometrically, this corresponds to the region
+
+$$
+0 \le x \le 5,
+\quad
+x \le y \le 10
+$$
+
+This region respects both the service ordering constraint and the operational time limits. The probability is obtained by integrating the joint pdf over this region
+
+$$
+P(X \le 5, Y \le 10)
+=
+\int_{0}^{5}
+\int_{x}^{10}
+6 \, e^{-x - 2y}
+\, dy \, dx
+$$
+
+Evaluating the integrals step by step leads to
+
+$$
+P(X \le 5, Y \le 10)
+\approx 0.91
+$$
+
+```{raw} html
+<iframe src="../_static/joint_pdf_integration_linear_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe>
+```
+
+The same distinction applies when visualizing the probability $P(X \le 5, Y \le 10)$. On the original scale, the highlighted region shows where most of the probability mass contributing to this event lies. On the logarithmic scale, the same region is easier to locate relative to the full feasible set, clarifying the limits used in the integral.
+
+The corresponding figure highlights this region within the joint space. It shows how the limits of integration arise from the geometry of the feasible outcomes.
+
+```{raw} html
+<iframe src="../_static/joint_pdf_integration_log_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe>
+```
+
+---
+
+### Step 3: Marginal distribution of waiting time
+
+To understand waiting time on its own, the joint pdf is integrated over all possible completion times
+
+$$
+f_X(x)
+=
+\int_{x}^{\infty}
+6 \, e^{-x - 2y}
+\, dy
+$$
+
+This yields
+
+$$
+f_X(x)
+=
+3 \, e^{-3x},
+\quad x \ge 0
+$$
+
+The marginal distribution of $X$ shows that short waiting times are much more likely than long ones. It reflects the rapid decay typical of exponential models.
+
+```{raw} html
+<iframe src="../_static/marginal_pdf_X.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe>
+```
+
+---
+
+### Step 4: Marginal distribution of completion time
+
+Similarly, integrating out the waiting time produces the marginal distribution of $Y$
+
+$$
+f_Y(y)
+=
+\int_{0}^{y}
+6 \, e^{-x - 2y}
+\, dx
+$$
+
+which simplifies to
+
+$$
+f_Y(y)
+=
+6 \, e^{-2y}
+\left(
+1 - e^{-y}
+\right),
+\quad y \ge 0
+$$
+
+This marginal distribution captures total time in the system. It combines both waiting and service components.
+
+```{raw} html
+<iframe src="../_static/marginal_pdf_Y.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe>
+```
+
+---
+
+Taken together, the joint and marginal views describe different aspects of the same process. The joint model makes explicit which combinations of waiting and completion times can occur, while the marginal distributions summarize each time variable individually. The figures associated with this case help connect probability calculations to the geometry of the service process and to the observed variability in customer experience.
