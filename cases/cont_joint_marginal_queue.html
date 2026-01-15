@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Case Study: Joint and Marginal Distributions in Queue (Continuous Case) &mdash; Project name not set  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Project name not set
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../handouts/joint_distributions.html">Joint Probability Distributions</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Project name not set</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Case Study: Joint and Marginal Distributions in Queue (Continuous Case)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/cases/cont_joint_marginal_queue.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="case-study-joint-and-marginal-distributions-in-queue-continuous-case">
+<h1>Case Study: Joint and Marginal Distributions in Queue (Continuous Case)<a class="headerlink" href="#case-study-joint-and-marginal-distributions-in-queue-continuous-case" title="Link to this heading"></a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>A customer arrives at a service facility where requests are handled in two sequential stages. After arrival, the customer first waits until service begins. Once service starts, it continues until completion. Both times are measured from the moment the customer arrives at the system.</p>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> denote the waiting time (in <strong>minutes</strong>) until the customer begins receiving service</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> denote the total time (in <strong>minutes</strong>) until the service is completed</p></li>
+</ul>
+<p>Because service must begin before it can be completed, every observed customer satisfies</p>
+<div class="math notranslate nohighlight">
+\[
+X &lt; Y
+\]</div>
+<p>Based on historical observations under stable operating conditions, the joint behavior of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is modeled by the following joint probability density function</p>
+<div class="math notranslate nohighlight">
+\[
+f_{XY}(x,y)
+=
+6 \, e^{-x - 2y},
+\quad 0 \le x &lt; y &lt; \infty
+\]</div>
+<p>Outside this region, the joint pdf is zero.</p>
+</section>
+<hr class="docutils" />
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Verify that the given function is a valid joint probability density function</p></li>
+<li><p>Find the probability that a customer begins service within <strong>5 minutes</strong> and completes service within <strong>10 minutes</strong></p></li>
+<li><p>Derive the marginal probability density function of <span class="math notranslate nohighlight">\(X\)</span></p></li>
+<li><p>Derive the marginal probability density function of <span class="math notranslate nohighlight">\(Y\)</span></p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="analysis">
+<h2>Analysis<a class="headerlink" href="#analysis" title="Link to this heading"></a></h2>
+<section id="step-1-verifying-the-joint-model">
+<h3>Step 1: Verifying the joint model<a class="headerlink" href="#step-1-verifying-the-joint-model" title="Link to this heading"></a></h3>
+<p>The joint pdf is defined only for values satisfying</p>
+<div class="math notranslate nohighlight">
+\[
+0 \le x &lt; y
+\]</div>
+<p>This restriction reflects the service process itself: service must begin before it can be completed. In the <span class="math notranslate nohighlight">\((x,y)\)</span> plane, the feasible outcomes lie above the diagonal line <span class="math notranslate nohighlight">\(y=x\)</span> in the first quadrant. Integrating the joint pdf over this feasible region verifies whether the model assigns total probability one</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{0}^{\infty}
+\int_{x}^{\infty}
+6 \, e^{-x - 2y}
+\, dy \, dx
+\]</div>
+<p>Evaluating the inner integral gives</p>
+<div class="math notranslate nohighlight">
+\[
+\int_{x}^{\infty} e^{-2y} \, dy
+=
+\frac{e^{-2x}}{2}
+\]</div>
+<p>Substituting into the outer integral yields</p>
+<div class="math notranslate nohighlight">
+\[
+3
+\int_{0}^{\infty}
+e^{-3x}
+\, dx
+\]</div>
+<p>Since this integral equals 1, the function is a valid joint probability density function.</p>
+<p>A first visualization shows the joint pdf using the original probability scale. In this view, color intensity corresponds directly to the magnitude of the probability density. The plot makes clear that most probability mass is concentrated near small waiting and completion times, with density decreasing rapidly as time increases.</p>
+<iframe src="../_static/joint_pdf_linear_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe><p>However, because the density decays quickly, large portions of the feasible region appear nearly empty on the original scale. To better visualize the full set of possible outcomes and the geometric structure imposed by the constraint <span class="math notranslate nohighlight">\(x&lt;y\)</span>, the same joint pdf is also shown using a logarithmic color scale. This second view does not change the underlying probability model, but it makes the feasible region and boundaries easier to see.</p>
+<iframe src="../_static/joint_pdf_log_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe><p>A graphical representation of the joint pdf reinforces this conclusion. The feasible region <span class="math notranslate nohighlight">\(x&lt;y\)</span> is clearly separated from impossible outcomes, and probability density decreases smoothly as waiting and completion times increase.</p>
+</section>
+<hr class="docutils" />
+<section id="step-2-probability-of-meeting-a-service-target">
+<h3>Step 2: Probability of meeting a service target<a class="headerlink" href="#step-2-probability-of-meeting-a-service-target" title="Link to this heading"></a></h3>
+<p>Consider the event that a customer begins service within 5 minutes and completes service within 10 minutes</p>
+<div class="math notranslate nohighlight">
+\[
+X \le 5
+\quad \text{and} \quad
+Y \le 10
+\]</div>
+<p>Geometrically, this corresponds to the region</p>
+<div class="math notranslate nohighlight">
+\[
+0 \le x \le 5,
+\quad
+x \le y \le 10
+\]</div>
+<p>This region respects both the service ordering constraint and the operational time limits. The probability is obtained by integrating the joint pdf over this region</p>
+<div class="math notranslate nohighlight">
+\[
+P(X \le 5, Y \le 10)
+=
+\int_{0}^{5}
+\int_{x}^{10}
+6 \, e^{-x - 2y}
+\, dy \, dx
+\]</div>
+<p>Evaluating the integrals step by step leads to</p>
+<div class="math notranslate nohighlight">
+\[
+P(X \le 5, Y \le 10)
+\approx 0.91
+\]</div>
+<iframe src="../_static/joint_pdf_integration_linear_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe><p>The same distinction applies when visualizing the probability <span class="math notranslate nohighlight">\(P(X \le 5, Y \le 10)\)</span>. On the original scale, the highlighted region shows where most of the probability mass contributing to this event lies. On the logarithmic scale, the same region is easier to locate relative to the full feasible set, clarifying the limits used in the integral.</p>
+<p>The corresponding figure highlights this region within the joint space. It shows how the limits of integration arise from the geometry of the feasible outcomes.</p>
+<iframe src="../_static/joint_pdf_integration_log_minutes.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe></section>
+<hr class="docutils" />
+<section id="step-3-marginal-distribution-of-waiting-time">
+<h3>Step 3: Marginal distribution of waiting time<a class="headerlink" href="#step-3-marginal-distribution-of-waiting-time" title="Link to this heading"></a></h3>
+<p>To understand waiting time on its own, the joint pdf is integrated over all possible completion times</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x)
+=
+\int_{x}^{\infty}
+6 \, e^{-x - 2y}
+\, dy
+\]</div>
+<p>This yields</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x)
+=
+3 \, e^{-3x},
+\quad x \ge 0
+\]</div>
+<p>The marginal distribution of <span class="math notranslate nohighlight">\(X\)</span> shows that short waiting times are much more likely than long ones. It reflects the rapid decay typical of exponential models.</p>
+<iframe src="../_static/marginal_pdf_X.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe></section>
+<hr class="docutils" />
+<section id="step-4-marginal-distribution-of-completion-time">
+<h3>Step 4: Marginal distribution of completion time<a class="headerlink" href="#step-4-marginal-distribution-of-completion-time" title="Link to this heading"></a></h3>
+<p>Similarly, integrating out the waiting time produces the marginal distribution of <span class="math notranslate nohighlight">\(Y\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+f_Y(y)
+=
+\int_{0}^{y}
+6 \, e^{-x - 2y}
+\, dx
+\]</div>
+<p>which simplifies to</p>
+<div class="math notranslate nohighlight">
+\[
+f_Y(y)
+=
+6 \, e^{-2y}
+\left(
+1 - e^{-y}
+\right),
+\quad y \ge 0
+\]</div>
+<p>This marginal distribution captures total time in the system. It combines both waiting and service components.</p>
+<iframe src="../_static/marginal_pdf_Y.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe><hr class="docutils" />
+<p>Taken together, the joint and marginal views describe different aspects of the same process. The joint model makes explicit which combinations of waiting and completion times can occur, while the marginal distributions summarize each time variable individually. The figures associated with this case help connect probability calculations to the geometry of the service process and to the observed variability in customer experience.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

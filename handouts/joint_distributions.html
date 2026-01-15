@@ -1,0 +1,916 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joint Probability Distributions &mdash; Project name not set  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Statistics II — Course Notes" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Project name not set
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Joint Probability Distributions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning Objectives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">1. Joint Probability Distributions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#joint-probability-distributions-for-two-random-variables">2. Joint Probability Distributions for Two Random Variables</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#joint-probability-mass-function-discrete-case">2.1. Joint Probability Mass Function (Discrete Case)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#illustration">Illustration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#joint-probability-density-function-continuous-case">2.2. Joint Probability Density Function (Continuous Case)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">Illustration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#marginal-distributions">2.3. Marginal Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#discrete-case">Discrete Case</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#continuous-case">Continuous Case</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conditional-probability-distributions-and-independence">3. Conditional Probability Distributions and Independence</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conditional-probability-distributions">3.1. Conditional Probability Distributions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#discrete-case-pmf">Discrete case (pmf)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#continuous-case-pdf">Continuous case (pdf)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#note-always-state-the-nonzero-region-support">Note: always state the nonzero region (support)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#conditional-mean-and-variance">Conditional Mean and Variance</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conditional-mean">Conditional mean</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conditional-variance">Conditional variance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#illustrative-example-joint-pdf-conditional-pdf-conditional-probability-conditional-mean-variance">Illustrative example (joint pdf → conditional pdf → conditional probability → conditional mean/variance)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#step-1-define-a-simple-joint-pdf-with-a-support-region">Step 1: Define a simple joint pdf with a support region</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-2-compute-the-marginal-f-x-x-use-the-support-to-set-limits">Step 2: Compute the marginal <span class="math notranslate nohighlight">\(f_X(x)\)</span> (use the support to set limits)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-3-compute-the-conditional-pdf-f-y-mid-x-y-mid-x">Step 3: Compute the conditional pdf <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-4-example-of-a-conditional-probability-a-condition-specific-question">Step 4: Example of a conditional probability (a condition-specific question)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#step-5-conditional-mean-and-variance">Step 5: Conditional mean and variance</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#plotly-visualization-code-joint-pdf-conditional-slice-conditional-mean-variance">Plotly visualization code (joint pdf + conditional slice + conditional mean/variance)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Project name not set</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Joint Probability Distributions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/handouts/joint_distributions.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section class="tex2jax_ignore mathjax_ignore" id="joint-probability-distributions">
+<h1>Joint Probability Distributions<a class="headerlink" href="#joint-probability-distributions" title="Link to this heading"></a></h1>
+<section id="learning-objectives">
+<h2>Learning Objectives<a class="headerlink" href="#learning-objectives" title="Link to this heading"></a></h2>
+<p>After studying this handout, you should be able to:</p>
+<ol class="arabic simple">
+<li><p>Explain what a joint probability distribution represents.</p></li>
+<li><p>Compute probabilities using a joint probability mass function (pmf).</p></li>
+<li><p>Compute probabilities using a joint probability density function (pdf).</p></li>
+<li><p>Obtain marginal distributions from a joint distribution.</p></li>
+<li><p>Interpret conditional distributions in an operational context.</p></li>
+<li><p>Determine whether two random variables are independent.</p></li>
+</ol>
+</section>
+<section id="id1">
+<h2>1. Joint Probability Distributions<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>Many real systems produce more than one outcome at the same time. These outcomes are observed from the same process, during the same period, and under the same operating conditions. Because they are generated together, the outcomes often influence each other. Analyzing each outcome separately can hide important relationships. Joint analysis focuses on how outcomes occur together.</p>
+<p>Consider the following situations.</p>
+<ul class="simple">
+<li><p>A production process operates continuously throughout the day. During each shift, the operating condition of the machine is recorded, along with the number of defective items produced. On some days, the machine runs smoothly and only a few defects appear.  On other days, small changes in operating conditions are observed and defects increase noticeably.  This is a case of a <strong>joint distribution</strong>, because operating condition and product quality are observed together and may be related.</p></li>
+<li><p>A company receives customer orders every day and records the number of units requested.  At the same time, it records how long deliveries take to arrive.  On certain days, high order volumes are followed by longer delivery times.  On other days, orders are fewer and deliveries arrive quickly.  This is a case of a <strong>joint distribution</strong>, because demand and delivery time describe the same system behavior and must be studied together.</p></li>
+<li><p>Customers arrive at a service facility and wait for assistance.  For each customer, the waiting time before service and the time spent being served are recorded.  Some customers wait a long time even when service times are short.  Other customers experience long waits mainly when service times are long.  This is a case of a <strong>joint distribution</strong>, because waiting time and service time are measured for the same customer and may depend on each other.</p></li>
+<li><p>A computer system processes user requests throughout the day. For each request, the system records the signal condition and the response time. When the signal is strong, responses are usually fast, but not always.  When the signal is weak, delays occur more frequently. This is a case of a <strong>joint distribution</strong>, because signal condition and response time describe the same request and are connected.</p></li>
+</ul>
+<p>In each situation above, it is possible to study only one outcome at a time. For example, delivery time can be analyzed without considering demand, or response time can be examined without considering signal condition. Such an analysis can describe typical behavior, such as an average delay, a usual waiting time, or the overall variability of a single outcome. This information is useful, but it is incomplete.</p>
+<p>The limitation becomes clear when we return to the situations described earlier. Suppose long delivery times are observed. Without considering demand, it is not clear whether these delays occur randomly or mainly on days when demand is high. Similarly, suppose a higher number of defects is observed. Without considering operating conditions, it is not clear whether defects increase uniformly or mainly when certain conditions are present. In the service example, knowing the average waiting time does not explain whether long waits occur even when service is fast, or mainly when service itself is slow. In the system example, knowing the overall response time does not explain whether slow responses are equally likely under all signal conditions.</p>
+<p>These questions all have the same structure. They ask whether two outcomes tend to occur <strong>together</strong> in the same observation. They ask whether one outcome changes when the other outcome takes a particular value. Answering such questions requires more than studying each outcome separately. It requires a way to describe how pairs of outcomes appear across repeated observations of the same system.</p>
+<p>A <strong>joint probability distribution</strong> addresses this limitation by describing how two random variables behave at the same time. Instead of assigning probabilities to individual outcomes, it assigns probabilities to <strong>pairs of outcomes</strong> that occur together in a single observation. For example, it can describe how often high demand occurs together with long delivery time, how often specific operating conditions occur together with high defect counts, or how often weak signal conditions occur together with slow system responses. By organizing probabilities around these pairs, a joint probability distribution provides a complete description of how two sources of uncertainty interact within the same system.</p>
+</section>
+<section id="joint-probability-distributions-for-two-random-variables">
+<h2>2. Joint Probability Distributions for Two Random Variables<a class="headerlink" href="#joint-probability-distributions-for-two-random-variables" title="Link to this heading"></a></h2>
+<section id="joint-probability-mass-function-discrete-case">
+<h3>2.1. Joint Probability Mass Function (Discrete Case)<a class="headerlink" href="#joint-probability-mass-function-discrete-case" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be two <strong>discrete random variables</strong>. Each time the system is observed, it produces one value of <span class="math notranslate nohighlight">\(X\)</span> and one value of <span class="math notranslate nohighlight">\(Y\)</span> at the same time. Because both values come from the same observation, they must be described together rather than separately.</p>
+<p>The <strong>joint probability mass function (joint pmf)</strong> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+f_{XY}(x,y) = P(X = x, Y = y)
+\]</div>
+<p>This notation should be read carefully. The expression <span class="math notranslate nohighlight">\(X = x\)</span> means that the random variable <span class="math notranslate nohighlight">\(X\)</span> takes the specific value <span class="math notranslate nohighlight">\(x\)</span>. The expression <span class="math notranslate nohighlight">\(Y = y\)</span> means that the random variable <span class="math notranslate nohighlight">\(Y\)</span> takes the specific value <span class="math notranslate nohighlight">\(y\)</span>. The comma indicates that both events occur together in the same observation. The probability operator <span class="math notranslate nohighlight">\(P(\cdot)\)</span> assigns a probability to this joint event. Therefore, <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> represents the probability that <span class="math notranslate nohighlight">\(X\)</span> takes the value <span class="math notranslate nohighlight">\(x\)</span> and, at the same time, <span class="math notranslate nohighlight">\(Y\)</span> takes the value <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>A joint pmf assigns a probability to every possible pair <span class="math notranslate nohighlight">\((x,y)\)</span> that the two variables can take. Each pair corresponds to one possible outcome of the system. For discrete variables, the joint pmf is often presented as a table, where rows correspond to values of one variable, columns correspond to values of the other variable, and each cell contains the probability of a specific pair. Each cell describes what happens when both variables take particular values together, not separately.</p>
+<p>The joint pmf must satisfy two basic properties.</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity.</strong><br />
+For all values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, the joint pmf must satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+   f_{XY}(x,y) \ge 0
+   \]</div>
+<p>This means that probabilities cannot be negative. A value of zero indicates that a particular pair <span class="math notranslate nohighlight">\((x,y)\)</span> never occurs, while larger values indicate pairs that occur more frequently in the observed system.</p>
+</li>
+<li><p><strong>Total probability equals one.</strong><br />
+The probabilities assigned to all possible pairs of values must add up to one:</p>
+<div class="math notranslate nohighlight">
+\[
+   \sum_x \sum_y f_{XY}(x,y) = 1
+   \]</div>
+<p>The inner sum adds probabilities across all possible values of <span class="math notranslate nohighlight">\(Y\)</span> for a fixed value of <span class="math notranslate nohighlight">\(X\)</span>. The outer sum then adds across all possible values of <span class="math notranslate nohighlight">\(X\)</span>. Together, these sums account for every possible outcome of the system. This reflects the fact that, in each observation, one and only one pair <span class="math notranslate nohighlight">\((x,y)\)</span> must occur.</p>
+</li>
+</ol>
+<p>When reading a joint pmf, attention should remain on <strong>joint occurrence</strong>. The value <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> refers to a specific pair of values observed together in the same outcome. It does not describe how <span class="math notranslate nohighlight">\(X\)</span> behaves on its own, and it does not describe how <span class="math notranslate nohighlight">\(Y\)</span> behaves on its own. Each value of the joint pmf answers a localized question: how frequently does this particular combination appear among all observations? Understanding this point is essential before extracting any further information from the joint distribution.</p>
+<section id="illustration">
+<h4>Illustration<a class="headerlink" href="#illustration" title="Link to this heading"></a></h4>
+<p>To make the idea of a joint pmf concrete, consider again the inspection scenario in which two outcomes are recorded at the same time during each inspection.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> denotes the machine status during inspection:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X = 1\)</span> for a normal state,</p></li>
+<li><p><span class="math notranslate nohighlight">\(X = 2\)</span> for a warning signal,</p></li>
+<li><p><span class="math notranslate nohighlight">\(X = 3\)</span> for an alarm signal.</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> denotes the inspection result:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(Y = 0\)</span> if no defect is found,</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y = 1\)</span> if a defect is found.</p></li>
+</ul>
+</li>
+</ul>
+<p>Each inspection produces one <strong>paired outcome</strong> <span class="math notranslate nohighlight">\((X,Y)\)</span>.</p>
+<p><strong>Observation-level view</strong>. Before working with probabilities, it is useful to look at the data at the level of individual inspections. Each row in the table below corresponds to one inspection, and each inspection produces one pair of outcomes.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-right"><p>Inspection</p></th>
+<th class="head text-center"><p>Machine Status <span class="math notranslate nohighlight">\(X\)</span></p></th>
+<th class="head text-center"><p>Inspection Result <span class="math notranslate nohighlight">\(Y\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-right"><p>1</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>2</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>3</p></td>
+<td class="text-center"><p>2</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>4</p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>5</p></td>
+<td class="text-center"><p>1</p></td>
+<td class="text-center"><p>0</p></td>
+</tr>
+<tr class="row-odd"><td class="text-right"><p>6</p></td>
+<td class="text-center"><p>3</p></td>
+<td class="text-center"><p>1</p></td>
+</tr>
+<tr class="row-even"><td class="text-right"><p>⋮</p></td>
+<td class="text-center"><p>⋮</p></td>
+<td class="text-center"><p>⋮</p></td>
+</tr>
+</tbody>
+</table>
+<p>The important point here is that the values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> in each row are observed <strong>together</strong>. They describe the same inspection and should not be separated. Each row represents one realized pair <span class="math notranslate nohighlight">\((x,y)\)</span>, such as <span class="math notranslate nohighlight">\((2,1)\)</span>, which corresponds to a defect found when a warning signal is present.</p>
+<p><strong>Joint pmf table</strong>. When the number of inspections is large, the individual observations can be summarized by counting how frequently each possible pair <span class="math notranslate nohighlight">\((x,y)\)</span> appears and then converting those counts into probabilities. The result is the joint pmf <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>, which can be displayed in a table.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head text-center"><p><span class="math notranslate nohighlight">\(X \backslash Y\)</span></p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y = 0\)</span> (No defect)</p></th>
+<th class="head text-center"><p><span class="math notranslate nohighlight">\(Y = 1\)</span> (Defect)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X = 1\)</span> (Normal)</p></td>
+<td class="text-center"><p>0.30</p></td>
+<td class="text-center"><p>0.10</p></td>
+</tr>
+<tr class="row-odd"><td class="text-center"><p><span class="math notranslate nohighlight">\(X = 2\)</span> (Warning)</p></td>
+<td class="text-center"><p>0.20</p></td>
+<td class="text-center"><p>0.15</p></td>
+</tr>
+<tr class="row-even"><td class="text-center"><p><span class="math notranslate nohighlight">\(X = 3\)</span> (Alarm)</p></td>
+<td class="text-center"><p>0.10</p></td>
+<td class="text-center"><p>0.15</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each entry in this table represents a joint probability. For example, the value 0.15 in the row <span class="math notranslate nohighlight">\(X = 2\)</span> and column <span class="math notranslate nohighlight">\(Y = 1\)</span> is <span class="math notranslate nohighlight">\(f_{XY}(2,1)\)</span>, the probability that a defect is found during an inspection when the machine is in a warning state. Each cell corresponds to one specific combination of outcomes and should be interpreted as such.</p>
+<p><strong>Visual representation of the joint pmf</strong>. The same joint pmf can also be represented visually. In the figure above, each bar corresponds to one cell of the joint pmf table. The horizontal position of a bar identifies the pair <span class="math notranslate nohighlight">\((x,y)\)</span>, and the height of the bar represents the value of <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>.</p>
+<iframe src="../_static/joint_pmf_interactive.html"
+        width="100%"
+        height="500px"
+        style="border:none;">
+</iframe><p>Difficulties arise when this visual representation is not treated as a joint description. One common mistake is to focus on only one variable while ignoring the paired structure of the bars. For example, observing that bars associated with <span class="math notranslate nohighlight">\(X = 3\)</span> are relatively tall may lead to the incorrect conclusion that an alarm state always results in a defect, even though some bars at <span class="math notranslate nohighlight">\(X = 3\)</span> correspond to <span class="math notranslate nohighlight">\(Y = 0\)</span>. Similarly, focusing only on bars with <span class="math notranslate nohighlight">\(Y = 1\)</span> may suggest that defects occur independently of machine status, without considering how those bars are distributed across different values of <span class="math notranslate nohighlight">\(X\)</span>.</p>
+<p>Another misleading approach is to draw conclusions by tracing a single line along one axis, as if the figure represented a one-variable distribution. Doing so removes the pairing <span class="math notranslate nohighlight">\((x,y)\)</span> that defines each bar. When conclusions are drawn from only one variable at a time, the interaction between machine status and inspection result is no longer represented, and the figure is effectively reduced to a different object than the joint pmf it is meant to display.</p>
+</section>
+</section>
+<section id="joint-probability-density-function-continuous-case">
+<h3>2.2. Joint Probability Density Function (Continuous Case)<a class="headerlink" href="#joint-probability-density-function-continuous-case" title="Link to this heading"></a></h3>
+<p>When <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <strong>continuous random variables</strong>, the way probabilities are described changes. Individual values of <span class="math notranslate nohighlight">\(X\)</span> or <span class="math notranslate nohighlight">\(Y\)</span> are no longer counted as separate outcomes. Instead, the variables can take any value within an interval. As a result, probabilities cannot be assigned to single points in the same way as in the discrete case.</p>
+<p>In this setting, the behavior of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> together is described by a <strong>joint probability density function</strong>, denoted by <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>. The function <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> does not give the probability that <span class="math notranslate nohighlight">\(X = x\)</span> and <span class="math notranslate nohighlight">\(Y = y\)</span>. For continuous variables, the probability of observing any exact pair <span class="math notranslate nohighlight">\((x,y)\)</span> is zero. Instead, the joint pdf describes how probability is distributed across different regions of the <span class="math notranslate nohighlight">\((x,y)\)</span> plane.</p>
+<p>To obtain a probability, the joint pdf must be integrated over a region of interest. If <span class="math notranslate nohighlight">\(R\)</span> is a region in the <span class="math notranslate nohighlight">\((x,y)\)</span> plane, then the probability that the pair <span class="math notranslate nohighlight">\((X,Y)\)</span> falls within this region is given by</p>
+<div class="math notranslate nohighlight">
+\[
+P((X,Y) \in R) = \iint_R f_{XY}(x,y)\,dx\,dy
+\]</div>
+<p>The region <span class="math notranslate nohighlight">\(R\)</span> represents all pairs of values that satisfy the conditions being studied. For example, it may represent all combinations where both variables are below certain thresholds, or where one variable lies within a specific range while the other varies more freely. The probability is obtained by accumulating the density over all such pairs.</p>
+<p>Geometrically, the joint pdf can be viewed as defining a surface above the <span class="math notranslate nohighlight">\((x,y)\)</span> plane. The double integral computes the volume under this surface and above the region <span class="math notranslate nohighlight">\(R\)</span>. This volume corresponds to the probability that the observed values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> fall within that region. In this way, probabilities for continuous random variables are associated with <strong>areas and regions</strong>, not with individual points.</p>
+<p>Like the joint pmf, the joint pdf must satisfy basic properties that ensure it represents a valid probability model.</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity.</strong><br />
+For all values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, the joint pdf must satisfy</p>
+<div class="math notranslate nohighlight">
+\[
+   f_{XY}(x,y) \ge 0
+   \]</div>
+<p>Although the joint pdf is not itself a probability, it represents how probability density is distributed across the <span class="math notranslate nohighlight">\((x,y)\)</span> plane. Negative values would have no physical or probabilistic meaning.</p>
+</li>
+<li><p><strong>Total probability equals one.</strong><br />
+When the joint pdf is integrated over all possible values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, the result must be one:</p>
+<div class="math notranslate nohighlight">
+\[
+   \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} f_{XY}(x,y)\,dx\,dy = 1
+   \]</div>
+<p>This condition ensures that all possible pairs of values are accounted for. It reflects the fact that, in each observation, the pair <span class="math notranslate nohighlight">\((X,Y)\)</span> must fall somewhere in the plane.</p>
+</li>
+</ol>
+<p>These properties mirror those of the joint pmf, but the interpretation is different. In the continuous case, probabilities are not attached to individual pairs <span class="math notranslate nohighlight">\((x,y)\)</span>. Instead, they are attached to regions formed by many such pairs. The joint pdf describes how probability accumulates across these regions rather than how it is assigned to single outcomes.</p>
+<section id="id2">
+<h4>Illustration<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>Consider a process in which two continuous measurements are recorded simultaneously. Let <span class="math notranslate nohighlight">\(X\)</span> denote the processing time of a task, measured in seconds, and let <span class="math notranslate nohighlight">\(Y\)</span> denote the operating temperature of the system, measured in degrees Celsius. Suppose that observations show the following behavior: processing times vary between 0 and 10 seconds, temperatures vary between 0 and 5 degrees, and all combinations within this range occur with equal likelihood.</p>
+<p>This situation can be modeled using a joint probability density function that is uniform over a rectangular region. The joint pdf is defined as</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_{XY}(x,y) =
+\begin{cases}
+\frac{1}{50}, &amp; 0 \le x \le 10,\; 0 \le y \le 5, \\
+0, &amp; \text{otherwise}
+\end{cases}
+\end{split}\]</div>
+<p>The constant value <span class="math notranslate nohighlight">\(\frac{1}{50}\)</span> is chosen so that the total probability over the rectangle equals one, since the area of the region is <span class="math notranslate nohighlight">\(10 \times 5 = 50\)</span>.</p>
+<p><strong>Interpreting probability using regions</strong>. In this continuous setting, probabilities are obtained by specifying regions rather than individual points. For example, the probability that the processing time is between 2 and 6 seconds and the temperature is between 1 and 3 degrees corresponds to a rectangular region inside the support of the joint pdf. The probability of this event is computed by integrating <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> over that region.</p>
+<p>Because the joint pdf is constant within the rectangle, probabilities depend only on the area of the region being considered. Larger regions correspond to higher probabilities, while smaller regions correspond to lower probabilities.</p>
+<p><strong>Visual representation of the joint pdf</strong>. The joint pdf can be visualized as a flat surface above the <span class="math notranslate nohighlight">\((x,y)\)</span> plane. The height of the surface represents the value of <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>, and probability is associated with the volume under the surface over a specified region.</p>
+<iframe src="../_static/joint_pdf_interactive_nonuniform.html"
+        width="100%"
+        height="500px"
+        style="border:none;">
+</iframe><p>In the figure above, the surface height represents the value of the joint pdf <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>. Higher regions of the surface correspond to pairs of values that occur more frequently, while lower regions correspond to pairs that occur less frequently. Probability is obtained by selecting a region in the <span class="math notranslate nohighlight">\((x,y)\)</span> plane and accumulating the density over that region. The shape of the surface reflects joint behavior. Because the density is higher along a diagonal direction, values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> tend to increase or decrease together rather than independently.</p>
+<p>We also can observe that the joint pdf surface is stretched more in one direction than the other. This reflects the fact that the two variables do not vary on the same scale. One variable shows greater spread across its range, while the other is more tightly concentrated. The surface shape therefore encodes information about how widely each variable varies, in addition to how they vary together.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+<section id="marginal-distributions">
+<h3>2.3. Marginal Distributions<a class="headerlink" href="#marginal-distributions" title="Link to this heading"></a></h3>
+<p>A joint distribution describes how two variables behave <strong>together</strong>. In many situations, however, interest lies in understanding the behavior of <strong>one variable by itself</strong>, without conditioning on or explicitly tracking the other. A <strong>marginal distribution</strong> provides exactly this view.</p>
+<p>The word <em>marginal</em> reflects the idea of moving from a two-dimensional description to a one-dimensional one by “summing out” or “integrating out” the other variable. The result is a distribution that describes variability in one variable alone, while still being derived from the joint model.</p>
+<section id="discrete-case">
+<h4>Discrete Case<a class="headerlink" href="#discrete-case" title="Link to this heading"></a></h4>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be discrete random variables with joint probability mass function <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>. The marginal pmf of <span class="math notranslate nohighlight">\(X\)</span> is obtained by summing the joint pmf over all possible values of <span class="math notranslate nohighlight">\(Y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x) = \sum_y f_{XY}(x,y)
+\]</div>
+<p>Similarly, the marginal pmf of <span class="math notranslate nohighlight">\(Y\)</span> is obtained by summing over all possible values of <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+f_Y(y) = \sum_x f_{XY}(x,y)
+\]</div>
+<p>In each case, the summation collects the probabilities of <strong>all joint outcomes</strong> in which the variable of interest takes a specific value. The other variable is not fixed; instead, all of its possible values are accounted for. As a result, the marginal pmf describes how often a particular value of <span class="math notranslate nohighlight">\(X\)</span> or <span class="math notranslate nohighlight">\(Y\)</span> occurs overall, regardless of what happens to the other variable.</p>
+</section>
+<section id="continuous-case">
+<h4>Continuous Case<a class="headerlink" href="#continuous-case" title="Link to this heading"></a></h4>
+<p>When <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are continuous random variables with joint probability density function <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>, marginal distributions are obtained by integration rather than summation.</p>
+<p>The marginal pdf of <span class="math notranslate nohighlight">\(X\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dy
+\]</div>
+<p>and the marginal pdf of <span class="math notranslate nohighlight">\(Y\)</span> is defined as</p>
+<div class="math notranslate nohighlight">
+\[
+f_Y(y) = \int_{-\infty}^{\infty} f_{XY}(x,y)\,dx
+\]</div>
+<p>The integral accumulates probability density across <strong>all possible values of the other variable</strong>. Conceptually, this corresponds to projecting the joint density surface onto one axis. The resulting function describes the relative likelihood of different values of the variable of interest, without reference to the second variable.</p>
+<p><strong>Interpretation</strong>. Marginal distributions answer questions about <strong>one outcome at a time</strong>, while still being grounded in the joint behavior of the system. Typical questions include:</p>
+<ul class="simple">
+<li><p>What is the distribution of waiting time, without distinguishing between different completion times?</p></li>
+<li><p>What is the distribution of total service time, without conditioning on how long the customer waited?</p></li>
+<li><p>What is the distribution of demand, regardless of lead time or supply conditions?</p></li>
+</ul>
+<p>It is important to recognize what marginal distributions <strong>do and do not</strong> represent. They preserve information about the overall variability of a single variable, but they do not describe how two variables interact or depend on each other. That interaction is present in the joint distribution and can only be recovered by considering joint or conditional distributions.</p>
+</section>
+</section>
+</section>
+<section id="conditional-probability-distributions-and-independence">
+<h2>3. Conditional Probability Distributions and Independence<a class="headerlink" href="#conditional-probability-distributions-and-independence" title="Link to this heading"></a></h2>
+<section id="conditional-probability-distributions">
+<h3>3.1. Conditional Probability Distributions<a class="headerlink" href="#conditional-probability-distributions" title="Link to this heading"></a></h3>
+<p>Marginal distributions are usually the first summaries we compute from a joint distribution. For example, the marginal distribution of <span class="math notranslate nohighlight">\(X\)</span> describes the overall variability of <span class="math notranslate nohighlight">\(X\)</span>, without using any information about <span class="math notranslate nohighlight">\(Y\)</span>. This is useful for overall questions such as: “What values of <span class="math notranslate nohighlight">\(Y\)</span> are common in general?” or “What is the average value of <span class="math notranslate nohighlight">\(X\)</span> overall?”. However, many practical questions are <strong>condition-specific</strong>. They ask about <span class="math notranslate nohighlight">\(Y\)</span> after we know something about <span class="math notranslate nohighlight">\(X\)</span>. For example:</p>
+<ul class="simple">
+<li><p>“How does the number of conforming parts behave <strong>given</strong> that a certain number of nonconforming parts is observed?”</p></li>
+<li><p>“What response time is likely <strong>given</strong> strong Wi-Fi signal?”</p></li>
+<li><p>“What defect rate is likely <strong>given</strong> the machine alarm is ON?”</p></li>
+</ul>
+<p>These questions cannot be answered using marginal distributions alone. A marginal distribution mixes together all operating conditions. It does not separate the cases where <span class="math notranslate nohighlight">\(X\)</span> is small from the cases where <span class="math notranslate nohighlight">\(X\)</span> is large. If the behavior of <span class="math notranslate nohighlight">\(Y\)</span> changes with <span class="math notranslate nohighlight">\(X\)</span>, then the marginal distribution of <span class="math notranslate nohighlight">\(Y\)</span> hides this change.</p>
+<p>To answer condition-specific questions, we must use the <strong>joint distribution</strong> and focus on one condition at a time. Graphically, conditioning means:</p>
+<ol class="arabic simple">
+<li><p>Start from the <strong>joint distribution</strong> of <span class="math notranslate nohighlight">\((X,Y)\)</span>.</p></li>
+<li><p>Fix a value <span class="math notranslate nohighlight">\(X=x\)</span>.</p></li>
+<li><p>Keep only the part of the joint distribution compatible with that condition.</p></li>
+<li><p><strong>Renormalize</strong> within that part so the total probability (discrete case) or total area (continuous case) becomes 1.</p></li>
+</ol>
+<p>This “select and renormalize” idea leads to a <strong>conditional distribution</strong>: the distribution of <span class="math notranslate nohighlight">\(Y\)</span> when <span class="math notranslate nohighlight">\(X=x\)</span> is known.</p>
+<section id="discrete-case-pmf">
+<h4>Discrete case (pmf)<a class="headerlink" href="#discrete-case-pmf" title="Link to this heading"></a></h4>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <strong>discrete</strong>, the conditional probability mass function (pmf) of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X=x\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+f_{Y\mid X}(y\mid x)=P(Y=y\mid X=x)=\frac{f_{XY}(x,y)}{f_X(x)},\quad f_X(x)&gt;0
+\]</div>
+<p>where,</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\( f_{XY}(x,y)=P(X=x,\;Y=y) \)</span> is the <strong>joint pmf</strong>.</p></li>
+<li><p><span class="math notranslate nohighlight">\( f_X(x)=P(X=x)=\sum_y f_{XY}(x,y) \)</span> is the <strong>marginal pmf</strong> of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+<p>The division appears due to:</p>
+<ul class="simple">
+<li><p>The numerator selects outcomes with <span class="math notranslate nohighlight">\((X=x,Y=y)\)</span>.</p></li>
+<li><p>The denominator represents the total probability of the condition <span class="math notranslate nohighlight">\(X=x\)</span>.</p></li>
+<li><p>Dividing rescales probabilities so that, for fixed <span class="math notranslate nohighlight">\(x\)</span>,</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\sum_y f_{Y\mid X}(y\mid x)=1
+\]</div>
+<p><strong>Interpretation</strong>
+For a fixed <span class="math notranslate nohighlight">\(x\)</span>, the set <span class="math notranslate nohighlight">\(\{f_{Y\mid X}(y\mid x)\}\)</span> over all <span class="math notranslate nohighlight">\(y\)</span> forms a <strong>new probability distribution</strong> for <span class="math notranslate nohighlight">\(Y\)</span>, valid only under the condition <span class="math notranslate nohighlight">\(X=x\)</span>.</p>
+</section>
+<section id="continuous-case-pdf">
+<h4>Continuous case (pdf)<a class="headerlink" href="#continuous-case-pdf" title="Link to this heading"></a></h4>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <strong>continuous</strong> with joint probability density function (pdf) <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>, the conditional pdf of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X=x\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+f_{Y\mid X}(y\mid x)=\frac{f_{XY}(x,y)}{f_X(x)},\quad f_X(x)&gt;0
+\]</div>
+<p>where the marginal pdf of <span class="math notranslate nohighlight">\(X\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x)=\int_{-\infty}^{\infty} f_{XY}(x,y)\,dy
+\]</div>
+<p>using the correct integration limits based on where <span class="math notranslate nohighlight">\(f_{XY}(x,y)\neq 0\)</span>.</p>
+<p><strong>Important interpretation</strong></p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span> is a <strong>density</strong>, not a probability.</p></li>
+<li><p>Conditional probabilities come from integration:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(Y\in B\mid X=x)=\int_B f_{Y\mid X}(y\mid x)\,dy
+\]</div>
+<p><strong>Properties</strong>
+For each fixed <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(f_X(x)&gt;0\)</span>, <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span> must satisfythe following three properties:</p>
+<ol class="arabic">
+<li><p><strong>Nonnegativity:</strong>
+Since <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span> is a probability density for <span class="math notranslate nohighlight">\(Y\)</span> after fixing <span class="math notranslate nohighlight">\(X=x\)</span>, it cannot be negative. A negative value would imply a negative probability over some interval, which is not meaningful.</p>
+<div class="math notranslate nohighlight">
+\[ f_{Y\mid X}(y\mid x)\ge 0 \]</div>
+</li>
+<li><p><strong>Total area equals 1:</strong>
+After conditioning on <span class="math notranslate nohighlight">\(X=x\)</span>, <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span> must represent a complete distribution of <span class="math notranslate nohighlight">\(Y\)</span> under that condition. Therefore, the total area under the curve must be 1:</p>
+<div class="math notranslate nohighlight">
+\[
+   \int_{-\infty}^{\infty} f_{Y\mid X}(y\mid x)dy=1
+   \]</div>
+</li>
+<li><p><strong>Probabilities come from integrating over a set:</strong>
+For continuous <span class="math notranslate nohighlight">\(Y\)</span>, a probability is obtained by integrating the conditional density over the set <span class="math notranslate nohighlight">\(B\)</span>. This gives the conditional probability that <span class="math notranslate nohighlight">\(Y\)</span> falls in <span class="math notranslate nohighlight">\(B\)</span> given <span class="math notranslate nohighlight">\(X=x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+   P(Y\in B\mid X=x)=\int_B f_{Y\mid X}(y\mid x)dy
+   \]</div>
+</li>
+</ol>
+</section>
+<section id="note-always-state-the-nonzero-region-support">
+<h4>Note: always state the nonzero region (support)<a class="headerlink" href="#note-always-state-the-nonzero-region-support" title="Link to this heading"></a></h4>
+<p>A joint pdf <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> is often defined to be positive only for some allowed ((x,y)) values. This allowed set is called the <strong>support</strong>. Outside the support, the pdf is <span class="math notranslate nohighlight">\(0\)</span>.</p>
+<p>This matters because the support tells you: <strong>which values of <span class="math notranslate nohighlight">\(y\)</span> are possible when <span class="math notranslate nohighlight">\(X=x\)</span> is fixed</strong>, and <strong>what limits to use when computing the marginal</strong>.</p>
+<div class="math notranslate nohighlight">
+\[
+  f_X(x)=\int f_{XY}(x,y) dy
+  \]</div>
+<p>If you ignore the support, you may integrate over values that are not possible. Then <span class="math notranslate nohighlight">\(f_X(x)\)</span> and <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span> will be wrong.</p>
+</section>
+</section>
+</section>
+<section id="conditional-mean-and-variance">
+<h2>Conditional Mean and Variance<a class="headerlink" href="#conditional-mean-and-variance" title="Link to this heading"></a></h2>
+<p>After we condition on <span class="math notranslate nohighlight">\(X=x\)</span>, the variable <span class="math notranslate nohighlight">\(Y\)</span> has a new distribution: the conditional distribution <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span>. The <strong>conditional mean</strong> and <strong>conditional variance</strong> summarize this conditional distribution.</p>
+<section id="conditional-mean">
+<h3>Conditional mean<a class="headerlink" href="#conditional-mean" title="Link to this heading"></a></h3>
+<p>The <strong>conditional mean of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X=x\)</span></strong> is written as <span class="math notranslate nohighlight">\(E(Y\mid X=x)\)</span>. We also denote it by <span class="math notranslate nohighlight">\(\mu_{Y\mid x}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+\mu_{Y\mid x}=E(Y\mid X=x)=\int_{-\infty}^{\infty} y\, f_{Y\mid X}(y\mid x)dy
+\]</div>
+</section>
+<section id="conditional-variance">
+<h3>Conditional variance<a class="headerlink" href="#conditional-variance" title="Link to this heading"></a></h3>
+<p>The <strong>conditional variance of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X=x\)</span></strong> is written as <span class="math notranslate nohighlight">\(V(Y\mid X=x)\)</span>. It measures how far <span class="math notranslate nohighlight">\(Y\)</span> typically is from the conditional mean <span class="math notranslate nohighlight">\(\mu_{Y\mid x}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[
+V(Y\mid X=x)=\int_{-\infty}^{\infty} (y-\mu_{Y\mid x})^2 f_{Y\mid X}(y\mid x)dy
+\]</div>
+<p>A common shortcut form is</p>
+<div class="math notranslate nohighlight">
+\[
+V(Y\mid X=x)=E(Y^2\mid X=x)-\mu_{Y\mid x}^2
+\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[
+E(Y^2\mid X=x)=\int_{-\infty}^{\infty} y^2\, f_{Y\mid X}(y\mid x)dy
+\]</div>
+<p>Once we have the conditional distribution of <span class="math notranslate nohighlight">\(Y\)</span> given <span class="math notranslate nohighlight">\(X=x\)</span>, we can summarize it using a <strong>conditional mean</strong> and a <strong>conditional variance</strong>.</p>
+<ul class="simple">
+<li><p>The <strong>conditional mean</strong> <span class="math notranslate nohighlight">\(E(Y\mid X=x)\)</span> is the average value of <span class="math notranslate nohighlight">\(Y\)</span> <strong>under the condition</strong> that <span class="math notranslate nohighlight">\(X=x\)</span> is known.</p></li>
+<li><p>The <strong>conditional variance</strong> <span class="math notranslate nohighlight">\(V(Y\mid X=x)\)</span> measures how spread out <span class="math notranslate nohighlight">\(Y\)</span> is <strong>under the same condition</strong>.</p></li>
+</ul>
+<p>These quantities are useful because they translate a full conditional distribution into two interpretable numbers: a typical level (mean) and uncertainty (variance), <strong>at each condition <span class="math notranslate nohighlight">\(x\)</span></strong>.</p>
+</section>
+</section>
+<section id="illustrative-example-joint-pdf-conditional-pdf-conditional-probability-conditional-mean-variance">
+<h2>Illustrative example (joint pdf → conditional pdf → conditional probability → conditional mean/variance)<a class="headerlink" href="#illustrative-example-joint-pdf-conditional-pdf-conditional-probability-conditional-mean-variance" title="Link to this heading"></a></h2>
+<section id="step-1-define-a-simple-joint-pdf-with-a-support-region">
+<h3>Step 1: Define a simple joint pdf with a support region<a class="headerlink" href="#step-1-define-a-simple-joint-pdf-with-a-support-region" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\((X,Y)\)</span> have joint pdf</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+f_{XY}(x,y)=
+\begin{cases}
+2, &amp; 0&lt;x&lt;y&lt;1,\\
+0, &amp; \text{otherwise}.
+\end{cases}
+\end{split}\]</div>
+<p><strong>How to read the support <span class="math notranslate nohighlight">\(0&lt;x&lt;y&lt;1\)</span>:</strong><br />
+Only points above the line <span class="math notranslate nohighlight">\(y=x\)</span> inside the unit square are possible. Outside that triangular region, the density is <span class="math notranslate nohighlight">\(0\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="step-2-compute-the-marginal-f-x-x-use-the-support-to-set-limits">
+<h3>Step 2: Compute the marginal <span class="math notranslate nohighlight">\(f_X(x)\)</span> (use the support to set limits)<a class="headerlink" href="#step-2-compute-the-marginal-f-x-x-use-the-support-to-set-limits" title="Link to this heading"></a></h3>
+<p>For a fixed <span class="math notranslate nohighlight">\(x\)</span> with <span class="math notranslate nohighlight">\(0&lt;x&lt;1\)</span>, the allowed <span class="math notranslate nohighlight">\(y\)</span> values are <span class="math notranslate nohighlight">\(x&lt;y&lt;1\)</span>. So</p>
+<div class="math notranslate nohighlight">
+\[
+f_X(x)=\int_x^1 2\,dy=2(1-x), \quad 0&lt;x&lt;1.
+\]</div>
+</section>
+<hr class="docutils" />
+<section id="step-3-compute-the-conditional-pdf-f-y-mid-x-y-mid-x">
+<h3>Step 3: Compute the conditional pdf <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span><a class="headerlink" href="#step-3-compute-the-conditional-pdf-f-y-mid-x-y-mid-x" title="Link to this heading"></a></h3>
+<p>For <span class="math notranslate nohighlight">\(0&lt;x&lt;1\)</span> and <span class="math notranslate nohighlight">\(x&lt;y&lt;1\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[
+f_{Y\mid X}(y\mid x)=\frac{f_{XY}(x,y)}{f_X(x)}
+=\frac{2}{2(1-x)}
+=\frac{1}{1-x}.
+\]</div>
+<p>So <span class="math notranslate nohighlight">\(Y\mid X=x\)</span> is <strong>uniform</strong> on the interval <span class="math notranslate nohighlight">\([x,1]\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="step-4-example-of-a-conditional-probability-a-condition-specific-question">
+<h3>Step 4: Example of a conditional probability (a condition-specific question)<a class="headerlink" href="#step-4-example-of-a-conditional-probability-a-condition-specific-question" title="Link to this heading"></a></h3>
+<p>Compute <span class="math notranslate nohighlight">\(P(Y&gt;0.8\mid X=x)\)</span>.</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(x\ge 0.8\)</span>, then <span class="math notranslate nohighlight">\(Y\)</span> must be at least <span class="math notranslate nohighlight">\(x\)</span>, so <span class="math notranslate nohighlight">\(P(Y&gt;0.8\mid X=x)=1\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(x&lt;0.8\)</span>, integrate the conditional density from <span class="math notranslate nohighlight">\(0.8\)</span> to <span class="math notranslate nohighlight">\(1\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+P(Y&gt;0.8\mid X=x)=\int_{0.8}^{1}\frac{1}{1-x}\,dy
+=\frac{1-0.8}{1-x}
+=\frac{0.2}{1-x},
+\quad 0&lt;x&lt;0.8.
+\]</div>
+<p>This shows why marginal distributions are not enough: the probability changes with the known condition <span class="math notranslate nohighlight">\(x\)</span>.</p>
+</section>
+<hr class="docutils" />
+<section id="step-5-conditional-mean-and-variance">
+<h3>Step 5: Conditional mean and variance<a class="headerlink" href="#step-5-conditional-mean-and-variance" title="Link to this heading"></a></h3>
+<p>Because <span class="math notranslate nohighlight">\(Y\mid X=x\)</span> is uniform on <span class="math notranslate nohighlight">\([x,1]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[
+E(Y\mid X=x)=\int_x^1 y\cdot \frac{1}{1-x}\,dy
+=\frac{x+1}{2}.
+\]</div>
+<p>For the conditional second moment:</p>
+<div class="math notranslate nohighlight">
+\[
+E(Y^2\mid X=x)=\int_x^1 y^2\cdot \frac{1}{1-x}\,dy
+=\frac{1-x^3}{3(1-x)}
+=\frac{1+x+x^2}{3}.
+\]</div>
+<p>Then</p>
+<div class="math notranslate nohighlight">
+\[
+V(Y\mid X=x)=E(Y^2\mid X=x)-\bigl(E(Y\mid X=x)\bigr)^2
+=\frac{(1-x)^2}{12}.
+\]</div>
+<p><strong>Interpretation</strong></p>
+<ul class="simple">
+<li><p>As <span class="math notranslate nohighlight">\(x\)</span> increases, the possible range for <span class="math notranslate nohighlight">\(Y\)</span> becomes shorter (<span class="math notranslate nohighlight">\([x,1]\)</span> shrinks).</p></li>
+<li><p>So the conditional mean increases toward <span class="math notranslate nohighlight">\(1\)</span>, and the conditional variance decreases toward <span class="math notranslate nohighlight">\(0\)</span>.</p></li>
+</ul>
+</section>
+</section>
+<hr class="docutils" />
+<section id="plotly-visualization-code-joint-pdf-conditional-slice-conditional-mean-variance">
+<h2>Plotly visualization code (joint pdf + conditional slice + conditional mean/variance)<a class="headerlink" href="#plotly-visualization-code-joint-pdf-conditional-slice-conditional-mean-variance" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>This code creates:</p>
+<ol class="arabic simple">
+<li><p>a 3D surface view of the joint pdf support region,</p></li>
+<li><p>a 2D plot of the conditional density slice at a chosen <span class="math notranslate nohighlight">\(x=x_0\)</span>, with the conditional mean marked,</p></li>
+<li><p>a 2D plot showing how <span class="math notranslate nohighlight">\(E(Y\mid X=x)\)</span> and <span class="math notranslate nohighlight">\(V(Y\mid X=x)\)</span> change with <span class="math notranslate nohighlight">\(x\)</span>.</p></li>
+</ol>
+</div></blockquote>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objects</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+
+<span class="c1"># -----------------------</span>
+<span class="c1"># Joint pdf definition</span>
+<span class="c1"># f_{XY}(x,y) = 2 for 0 &lt; x &lt; y &lt; 1, else 0</span>
+<span class="c1"># -----------------------</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_xy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">),</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1"># Marginal f_X(x) = 2(1-x) for 0&lt;x&lt;1</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_x</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">),</span> <span class="mf">2.0</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1"># Conditional f_{Y|X}(y|x) = 1/(1-x) for x&lt;y&lt;1, else 0 (for 0&lt;x&lt;1)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">f_y_given_x</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">((</span><span class="n">x</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&gt;=</span> <span class="n">x</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">),</span> <span class="mf">1.0</span> <span class="o">/</span> <span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">),</span> <span class="mf">0.0</span><span class="p">)</span>
+
+<span class="c1"># Conditional mean and variance</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">cond_mean</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">)</span> <span class="o">/</span> <span class="mf">2.0</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">cond_var</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">((</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">x</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="mf">12.0</span>
+
+<span class="c1"># -----------------------</span>
+<span class="c1"># Figure 1: 3D surface for joint pdf over a grid</span>
+<span class="c1"># -----------------------</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">xg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">yg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">xg</span><span class="p">,</span> <span class="n">yg</span><span class="p">)</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">f_xy</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+
+<span class="n">fig_joint</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">[</span>
+        <span class="n">go</span><span class="o">.</span><span class="n">Surface</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">Y</span><span class="p">,</span> <span class="n">z</span><span class="o">=</span><span class="n">Z</span><span class="p">,</span> <span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="p">]</span>
+<span class="p">)</span>
+<span class="n">fig_joint</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Joint pdf f_XY(x,y): nonzero only on the triangular support 0&lt;x&lt;y&lt;1&quot;</span><span class="p">,</span>
+    <span class="n">scene</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+        <span class="n">zaxis_title</span><span class="o">=</span><span class="s2">&quot;f_XY(x,y)&quot;</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+
+<span class="c1"># -----------------------</span>
+<span class="c1"># Figure 2: Conditional slice at x = x0</span>
+<span class="c1"># -----------------------</span>
+<span class="n">x0</span> <span class="o">=</span> <span class="mf">0.30</span>
+<span class="n">y_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">fy_line</span> <span class="o">=</span> <span class="n">f_y_given_x</span><span class="p">(</span><span class="n">y_line</span><span class="p">,</span> <span class="n">x0</span><span class="p">)</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="n">cond_mean</span><span class="p">(</span><span class="n">x0</span><span class="p">)</span>
+
+<span class="n">fig_cond</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">fig_cond</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">y_line</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">fy_line</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;f_Y|X(y|x=</span><span class="si">{</span><span class="n">x0</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">))</span>
+<span class="n">fig_cond</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">mu</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="n">f_y_given_x</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">x0</span><span class="p">)],</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;markers&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Conditional mean&quot;</span><span class="p">))</span>
+
+<span class="n">fig_cond</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Conditional density slice: Y | X = x0 (uniform on [x0, 1])&quot;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;f_Y|X(y|x0)&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># -----------------------</span>
+<span class="c1"># Figure 3: Conditional mean and variance as functions of x</span>
+<span class="c1"># -----------------------</span>
+<span class="n">x_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.999</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">mu_line</span> <span class="o">=</span> <span class="n">cond_mean</span><span class="p">(</span><span class="n">x_line</span><span class="p">)</span>
+<span class="n">var_line</span> <span class="o">=</span> <span class="n">cond_var</span><span class="p">(</span><span class="n">x_line</span><span class="p">)</span>
+
+<span class="n">fig_moments</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">()</span>
+<span class="n">fig_moments</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_line</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">mu_line</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;E(Y|X=x)&quot;</span><span class="p">))</span>
+<span class="n">fig_moments</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">go</span><span class="o">.</span><span class="n">Scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">x_line</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">var_line</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;lines&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;V(Y|X=x)&quot;</span><span class="p">))</span>
+
+<span class="n">fig_moments</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;How conditioning changes the mean and variance of Y&quot;</span><span class="p">,</span>
+    <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span>
+    <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Value&quot;</span>
+<span class="p">)</span>
+
+<span class="c1"># Show figures</span>
+<span class="n">fig_joint</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig_cond</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">fig_moments</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c1">### 3.2. Independence</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<span class="c1">## 6. Independence</span>
+
+<span class="n">Two</span> <span class="n">random</span> <span class="n">variables</span> <span class="err">$</span><span class="n">X</span><span class="err">$</span> <span class="ow">and</span> <span class="err">$</span><span class="n">Y</span><span class="err">$</span> <span class="n">are</span> <span class="o">**</span><span class="n">independent</span><span class="o">**</span> <span class="k">if</span> <span class="n">knowing</span> <span class="n">one</span> <span class="n">does</span> <span class="o">**</span><span class="ow">not</span><span class="o">**</span> <span class="n">change</span> <span class="n">the</span> <span class="n">distribution</span> <span class="n">of</span> <span class="n">the</span> <span class="n">other</span><span class="o">.</span>
+
+<span class="n">Mathematically</span><span class="p">,</span> <span class="n">independence</span> <span class="n">means</span><span class="p">:</span>
+
+<span class="err">$$</span>
+<span class="n">f_</span><span class="p">{</span><span class="n">XY</span><span class="p">}(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="o">=</span> <span class="n">f_X</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>\<span class="p">,</span><span class="n">f_Y</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> \<span class="n">quad</span> \<span class="n">text</span><span class="p">{</span><span class="k">for</span> <span class="nb">all</span> <span class="p">}</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span>
+<span class="err">$$</span>
+
+<span class="c1">### Practical Meaning</span>
+
+<span class="o">-</span> <span class="n">Independence</span> <span class="ow">is</span> <span class="n">a</span> <span class="o">**</span><span class="n">strong</span> <span class="n">assumption</span><span class="o">**</span>
+<span class="o">-</span> <span class="n">It</span> <span class="n">should</span> <span class="n">be</span> <span class="o">**</span><span class="n">checked</span><span class="o">**</span><span class="p">,</span> <span class="ow">not</span> <span class="n">assumed</span>
+<span class="o">-</span> <span class="n">Many</span> <span class="n">operational</span> <span class="n">variables</span> <span class="n">are</span> <span class="o">**</span><span class="ow">not</span> <span class="n">independent</span><span class="o">**</span>
+
+<span class="o">---</span>
+
+<span class="c1">## 7. Worked Example (Discrete)</span>
+
+<span class="c1">### Context: Factory Wi-Fi and System Response Time</span>
+
+<span class="n">A</span> <span class="n">factory</span> <span class="n">uses</span> <span class="n">a</span> <span class="n">web</span><span class="o">-</span><span class="n">based</span> <span class="n">system</span> <span class="n">to</span> <span class="n">release</span> <span class="n">work</span> <span class="n">orders</span><span class="o">.</span>  
+<span class="n">Operators</span> <span class="n">report</span> <span class="n">that</span> <span class="n">slow</span> <span class="n">response</span> <span class="n">times</span> <span class="n">reduce</span> <span class="n">productivity</span><span class="o">.</span>
+
+<span class="n">Two</span> <span class="n">variables</span> <span class="n">are</span> <span class="n">recorded</span><span class="p">:</span>
+
+<span class="o">-</span> <span class="err">$</span><span class="n">X</span><span class="err">$</span><span class="p">:</span> <span class="n">Wi</span><span class="o">-</span><span class="n">Fi</span> <span class="n">signal</span> <span class="n">strength</span> <span class="p">(</span><span class="n">bars</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="o">-</span> <span class="err">$</span><span class="n">Y</span><span class="err">$</span><span class="p">:</span> <span class="n">response</span> <span class="n">time</span> <span class="p">(</span><span class="n">seconds</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="n">The</span> <span class="n">joint</span> <span class="n">probability</span> <span class="n">table</span> <span class="ow">is</span><span class="p">:</span>
+
+<span class="o">|</span> <span class="err">$</span><span class="n">Y</span> \<span class="n">backslash</span> <span class="n">X</span><span class="err">$</span> <span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mi">3</span> <span class="o">|</span>
+<span class="o">|---|---</span><span class="p">:</span><span class="o">|---</span><span class="p">:</span><span class="o">|---</span><span class="p">:</span><span class="o">|</span>
+<span class="o">|</span> <span class="mi">4</span> <span class="o">|</span> <span class="mf">0.15</span> <span class="o">|</span> <span class="mf">0.10</span> <span class="o">|</span> <span class="mf">0.05</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">3</span> <span class="o">|</span> <span class="mf">0.02</span> <span class="o">|</span> <span class="mf">0.10</span> <span class="o">|</span> <span class="mf">0.05</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">2</span> <span class="o">|</span> <span class="mf">0.02</span> <span class="o">|</span> <span class="mf">0.03</span> <span class="o">|</span> <span class="mf">0.20</span> <span class="o">|</span>
+<span class="o">|</span> <span class="mi">1</span> <span class="o">|</span> <span class="mf">0.01</span> <span class="o">|</span> <span class="mf">0.02</span> <span class="o">|</span> <span class="mf">0.25</span> <span class="o">|</span>
+
+<span class="o">---</span>
+
+<span class="c1">### Question A: Joint Probability</span>
+
+<span class="n">Find</span> <span class="err">$</span><span class="n">P</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span><span class="err">$</span><span class="o">.</span>
+
+<span class="err">$$</span>
+<span class="n">P</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="n">Y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="err">$$</span>
+
+<span class="o">**</span><span class="n">Interpretation</span><span class="o">**</span>
+
+<span class="mi">25</span><span class="o">%</span> <span class="n">of</span> <span class="n">sessions</span> <span class="n">have</span> <span class="n">strong</span> <span class="n">signal</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">fastest</span> <span class="n">response</span><span class="o">.</span>
+
+<span class="o">---</span>
+
+<span class="c1">### Question B: Marginal Probability</span>
+
+<span class="n">Find</span> <span class="err">$</span><span class="n">P</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span><span class="err">$</span><span class="o">.</span>
+
+<span class="err">$$</span>
+<span class="n">P</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.05</span> <span class="o">+</span> <span class="mf">0.05</span> <span class="o">+</span> <span class="mf">0.20</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">=</span> <span class="mf">0.55</span>
+<span class="err">$$</span>
+
+<span class="o">**</span><span class="n">Interpretation</span><span class="o">**</span>
+
+<span class="mi">55</span><span class="o">%</span> <span class="n">of</span> <span class="n">sessions</span> <span class="n">experience</span> <span class="n">strong</span> <span class="n">Wi</span><span class="o">-</span><span class="n">Fi</span> <span class="n">signal</span><span class="o">.</span>
+
+<span class="o">---</span>
+
+<span class="c1">### Question C: Conditional Probability</span>
+
+<span class="n">Find</span> <span class="err">$</span><span class="n">P</span><span class="p">(</span><span class="n">Y</span> <span class="o">=</span> <span class="mi">1</span> \<span class="n">mid</span> <span class="n">X</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span><span class="err">$</span><span class="o">.</span>
+
+<span class="err">$$</span>
+<span class="n">P</span><span class="p">(</span><span class="n">Y</span> <span class="o">=</span> <span class="mi">1</span> \<span class="n">mid</span> <span class="n">X</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="o">=</span> \<span class="n">frac</span><span class="p">{</span><span class="mf">0.25</span><span class="p">}{</span><span class="mf">0.55</span><span class="p">}</span> \<span class="n">approx</span> <span class="mf">0.455</span>
+<span class="err">$$</span>
+
+<span class="o">**</span><span class="n">Interpretation</span><span class="o">**</span>
+
+<span class="n">Given</span> <span class="n">strong</span> <span class="n">signal</span><span class="p">,</span> <span class="n">the</span> <span class="n">probability</span> <span class="n">of</span> <span class="n">a</span> <span class="mi">1</span><span class="o">-</span><span class="n">second</span> <span class="n">response</span> <span class="ow">is</span> <span class="n">about</span> <span class="mf">45.5</span><span class="o">%.</span>
+
+<span class="o">---</span>
+
+<span class="c1">### Question D: Independence Check</span>
+
+<span class="n">First</span> <span class="n">compute</span><span class="p">:</span>
+
+<span class="err">$$</span>
+<span class="n">P</span><span class="p">(</span><span class="n">Y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.01</span> <span class="o">+</span> <span class="mf">0.02</span> <span class="o">+</span> <span class="mf">0.25</span> <span class="o">=</span> <span class="mf">0.28</span>
+<span class="err">$$</span>
+
+<span class="n">Then</span> <span class="n">compare</span><span class="p">:</span>
+
+<span class="err">$$</span>
+<span class="n">P</span><span class="p">(</span><span class="n">X</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span> <span class="n">P</span><span class="p">(</span><span class="n">Y</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mf">0.55</span> \<span class="n">times</span> <span class="mf">0.28</span> <span class="o">=</span> <span class="mf">0.154</span>
+<span class="err">$$</span>
+
+<span class="n">Since</span> <span class="err">$</span><span class="mf">0.25</span> \<span class="n">neq</span> <span class="mf">0.154</span><span class="err">$</span><span class="p">,</span>  
+<span class="err">$</span><span class="n">X</span><span class="err">$</span> <span class="ow">and</span> <span class="err">$</span><span class="n">Y</span><span class="err">$</span> <span class="n">are</span> <span class="o">**</span><span class="ow">not</span> <span class="n">independent</span><span class="o">**.</span>
+
+<span class="o">**</span><span class="n">Operational</span> <span class="n">meaning</span><span class="p">:</span><span class="o">**</span> <span class="n">Improving</span> <span class="n">Wi</span><span class="o">-</span><span class="n">Fi</span> <span class="n">signal</span> <span class="n">can</span> <span class="n">improve</span> <span class="n">response</span> <span class="n">time</span><span class="o">.</span>
+
+<span class="o">---</span>
+
+<span class="c1">## 8. Visual Thinking (Strongly Recommended)</span>
+
+<span class="o">-</span> <span class="o">**</span><span class="n">Discrete</span> <span class="n">case</span><span class="p">:</span><span class="o">**</span>  
+  <span class="n">Draw</span> <span class="n">the</span> <span class="n">joint</span> <span class="n">table</span> <span class="ow">and</span> <span class="n">shade</span> <span class="n">cells</span> <span class="k">with</span> <span class="n">large</span> <span class="n">probabilities</span><span class="o">.</span>
+<span class="o">-</span> <span class="o">**</span><span class="n">Continuous</span> <span class="n">case</span><span class="p">:</span><span class="o">**</span>  
+  <span class="n">Sketch</span> <span class="n">the</span> <span class="n">feasible</span> <span class="n">region</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">probability</span> <span class="n">region</span> <span class="err">$</span><span class="n">R</span><span class="err">$</span><span class="o">.</span>
+
+<span class="n">Visual</span> <span class="n">sketches</span> <span class="n">help</span> <span class="n">you</span><span class="p">:</span>
+<span class="o">-</span> <span class="n">Detect</span> <span class="n">dependence</span>
+<span class="o">-</span> <span class="n">Set</span> <span class="n">correct</span> <span class="n">integration</span> <span class="n">limits</span>
+<span class="o">-</span> <span class="n">Reduce</span> <span class="n">calculation</span> <span class="n">errors</span>
+
+<span class="o">---</span>
+
+<span class="c1">## 9. Common Mistakes</span>
+
+<span class="mf">1.</span> <span class="n">Confusing</span> <span class="n">marginal</span> <span class="ow">and</span> <span class="n">conditional</span> <span class="n">distributions</span>  
+<span class="mf">2.</span> <span class="n">Treating</span> <span class="n">pdf</span> <span class="n">values</span> <span class="k">as</span> <span class="n">probabilities</span>  
+<span class="mf">3.</span> <span class="n">Ignoring</span> <span class="n">feasible</span> <span class="n">regions</span> <span class="ow">in</span> <span class="n">continuous</span> <span class="n">problems</span>  
+<span class="mf">4.</span> <span class="n">Assuming</span> <span class="n">independence</span> <span class="n">without</span> <span class="n">checking</span>  
+<span class="mf">5.</span> <span class="n">Mixing</span> <span class="n">up</span> <span class="err">$</span><span class="n">P</span><span class="p">(</span><span class="n">Y</span> \<span class="n">mid</span> <span class="n">X</span><span class="p">)</span><span class="err">$</span> <span class="ow">and</span> <span class="err">$</span><span class="n">P</span><span class="p">(</span><span class="n">X</span> \<span class="n">mid</span> <span class="n">Y</span><span class="p">)</span><span class="err">$</span>  
+
+<span class="o">---</span>
+
+<span class="c1">## 10. Key Takeaways</span>
+
+<span class="o">-</span> <span class="n">Joint</span> <span class="n">distributions</span> <span class="n">describe</span> <span class="n">how</span> <span class="n">two</span> <span class="n">variables</span> <span class="n">behave</span> <span class="o">**</span><span class="n">together</span><span class="o">**.</span>
+<span class="o">-</span> <span class="n">Use</span> <span class="o">**</span><span class="n">tables</span> <span class="ow">and</span> <span class="n">sums</span><span class="o">**</span> <span class="k">for</span> <span class="n">discrete</span> <span class="n">variables</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Use</span> <span class="o">**</span><span class="n">regions</span> <span class="ow">and</span> <span class="n">integrals</span><span class="o">**</span> <span class="k">for</span> <span class="n">continuous</span> <span class="n">variables</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Marginal</span> <span class="n">distributions</span> <span class="n">ignore</span> <span class="n">the</span> <span class="n">other</span> <span class="n">variable</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Conditional</span> <span class="n">distributions</span> <span class="n">incorporate</span> <span class="n">known</span> <span class="n">conditions</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Independence</span> <span class="n">must</span> <span class="n">be</span> <span class="n">verified</span> <span class="n">mathematically</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">Always</span> <span class="n">interpret</span> <span class="n">results</span> <span class="k">for</span> <span class="o">**</span><span class="n">engineering</span> <span class="ow">and</span> <span class="n">managerial</span> <span class="n">decisions</span><span class="o">**.</span>
+
+
+<span class="c1">## Case Examples</span>
+
+<span class="err">```</span><span class="p">{</span><span class="n">toctree</span><span class="p">}</span>
+<span class="p">:</span><span class="n">maxdepth</span><span class="p">:</span> <span class="mi">1</span>
+
+<span class="o">../</span><span class="n">cases</span><span class="o">/</span><span class="n">discrete_joint_marginal_quality</span>
+<span class="o">../</span><span class="n">cases</span><span class="o">/</span><span class="n">cont_joint_marginal_queue</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Statistics II — Course Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright .</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
