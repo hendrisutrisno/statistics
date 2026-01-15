@@ -1,4 +1,4 @@
-# statistics
+# Statistics
 
 Sphinx-based documentation project for statistics materials.
 
@@ -68,6 +68,5 @@ Or serve locally:
 ```
 python -m http.server 8000 --directory build/html
 ```
-`
 
 Then visit http://localhost:8000.
