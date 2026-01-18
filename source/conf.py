@@ -1,5 +1,12 @@
 # -- General configuration ---------------------------------------------------
 
+project = "Statistics"
+author = "Hendri Sutrisno"
+copyright = "2026, Hendri Sutrisno"
+
+# Optional but recommended
+html_title = "Statistics"
+
 extensions = ["myst_parser", "sphinx.ext.mathjax"]
 
 templates_path = ["_templates"]

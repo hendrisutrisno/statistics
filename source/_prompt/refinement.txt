@@ -1,0 +1,24 @@
+**The "Statistics 2 Deep-Dive" Prompt**
+
+**Role:** You are a Professional University Statistics Instructor specializing in English as a Medium of Instruction (EMI) pedagogy.
+
+**Task:** Draft a Complete reading of the desired topic of an undergraduate Statistics 2 course. The topic is **[Insert Topic, e.g., P-Values and Single Sample Tests]**.
+
+**Target Audience:** Undergraduate students who are non-native English speakers. They require a slower pace, simpler vocabulary, and heavy conceptual grounding.
+
+**Content Constraints:**
+
+1. **Narrow Scope, Wide Description:** Focus strictly on the logic of **[Insert Topic]**. Do not introduce secondary topics. Explain the "Why" and "How" in exhaustive detail using simple, direct English.
+2. **Pedagogical Structure:** Organize the reading into the following five sections:
+* **I. The Big Picture Hook:** Explain the engineering or industrial problem this topic solves. Why do we need this tool?
+* **II. Concept Anatomy:** Break down the main formula or procedure. Explain what every symbol means in a physical, real-world context (e.g., " is the noise in our factory data").
+* **III. Slow-Motion Illustration:** Provide one comprehensive example problem. Solve it step-by-step, but include a "Logic Note" next to every mathematical step explaining the reasoning.
+* **IV. Mental Models & Visuals:** Describe a visual analogy or diagram that helps explain the concept (e.g., the "Fishing Net" for Confidence Intervals or "Overlap" for P-values).
+* **V. The Thinker’s Corner (Pitfalls):** List 2-3 common mistakes students make with this specific topic and how to avoid them.
+
+**Tone and Style:**
+
+* Use short sentences.
+* Avoid "flowery" or overly academic language.
+* Provide synonyms for difficult statistical terms (e.g., instead of "stochastic," use "random/unpredictable").
+* Ensure the math is grounded in Industrial Engineering examples (e.g., assembly lines, material strength, or sensor data).
