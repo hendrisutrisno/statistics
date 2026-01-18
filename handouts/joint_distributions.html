@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Joint Probability Distributions &mdash; Project name not set  documentation</title>
+  <title>Joint Probability Distributions &mdash; Statistics</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -20,8 +20,7 @@
       <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Statistics II — Course Notes" href="../index.html" /> 
+    <link rel="search" title="Search" href="../search.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -33,7 +32,7 @@
           
           
           <a href="../index.html" class="icon icon-home">
-            Project name not set
+            Statistics
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -43,52 +42,10 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Joint Probability Distributions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#learning-objectives">Learning Objectives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id1">1. Joint Probability Distributions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#joint-probability-distributions-for-two-random-variables">2. Joint Probability Distributions for Two Random Variables</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#joint-probability-mass-function-discrete-case">2.1. Joint Probability Mass Function (Discrete Case)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#illustration">Illustration</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#joint-probability-density-function-continuous-case">2.2. Joint Probability Density Function (Continuous Case)</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#id2">Illustration</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#marginal-distributions">2.3. Marginal Distributions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#discrete-case">Discrete Case</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#continuous-case">Continuous Case</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#conditional-probability-distributions-and-independence">3. Conditional Probability Distributions and Independence</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#conditional-probability-distributions">3.1. Conditional Probability Distributions</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#discrete-case-pmf">Discrete case (pmf)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#continuous-case-pdf">Continuous case (pdf)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#note-always-state-the-nonzero-region-support">Note: always state the nonzero region (support)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#conditional-mean-and-variance">Conditional Mean and Variance</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#conditional-mean">Conditional mean</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#conditional-variance">Conditional variance</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#illustrative-example-joint-pdf-conditional-pdf-conditional-probability-conditional-mean-variance">Illustrative example (joint pdf → conditional pdf → conditional probability → conditional mean/variance)</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#step-1-define-a-simple-joint-pdf-with-a-support-region">Step 1: Define a simple joint pdf with a support region</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-2-compute-the-marginal-f-x-x-use-the-support-to-set-limits">Step 2: Compute the marginal <span class="math notranslate nohighlight">\(f_X(x)\)</span> (use the support to set limits)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-3-compute-the-conditional-pdf-f-y-mid-x-y-mid-x">Step 3: Compute the conditional pdf <span class="math notranslate nohighlight">\(f_{Y\mid X}(y\mid x)\)</span></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-4-example-of-a-conditional-probability-a-condition-specific-question">Step 4: Example of a conditional probability (a condition-specific question)</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#step-5-conditional-mean-and-variance">Step 5: Conditional mean and variance</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="#plotly-visualization-code-joint-pdf-conditional-slice-conditional-mean-variance">Plotly visualization code (joint pdf + conditional slice + conditional mean/variance)</a></li>
-</ul>
-</li>
+              <p class="caption" role="heading"><span class="caption-text">Courses</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../statistics1/index.html">Statistics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../statistics2/index.html">Statistics 2</a></li>
 </ul>
 
         </div>
@@ -97,7 +54,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Project name not set</a>
+          <a href="../index.html">Statistics</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -886,14 +843,12 @@ V(Y\mid X=x)=E(Y^2\mid X=x)-\bigl(E(Y\mid X=x)\bigr)^2
 
            </div>
           </div>
-          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="../index.html" class="btn btn-neutral float-left" title="Statistics II — Course Notes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-    </div>
+          <footer>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright .</p>
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
