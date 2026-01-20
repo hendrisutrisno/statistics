@@ -1,4 +1,4 @@
-# Case Study: Joint and Marginal Distributions in Queue (Continuous Case)
+<!-- # Case Study: Joint and Marginal Distributions in Queue (Continuous Case)
 
 ## Description
 
@@ -225,4 +225,4 @@ This marginal distribution captures total time in the system. It combines both w
 
 ---
 
-Taken together, the joint and marginal views describe different aspects of the same process. The joint model makes explicit which combinations of waiting and completion times can occur, while the marginal distributions summarize each time variable individually. The figures associated with this case help connect probability calculations to the geometry of the service process and to the observed variability in customer experience.
+Taken together, the joint and marginal views describe different aspects of the same process. The joint model makes explicit which combinations of waiting and completion times can occur, while the marginal distributions summarize each time variable individually. The figures associated with this case help connect probability calculations to the geometry of the service process and to the observed variability in customer experience. -->
