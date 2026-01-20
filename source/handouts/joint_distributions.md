@@ -1,4 +1,4 @@
-# Joint Probability Distributions
+<!-- # Joint Probability Distributions
 
 ### Learning Objectives
 
@@ -776,4 +776,4 @@ Visual sketches help you:
 :maxdepth: 1
 
 ../cases/discrete_joint_marginal_quality
-../cases/cont_joint_marginal_queue
+../cases/cont_joint_marginal_queue -->
