@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Statistics</title>
+  <title>Case Study: Joint and Marginal Distributions in Quality Inspection (Discrete Case) &mdash; Statistics</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -16,6 +16,8 @@
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -60,7 +62,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active">Case Study: Joint and Marginal Distributions in Quality Inspection (Discrete Case)</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/cases/discrete_joint_marginal_quality.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -70,7 +72,154 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <section id="case-study-joint-and-marginal-distributions-in-quality-inspection-discrete-case">
+<h1>Case Study: Joint and Marginal Distributions in Quality Inspection (Discrete Case)<a class="headerlink" href="#case-study-joint-and-marginal-distributions-in-quality-inspection-discrete-case" title="Link to this heading"></a></h1>
+<section id="description">
+<h2>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h2>
+<p>A production batch contains parts of two types:</p>
+<ul class="simple">
+<li><p><strong>Conforming</strong>: meet specifications</p></li>
+<li><p><strong>Nonconforming</strong>: do not meet specifications</p></li>
+</ul>
+<p>A quality engineer selects a sample to inspect the batch. The sampling is done <strong>randomly without replacement</strong>, meaning that once a part is selected, it is not returned to the batch before the next selection.</p>
+<p>Let:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> be the number of <strong>conforming</strong> parts in the sample.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> be the number of <strong>nonconforming</strong> parts in the sample.</p></li>
+</ul>
+<p>A sample of size <span class="math notranslate nohighlight">\(n = 20\)</span> is selected from a batch of size <span class="math notranslate nohighlight">\(N = 100\)</span>. Suppose the batch contains <span class="math notranslate nohighlight">\(K = 80\)</span> conforming parts and <span class="math notranslate nohighlight">\(N-K = 20\)</span> nonconforming parts.</p>
+<p>Because every sampled part must be either conforming or nonconforming, the two counts always satisfy</p>
+<div class="math notranslate nohighlight">
+\[X + Y = 20\]</div>
+</section>
+<section id="questions">
+<h2>Questions<a class="headerlink" href="#questions" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Is the joint distribution of <span class="math notranslate nohighlight">\((X,Y)\)</span> multinomial? Explain clearly using the sampling mechanism.</p></li>
+<li><p>Write the joint probability mass function <span class="math notranslate nohighlight">\(f_{XY}(x,y)=P(X=x,Y=y)\)</span>, including the valid range of <span class="math notranslate nohighlight">\((x,y)\)</span>.</p></li>
+<li><p>Derive the marginal distribution of <span class="math notranslate nohighlight">\(X\)</span>, i.e., <span class="math notranslate nohighlight">\(f_X(x)=P(X=x)\)</span>.</p></li>
+<li><p>Derive the marginal distribution of <span class="math notranslate nohighlight">\(Y\)</span>, i.e., <span class="math notranslate nohighlight">\(f_Y(y)=P(Y=y)\)</span>.</p></li>
+</ol>
+</section>
+<section id="solution">
+<h2>Solution<a class="headerlink" href="#solution" title="Link to this heading"></a></h2>
+<section id="question-1-is-the-joint-distribution-of-x-y-multinomial">
+<h3>Question 1: Is the joint distribution of <span class="math notranslate nohighlight">\((X,Y)\)</span> multinomial?<a class="headerlink" href="#question-1-is-the-joint-distribution-of-x-y-multinomial" title="Link to this heading"></a></h3>
+<p>The sample size is fixed at 20. This means exactly 20 parts are observed in total.</p>
+<p>In each sample:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> counts how many of the 20 are conforming.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> counts how many of the 20 are nonconforming.</p></li>
+</ul>
+<p>Since every sampled part must fall into exactly one of these two categories, the counts must satisfy</p>
+<div class="math notranslate nohighlight">
+\[X + Y = 20\]</div>
+<p>This is not an assumption. It is a direct consequence of counting.</p>
+<p>So, once <span class="math notranslate nohighlight">\(X\)</span> is known, <span class="math notranslate nohighlight">\(Y\)</span> is determined automatically:</p>
+<div class="math notranslate nohighlight">
+\[Y = 20 - X\]</div>
+<p>A multinomial model is appropriate when:</p>
+<ul class="simple">
+<li><p>trials are independent (or effectively independent), and</p></li>
+<li><p>category probabilities remain constant across trials.</p></li>
+</ul>
+<p>That situation corresponds to <strong>sampling with replacement</strong>.</p>
+<p>In this problem, sampling is done <strong>without replacement</strong>. After each draw, the composition of the batch changes. For example, if a conforming part is drawn, there is one fewer conforming part remaining, and the probability that the next draw is conforming changes.</p>
+<p>This dependence violates the assumptions of a multinomial model.</p>
+<p>In addition, the pair <span class="math notranslate nohighlight">\((X,Y)\)</span> is constrained by <span class="math notranslate nohighlight">\(X+Y=20\)</span>, meaning the joint pmf has support only on a single line in the <span class="math notranslate nohighlight">\((x,y)\)</span> plane. A multinomial joint distribution would allow variation in both dimensions.</p>
+<p>Therefore, the joint distribution of <span class="math notranslate nohighlight">\((X,Y)\)</span> is <strong>not multinomial</strong>.</p>
+</section>
+<section id="question-2-joint-probability-mass-function-of-x-y">
+<h3>Question 2: Joint probability mass function of <span class="math notranslate nohighlight">\((X,Y)\)</span><a class="headerlink" href="#question-2-joint-probability-mass-function-of-x-y" title="Link to this heading"></a></h3>
+<p>Because sampling is without replacement, probabilities are computed using combinations.</p>
+<p>To obtain the event <span class="math notranslate nohighlight">\((X=x, Y=y)\)</span> in a sample of size 20:</p>
+<ul class="simple">
+<li><p>choose <span class="math notranslate nohighlight">\(x\)</span> conforming parts from the 80 available,</p></li>
+<li><p>choose <span class="math notranslate nohighlight">\(y\)</span> nonconforming parts from the 20 available,</p></li>
+<li><p>divide by the total number of ways to choose any 20 parts from the 100.</p></li>
+</ul>
+<p>Thus,</p>
+<div class="math notranslate nohighlight">
+\[P(X=x, Y=y)
+=
+\frac{\binom{80}{x}\binom{20}{y}}{\binom{100}{20}}\]</div>
+<p>The valid range is determined by the fixed sample size:</p>
+<div class="math notranslate nohighlight">
+\[x + y = 20,
+\quad x = 0,1,\ldots,20,
+\quad y = 20 - x\]</div>
+<p>For all other pairs,</p>
+<div class="math notranslate nohighlight">
+\[P(X=x, Y=y) = 0\]</div>
+<p>A compact representation is</p>
+<div class="math notranslate nohighlight">
+\[P(X=x, Y=20-x)
+=
+\frac{\binom{80}{x}\binom{20}{20-x}}{\binom{100}{20}},
+\quad x = 0,1,\ldots,20\]</div>
+<iframe src="../_static/joint_pmf_3d.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe><p>This visualization shows that probability mass exists only along the diagonal line <span class="math notranslate nohighlight">\(x+y=20\)</span>. Outcomes away from this line are impossible.</p>
+</section>
+<section id="question-3-marginal-distribution-of-x">
+<h3>Question 3: Marginal distribution of <span class="math notranslate nohighlight">\(X\)</span><a class="headerlink" href="#question-3-marginal-distribution-of-x" title="Link to this heading"></a></h3>
+<p>By definition, the marginal distribution of <span class="math notranslate nohighlight">\(X\)</span> is obtained by summing the joint pmf over all values of <span class="math notranslate nohighlight">\(Y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f_X(x) = P(X=x) = \sum_y P(X=x, Y=y)\]</div>
+<p>Because the constraint <span class="math notranslate nohighlight">\(X+Y=20\)</span> holds, only one value of <span class="math notranslate nohighlight">\(Y\)</span> is compatible with a given <span class="math notranslate nohighlight">\(x\)</span>, namely <span class="math notranslate nohighlight">\(y=20-x\)</span>. All other values have probability zero.</p>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[P(X=x) = P(X=x, Y=20-x)\]</div>
+<p>Substituting the joint pmf,</p>
+<div class="math notranslate nohighlight">
+\[P(X=x)
+=
+\frac{\binom{80}{x}\binom{20}{20-x}}{\binom{100}{20}},
+\quad x = 0,1,\ldots,20\]</div>
+<p>This is the <strong>hypergeometric distribution</strong>, describing the number of conforming parts in a sample drawn without replacement.</p>
+<iframe src="../_static/marginal_pmf_X.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe></section>
+<section id="question-4-marginal-distribution-of-y">
+<h3>Question 4: Marginal distribution of <span class="math notranslate nohighlight">\(Y\)</span><a class="headerlink" href="#question-4-marginal-distribution-of-y" title="Link to this heading"></a></h3>
+<p>Similarly, the marginal distribution of <span class="math notranslate nohighlight">\(Y\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[f_Y(y) = P(Y=y) = \sum_x P(X=x, Y=y)\]</div>
+<p>Using the same constraint,</p>
+<div class="math notranslate nohighlight">
+\[X + Y = 20\]</div>
+<p>only <span class="math notranslate nohighlight">\(x = 20 - y\)</span> is possible. Hence,</p>
+<div class="math notranslate nohighlight">
+\[P(Y=y)
+=
+\frac{\binom{80}{20-y}\binom{20}{y}}{\binom{100}{20}},
+\quad y = 0,1,\ldots,20\]</div>
+<iframe src="../_static/marginal_pmf_Y.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe><p>Because</p>
+<div class="math notranslate nohighlight">
+\[Y = 20 - X\]</div>
+<p>the marginal distributions of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> have the same shape. Knowing one variable uniquely determines the other.</p>
+</section>
+<section id="reconnecting-marginals-with-the-joint-distribution">
+<h3>Reconnecting Marginals with the Joint Distribution<a class="headerlink" href="#reconnecting-marginals-with-the-joint-distribution" title="Link to this heading"></a></h3>
+<p>The marginal distributions summarize one variable at a time, but they do not explicitly show the dependence created by the fixed sample size.</p>
+<p>The joint distribution makes this structure visible.</p>
+<iframe src="../_static/joint_pmf_diagonal.html"
+        width="100%"
+        height="520px"
+        style="border:none;">
+</iframe><p>The joint pmf provides the foundation for <strong>conditional distributions</strong>, which describe how one variable behaves when the value of the other is known.</p>
+</section>
+</section>
+</section>
+
 
            </div>
           </div>
