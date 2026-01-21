@@ -1,0 +1,411 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>6. Linear Functions and Sampling Basics &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">6. Linear Functions and Sampling Basics</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#learning-outcomes">Learning Outcomes</a></li>
+<li><a class="reference internal" href="#purpose-and-use-cases">Purpose and Use Cases</a></li>
+<li><a class="reference internal" href="#core-concept-and-notation">Core Concept and Notation</a><ul>
+<li><a class="reference internal" href="#random-variables">Random variables</a></li>
+<li><a class="reference internal" href="#revisit-covariance-and-independence">Revisit: Covariance and Independence</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#definition-and-interpretation">Definition and Interpretation</a><ul>
+<li><a class="reference internal" href="#linear-function">Linear function</a></li>
+<li><a class="reference internal" href="#mean-of-a-linear-function">Mean of a linear function</a></li>
+<li><a class="reference internal" href="#variance-of-a-linear-function">Variance of a linear function</a></li>
+<li><a class="reference internal" href="#special-case-sum">Special case: sum</a></li>
+<li><a class="reference internal" href="#special-case-average-sampling-link">Special case: average (sampling link)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#connection-to-previous-ideas">Connection to Previous Ideas</a><ul>
+<li><a class="reference internal" href="#why-independence-matters">Why independence matters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#worked-example">Worked Example</a><ul>
+<li><a class="reference internal" href="#context">Context</a></li>
+<li><a class="reference internal" href="#step-1-mean-of-the-sum">Step 1 — Mean of the sum</a></li>
+<li><a class="reference internal" href="#step-2-variance-of-the-sum-dependent-case">Step 2 — Variance of the sum (dependent case)</a></li>
+<li><a class="reference internal" href="#step-3-compare-to-the-independent-case">Step 3 — Compare to the independent case</a></li>
+<li><a class="reference internal" href="#step-4-sampling-link-a-statistic-calculated-sample-value">Step 4 — Sampling link: a Statistic (Calculated Sample Value)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#intuition-visual-intuition">Intuition / Visual Intuition</a><ul>
+<li><a class="reference internal" href="#visual-1-how-covariance-changes-the-spread-of-a-sum">Visual 1: How covariance changes the spread of a sum</a></li>
+<li><a class="reference internal" href="#visual-2-mean-shift-under-a-linear-function">Visual 2: Mean shift under a linear function</a></li>
+<li><a class="reference internal" href="#visual-3-sampling-and-the-sample-mean-as-a-statistic">Visual 3: Sampling and the sample mean as a statistic</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#discussion-and-common-errors">Discussion and Common Errors</a><ul>
+<li><a class="reference internal" href="#common-error-1-forgetting-the-covariance-term">Common Error 1: Forgetting the covariance term</a></li>
+<li><a class="reference internal" href="#common-error-2-not-squaring-the-coefficients-in-variance">Common Error 2: Not squaring the coefficients in variance</a></li>
+<li><a class="reference internal" href="#common-error-3-confusing-a-statistic-with-a-parameter">Common Error 3: Confusing a statistic with a parameter</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">6. Linear Functions and Sampling Basics</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stat2/stat2_06.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="linear-functions-and-sampling-basics">
+<h1>6. Linear Functions and Sampling Basics<a class="headerlink" href="#linear-functions-and-sampling-basics" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In the previous session, we used <strong>covariance</strong> and <strong>correlation</strong> to describe how two variables move together.
+That was useful, but it did not yet tell us what happens to the <strong>mean</strong> and <strong>variance</strong> when we <em>combine</em> variables.</p>
+<p>In real operations, we often combine measurements.
+We add times, add costs, or average sensor readings.
+So we need rules for the mean and variance of <strong>linear functions</strong> (weighted sums).</p>
+</section>
+<section id="learning-outcomes">
+<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
+<p>After this session, you should be able to:</p>
+<ul class="simple">
+<li><p>Compute <span class="math notranslate nohighlight">\(E(aX + bY + c)\)</span> using means of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p>Compute <span class="math notranslate nohighlight">\(V(aX + bY + c)\)</span> using variances and <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y)\)</span>.</p></li>
+<li><p>Explain why independence matters for variance of a sum.</p></li>
+<li><p>Recognize a <strong>Statistic (Calculated Sample Value)</strong> as a function of sample random variables.</p></li>
+</ul>
+</section>
+<section id="purpose-and-use-cases">
+<h2>Purpose and Use Cases<a class="headerlink" href="#purpose-and-use-cases" title="Link to this heading"></a></h2>
+<p>You use linear combinations in many common settings:</p>
+<ul class="simple">
+<li><p><strong>Cycle time</strong>: total time is waiting time plus processing time.</p></li>
+<li><p><strong>Quality</strong>: final dimension is a sum of layer thicknesses.</p></li>
+<li><p><strong>Operations cost</strong>: total cost is material cost plus labor cost.</p></li>
+<li><p><strong>Sensor fusion</strong>: one estimate is a weighted average of two sensors.</p></li>
+<li><p><strong>Sampling</strong>: the sample mean is an average of repeated measurements.</p></li>
+</ul>
+</section>
+<section id="core-concept-and-notation">
+<h2>Core Concept and Notation<a class="headerlink" href="#core-concept-and-notation" title="Link to this heading"></a></h2>
+<section id="random-variables">
+<h3>Random variables<a class="headerlink" href="#random-variables" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span>, <span class="math notranslate nohighlight">\(Y\)</span>: two random variables (e.g., two sensor readings).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_X = E(X)\)</span>, <span class="math notranslate nohighlight">\(\mu_Y = E(Y)\)</span>: means.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_X^2 = V(X)\)</span>, <span class="math notranslate nohighlight">\(\sigma_Y^2 = V(Y)\)</span>: variances.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_X\)</span>, <span class="math notranslate nohighlight">\(\sigma_Y\)</span>: standard deviations.</p></li>
+</ul>
+</section>
+<section id="revisit-covariance-and-independence">
+<h3>Revisit: Covariance and Independence<a class="headerlink" href="#revisit-covariance-and-independence" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y)\)</span> measures joint variation.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are <strong>independent</strong>, then <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y)=0\)</span>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y)=0\)</span>, independence is <em>not guaranteed</em> (but it is still useful for variance rules).</p></li>
+</ul>
+</section>
+</section>
+<section id="definition-and-interpretation">
+<h2>Definition and Interpretation<a class="headerlink" href="#definition-and-interpretation" title="Link to this heading"></a></h2>
+<section id="linear-function">
+<h3>Linear function<a class="headerlink" href="#linear-function" title="Link to this heading"></a></h3>
+<p>A <strong>linear function</strong> of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[W = c_0 + c_1 X + c_2 Y\]</div>
+</section>
+<section id="mean-of-a-linear-function">
+<h3>Mean of a linear function<a class="headerlink" href="#mean-of-a-linear-function" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[E(W) = c_0 + c_1 E(X) + c_2 E(Y)
+     = c_0 + c_1 \mu_X + c_2 \mu_Y\]</div>
+<p>(Note: the mean is an average level, so weights pass through the expectation.)</p>
+</section>
+<section id="variance-of-a-linear-function">
+<h3>Variance of a linear function<a class="headerlink" href="#variance-of-a-linear-function" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[V(W) = c_1^2 V(X) + c_2^2 V(Y) + 2c_1c_2\,\mathrm{cov}(X,Y)
+     = c_1^2 \sigma_X^2 + c_2^2 \sigma_Y^2 + 2c_1c_2\,\mathrm{cov}(X,Y)\]</div>
+<p>(Note: variance tracks spread, so squared weights appear, and dependence adds the cross term.)</p>
+</section>
+<section id="special-case-sum">
+<h3>Special case: sum<a class="headerlink" href="#special-case-sum" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(S = X + Y\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[E(S) = \mu_X + \mu_Y\]</div>
+<div class="math notranslate nohighlight">
+\[V(S) = \sigma_X^2 + \sigma_Y^2 + 2\,\mathrm{cov}(X,Y)\]</div>
+<p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent:</p>
+<div class="math notranslate nohighlight">
+\[V(S) = \sigma_X^2 + \sigma_Y^2\]</div>
+</section>
+<section id="special-case-average-sampling-link">
+<h3>Special case: average (sampling link)<a class="headerlink" href="#special-case-average-sampling-link" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(\bar{X} = \dfrac{X_1 + \cdots + X_n}{n}\)</span> where the <span class="math notranslate nohighlight">\(X_i\)</span> are independent and have
+the same mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[E(\bar{X}) = \mu\]</div>
+<div class="math notranslate nohighlight">
+\[V(\bar{X}) = \frac{\sigma^2}{n}\]</div>
+<p>(Note: averaging keeps the center the same, but reduces spread by a factor of <span class="math notranslate nohighlight">\(n\)</span>.)</p>
+</section>
+</section>
+<section id="connection-to-previous-ideas">
+<h2>Connection to Previous Ideas<a class="headerlink" href="#connection-to-previous-ideas" title="Link to this heading"></a></h2>
+<section id="why-independence-matters">
+<h3>Why independence matters<a class="headerlink" href="#why-independence-matters" title="Link to this heading"></a></h3>
+<p>Variance is about uncertainty.
+If two quantities move together, their uncertainties can <strong>reinforce</strong> or <strong>cancel</strong>.</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y) &gt; 0\)</span>, then large values of <span class="math notranslate nohighlight">\(X\)</span> tend to come with large values of <span class="math notranslate nohighlight">\(Y\)</span>.
+The sum becomes more variable.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y) &lt; 0\)</span>, then large values of <span class="math notranslate nohighlight">\(X\)</span> tend to come with small values of <span class="math notranslate nohighlight">\(Y\)</span>.
+The sum becomes less variable.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are independent, there is no reinforcement pattern, and the cross term is zero.</p></li>
+</ul>
+</section>
+</section>
+<section id="worked-example">
+<h2>Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading"></a></h2>
+<section id="context">
+<h3>Context<a class="headerlink" href="#context" title="Link to this heading"></a></h3>
+<p>A production line uses two sensors to estimate a deviation from a target thickness.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span>: sensor A deviation (micrometers).</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span>: sensor B deviation (micrometers).</p></li>
+</ul>
+<p>Assume:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu_X = 0.20\)</span>, <span class="math notranslate nohighlight">\(\sigma_X = 0.50\)</span>  (so <span class="math notranslate nohighlight">\(\sigma_X^2 = 0.25\)</span>)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_Y = -0.10\)</span>, <span class="math notranslate nohighlight">\(\sigma_Y = 0.40\)</span> (so <span class="math notranslate nohighlight">\(\sigma_Y^2 = 0.16\)</span>)</p></li>
+<li><p>Correlation <span class="math notranslate nohighlight">\(\rho = 0.60\)</span>, so <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y) = \rho\sigma_X\sigma_Y = 0.60(0.50)(0.40)=0.12\)</span></p></li>
+</ul>
+<p>We define the combined estimate as a sum:</p>
+<div class="math notranslate nohighlight">
+\[S = X + Y\]</div>
+</section>
+<section id="step-1-mean-of-the-sum">
+<h3>Step 1 — Mean of the sum<a class="headerlink" href="#step-1-mean-of-the-sum" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[E(S) = \mu_X + \mu_Y = 0.20 + (-0.10) = 0.10.\]</div>
+<p>(Note: the average deviation adds, so positive and negative shifts can offset.)</p>
+</section>
+<section id="step-2-variance-of-the-sum-dependent-case">
+<h3>Step 2 — Variance of the sum (dependent case)<a class="headerlink" href="#step-2-variance-of-the-sum-dependent-case" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[V(S) = \sigma_X^2 + \sigma_Y^2 + 2\,\mathrm{cov}(X,Y)
+     = 0.25 + 0.16 + 2(0.12)
+     = 0.65\]</div>
+<p>So the standard deviation is:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_S = \sqrt{0.65} \approx 0.806\]</div>
+<p>(Note: positive covariance increases total variability through the cross term.)</p>
+</section>
+<section id="step-3-compare-to-the-independent-case">
+<h3>Step 3 — Compare to the independent case<a class="headerlink" href="#step-3-compare-to-the-independent-case" title="Link to this heading"></a></h3>
+<p>If the sensors were independent, then <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y)=0\)</span> and</p>
+<div class="math notranslate nohighlight">
+\[V(S) = 0.25 + 0.16 = 0.41,
+\quad \sigma_S = \sqrt{0.41} \approx 0.640\]</div>
+<p>(Note: independence removes the reinforcement effect, so the sum is less spread out.)</p>
+</section>
+<section id="step-4-sampling-link-a-statistic-calculated-sample-value">
+<h3>Step 4 — Sampling link: a Statistic (Calculated Sample Value)<a class="headerlink" href="#step-4-sampling-link-a-statistic-calculated-sample-value" title="Link to this heading"></a></h3>
+<p>Now suppose we take <span class="math notranslate nohighlight">\(n=5\)</span> parts and record sensor A each time:</p>
+<div class="math notranslate nohighlight">
+\[X_1, X_2, X_3, X_4, X_5\]</div>
+<p>The <strong>sample mean</strong> is</p>
+<div class="math notranslate nohighlight">
+\[\bar{X} = \frac{X_1+X_2+X_3+X_4+X_5}{5}\]</div>
+<p>This is a <strong>Statistic (Calculated Sample Value)</strong>.
+It is a rule that takes the sample values and returns one number.</p>
+<p>If the <span class="math notranslate nohighlight">\(X_i\)</span> are independent with mean <span class="math notranslate nohighlight">\(\mu_X\)</span> and variance <span class="math notranslate nohighlight">\(\sigma_X^2\)</span>, then:</p>
+<div class="math notranslate nohighlight">
+\[E(\bar{X}) = \mu_X = 0.20\]</div>
+<div class="math notranslate nohighlight">
+\[V(\bar{X}) = \frac{\sigma_X^2}{5} = \frac{0.25}{5} = 0.05\]</div>
+<p>So:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{\bar{X}} = \sqrt{0.05} \approx 0.224\]</div>
+<p>(Note: averaging reduces noise, so the sample mean is more stable than a single reading.)</p>
+</section>
+</section>
+<section id="intuition-visual-intuition">
+<h2>Intuition / Visual Intuition<a class="headerlink" href="#intuition-visual-intuition" title="Link to this heading"></a></h2>
+<section id="visual-1-how-covariance-changes-the-spread-of-a-sum">
+<h3>Visual 1: How covariance changes the spread of a sum<a class="headerlink" href="#visual-1-how-covariance-changes-the-spread-of-a-sum" title="Link to this heading"></a></h3>
+<p>For Figure 1, we simulate two measurements from the same system, such as two sensor readings taken on the same part.
+We set both means to 0 and both standard deviations to 1, so the only difference is how strongly the variables move together.
+We change the correlation <span class="math notranslate nohighlight">\(\rho\)</span> (and therefore the covariance) to create three cases: negative, zero, and positive dependence.
+Each time, we form the sum <span class="math notranslate nohighlight">\(S=X+Y\)</span> and plot its distribution.
+Keep the scale the same and compare the width of the curves.
+A positive covariance makes the sum more variable, and a negative covariance can reduce variability.</p>
+<p>Focus on how the distribution of <span class="math notranslate nohighlight">\(S=X+Y\)</span> becomes wider when covariance is positive.
+Also notice how it becomes tighter when covariance is negative.</p>
+<iframe src="../_static/06_01_sum_variance_covariance.html"
+        width="100%"
+        height="420px"
+        style="border:none;">
+</iframe></section>
+<section id="visual-2-mean-shift-under-a-linear-function">
+<h3>Visual 2: Mean shift under a linear function<a class="headerlink" href="#visual-2-mean-shift-under-a-linear-function" title="Link to this heading"></a></h3>
+<p>For Figure 2, we focus on a linear combination that is used for a combined index or a weighted estimate.
+We define <span class="math notranslate nohighlight">\(W=c_0+c_1X+c_2Y\)</span>, where <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> are weights chosen by the analyst.
+We treat <span class="math notranslate nohighlight">\(\mu_X\)</span> and <span class="math notranslate nohighlight">\(\mu_Y\)</span> as fixed process averages, and we change only the weights.
+The plot shows the mean of <span class="math notranslate nohighlight">\(W\)</span> across many values of <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span>.
+Use the surface to see that <span class="math notranslate nohighlight">\(E(W)=c_0+c_1\mu_X+c_2\mu_Y\)</span> changes smoothly and predictably as the weights change.</p>
+<p>Focus on how changing weights <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> shifts the center of <span class="math notranslate nohighlight">\(W=c_0+c_1X+c_2Y\)</span>.
+The mean moves in a “predictable way”.</p>
+<ul class="simple">
+<li><p>Focus on how the weights <span class="math notranslate nohighlight">\(c_1\)</span> and <span class="math notranslate nohighlight">\(c_2\)</span> control the contribution of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> to the linear function <span class="math notranslate nohighlight">\(W=c_0+c_1X+c_2Y\)</span>.</p></li>
+<li><p>As you change these weights, the mean (center) of <span class="math notranslate nohighlight">\(W\)</span> shifts according to <span class="math notranslate nohighlight">\(E(W)=c_0+c_1\mu_X+c_2\mu_Y\)</span>, so the surface moves in a smooth, straight-line way.</p></li>
+<li><p>If a weight is larger in magnitude, that variable has a stronger pull on the mean.</p></li>
+<li><p>If a weight is negative, it reverses the direction of the shift.</p></li>
+</ul>
+<iframe src="../_static/06_02_linear_mean_shift.html"
+        width="100%"
+        height="420px"
+        style="border:none;">
+</iframe></section>
+<section id="visual-3-sampling-and-the-sample-mean-as-a-statistic">
+<h3>Visual 3: Sampling and the sample mean as a statistic<a class="headerlink" href="#visual-3-sampling-and-the-sample-mean-as-a-statistic" title="Link to this heading"></a></h3>
+<p>To study sampling, we simulate repeated measurements from one stable process.
+Assume the process mean is <span class="math notranslate nohighlight">\(\mu = 0.20\)</span> and the process standard deviation is <span class="math notranslate nohighlight">\(\sigma = 0.50\)</span>.
+For each sample size <span class="math notranslate nohighlight">\(n \in \{1,2,5,10,30,50\}\)</span>, we take <span class="math notranslate nohighlight">\(n\)</span> measurements and compute the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span>.
+We repeat this experiment 15,000 times to see how the distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> changes as <span class="math notranslate nohighlight">\(n\)</span> increases.
+Keep the x-axis fixed and observe how the histogram becomes narrower when <span class="math notranslate nohighlight">\(n\)</span> is larger.</p>
+<iframe src="../_static/06_03_sample_mean_sampling.html"
+        width="100%"
+        height="420px"
+        style="border:none;">
+</iframe><p>Focus on how the sample mean varies less as <span class="math notranslate nohighlight">\(n\)</span> increases.
+The center stays near <span class="math notranslate nohighlight">\(\mu\)</span>, but the spread shrinks.</p>
+</section>
+</section>
+<section id="discussion-and-common-errors">
+<h2>Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
+<section id="common-error-1-forgetting-the-covariance-term">
+<h3>Common Error 1: Forgetting the covariance term<a class="headerlink" href="#common-error-1-forgetting-the-covariance-term" title="Link to this heading"></a></h3>
+<p>What goes wrong: Students use <span class="math notranslate nohighlight">\(V(X+Y)=V(X)+V(Y)\)</span> even when <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> are dependent.
+This underestimates or overestimates uncertainty.</p>
+<p>How to avoid it: Always ask, “Do these measurements come from the same machine/line or the same disturbance source?”
+If yes, include <span class="math notranslate nohighlight">\(2\,\mathrm{cov}(X,Y)\)</span>.</p>
+</section>
+<section id="common-error-2-not-squaring-the-coefficients-in-variance">
+<h3>Common Error 2: Not squaring the coefficients in variance<a class="headerlink" href="#common-error-2-not-squaring-the-coefficients-in-variance" title="Link to this heading"></a></h3>
+<p>What goes wrong: Students write <span class="math notranslate nohighlight">\(V(cX)=cV(X)\)</span> instead of <span class="math notranslate nohighlight">\(V(cX)=c^2V(X)\)</span>.
+This gives the wrong scale.</p>
+<p>How to avoid it: Remember variance is about squared deviation.
+So scaling by <span class="math notranslate nohighlight">\(c\)</span> scales deviation by <span class="math notranslate nohighlight">\(c\)</span>, and variance by <span class="math notranslate nohighlight">\(c^2\)</span>.</p>
+</section>
+<section id="common-error-3-confusing-a-statistic-with-a-parameter">
+<h3>Common Error 3: Confusing a statistic with a parameter<a class="headerlink" href="#common-error-3-confusing-a-statistic-with-a-parameter" title="Link to this heading"></a></h3>
+<p>What goes wrong: Students treat <span class="math notranslate nohighlight">\(\bar{X}\)</span> as a fixed number like <span class="math notranslate nohighlight">\(\mu\)</span>.
+But <span class="math notranslate nohighlight">\(\bar{X}\)</span> is random because it depends on random sample values.</p>
+<p>How to avoid it: Use the language rule: parameters (like <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span>) describe the population model.
+Statistics (like <span class="math notranslate nohighlight">\(\bar{X}\)</span>, <span class="math notranslate nohighlight">\(S^2\)</span>) are computed from the sample.</p>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>A linear function has the form <span class="math notranslate nohighlight">\(W=c_0+c_1X+c_2Y\)</span>.</p></li>
+<li><p>Means add and pass through constants: <span class="math notranslate nohighlight">\(E(W)=c_0+c_1\mu_X+c_2\mu_Y\)</span>.</p></li>
+<li><p>Variances need squared weights and a covariance term:
+<span class="math notranslate nohighlight">\(V(W)=c_1^2\sigma_X^2+c_2^2\sigma_Y^2+2c_1c_2\mathrm{cov}(X,Y)\)</span>.</p></li>
+<li><p>Independence implies <span class="math notranslate nohighlight">\(\mathrm{cov}(X,Y)=0\)</span>, which simplifies variance of a sum.</p></li>
+<li><p>The sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> is a <strong>Statistic (Calculated Sample Value)</strong>.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(X_1,\dots,X_n\)</span> are independent with variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>, then <span class="math notranslate nohighlight">\(V(\bar{X})=\sigma^2/n\)</span>.</p></li>
+<li><p>Averaging reduces spread but does not change the target mean.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

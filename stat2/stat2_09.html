@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9. Statistical Intervals for a Single Sample &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">9. Statistical Intervals for a Single Sample</a><ul>
+<li><a class="reference internal" href="#topic-confidence-intervals-for-the-mean-z-intervals-and-the-bridge-to-t">Topic: Confidence Intervals for the Mean (Z-Intervals, and the bridge to t)</a></li>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#learning-outcomes">Learning Outcomes</a></li>
+<li><a class="reference internal" href="#purpose-and-use-cases">Purpose and Use Cases</a></li>
+<li><a class="reference internal" href="#core-concept-and-notation">Core Concept and Notation</a></li>
+<li><a class="reference internal" href="#definition-and-interpretation">Definition and Interpretation</a><ul>
+<li><a class="reference internal" href="#a-key-standardization">A key standardization</a></li>
+<li><a class="reference internal" href="#two-sided-z-confidence-interval-for-mu-variance-known">Two-sided Z confidence interval for <span class="math notranslate nohighlight">\(\mu\)</span> (variance known)</a></li>
+<li><a class="reference internal" href="#random-interval-view-why-interpretation-is-subtle">Random-interval view (why interpretation is subtle)</a></li>
+<li><a class="reference internal" href="#margin-of-error-and-interval-length">Margin of error and interval length</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#connection-to-previous-ideas">Connection to Previous Ideas</a></li>
+<li><a class="reference internal" href="#worked-example">Worked Example</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#question">Question</a></li>
+<li><a class="reference internal" href="#analysis">Analysis</a><ul>
+<li><a class="reference internal" href="#sampling-spread-of-the-mean">Sampling spread of the mean</a></li>
+<li><a class="reference internal" href="#critical-value-and-margin-of-error">Critical value and margin of error</a></li>
+<li><a class="reference internal" href="#compute-the-interval">Compute the interval</a></li>
+<li><a class="reference internal" href="#interpretation">Interpretation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#visual-intuition">Visual Intuition</a><ul>
+<li><a class="reference internal" href="#mental-model-1-confidence-level-trades-precision-for-reliability">Mental model 1: Confidence level trades precision for reliability</a></li>
+<li><a class="reference internal" href="#mental-model-2-sample-size-has-diminishing-returns">Mental model 2: Sample size has diminishing returns</a></li>
+<li><a class="reference internal" href="#coverage-idea-why-some-intervals-miss">Coverage idea: Why some intervals miss</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#choice-of-sample-size">Choice of Sample Size</a><ul>
+<li><a class="reference internal" href="#why-sample-size-planning-matters">Why sample size planning matters</a></li>
+<li><a class="reference internal" href="#how-to-choose-n-known-sigma">How to choose <span class="math notranslate nohighlight">\(n\)</span> (known <span class="math notranslate nohighlight">\(\sigma\)</span>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#one-sided-confidence-bounds">One-Sided Confidence Bounds</a><ul>
+<li><a class="reference internal" href="#why-one-sided-bounds-are-used">Why one-sided bounds are used</a></li>
+<li><a class="reference internal" href="#upper-and-lower-one-sided-z-bounds-known-sigma">Upper and lower one-sided Z bounds (known <span class="math notranslate nohighlight">\(\sigma\)</span>)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#general-method-to-derive-a-confidence-interval">General Method to Derive a Confidence Interval</a><ul>
+<li><a class="reference internal" href="#why-a-general-method-is-useful">Why a general method is useful</a></li>
+<li><a class="reference internal" href="#how-it-looks-here-pivotal-quantity-idea">How it looks here (pivotal quantity idea)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#large-sample-confidence-interval-for-mu">Large-Sample Confidence Interval for <span class="math notranslate nohighlight">\(\mu\)</span></a><ul>
+<li><a class="reference internal" href="#why-we-need-a-large-sample-version">Why we need a large-sample version</a></li>
+<li><a class="reference internal" href="#large-sample-interval-approximate">Large-sample interval (approximate)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bridge-to-the-next-subtopic-variance-unknown-and-the-t-distribution">Bridge to the Next Subtopic: Variance Unknown and the t Distribution</a><ul>
+<li><a class="reference internal" href="#why-z-is-not-enough-for-small-samples">Why Z is not enough for small samples</a></li>
+<li><a class="reference internal" href="#key-result-t-statistic">Key result (t statistic)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#discussion-and-common-errors">Discussion and Common Errors</a><ul>
+<li><a class="reference internal" href="#error-1-saying-95-probability-that-mu-is-in-this-interval">Error 1: Saying “95% probability that <span class="math notranslate nohighlight">\(\mu\)</span> is in this interval”</a></li>
+<li><a class="reference internal" href="#error-2-using-sigma-instead-of-sigma-sqrt-n">Error 2: Using <span class="math notranslate nohighlight">\(\sigma\)</span> instead of <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span></a></li>
+<li><a class="reference internal" href="#error-3-using-a-z-interval-when-sigma-is-unknown-and-n-is-small">Error 3: Using a Z-interval when <span class="math notranslate nohighlight">\(\sigma\)</span> is unknown and <span class="math notranslate nohighlight">\(n\)</span> is small</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">9. Statistical Intervals for a Single Sample</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stat2/stat2_09.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="statistical-intervals-for-a-single-sample">
+<h1>9. Statistical Intervals for a Single Sample<a class="headerlink" href="#statistical-intervals-for-a-single-sample" title="Link to this heading"></a></h1>
+<section id="topic-confidence-intervals-for-the-mean-z-intervals-and-the-bridge-to-t">
+<h2>Topic: Confidence Intervals for the Mean (Z-Intervals, and the bridge to t)<a class="headerlink" href="#topic-confidence-intervals-for-the-mean-z-intervals-and-the-bridge-to-t" title="Link to this heading"></a></h2>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In the previous session, we used the <strong>Central Limit Theorem (CLT)</strong> to describe how
+the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> behaves across repeated samples.
+We also used the <strong>Standard Error (typical sampling spread)</strong> to measure that variation.</p>
+<p>That creates a practical gap.</p>
+<p>A point estimate such as <span class="math notranslate nohighlight">\(\bar{x}\)</span> is only one number.
+It does not tell us how close it is to the true mean <span class="math notranslate nohighlight">\(\mu\)</span>.
+In decision settings, we need a range that is supported by the data.</p>
+<p>Today we construct a <strong>confidence interval (plausible range)</strong> for the population mean <span class="math notranslate nohighlight">\(\mu\)</span>.
+We start with the <strong>Z-interval</strong>, which assumes the population standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> is known.
+Then we show the key idea that explains why the <strong>t-interval</strong> is needed when <span class="math notranslate nohighlight">\(\sigma\)</span> is unknown.</p>
+</section>
+<section id="learning-outcomes">
+<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
+<p>After this session, you should be able to:</p>
+<ul class="simple">
+<li><p>Explain what “confidence level” means using repeated sampling language.</p></li>
+<li><p>Construct a two-sided Z-interval for <span class="math notranslate nohighlight">\(\mu\)</span> when <span class="math notranslate nohighlight">\(\sigma\)</span> is known.</p></li>
+<li><p>Explain how confidence level and sample size change interval length.</p></li>
+<li><p>Choose <span class="math notranslate nohighlight">\(n\)</span> to meet a target error bound (margin of error).</p></li>
+<li><p>Construct one-sided Z confidence bounds for <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+</ul>
+</section>
+<section id="purpose-and-use-cases">
+<h2>Purpose and Use Cases<a class="headerlink" href="#purpose-and-use-cases" title="Link to this heading"></a></h2>
+<p>You use a confidence interval when you must report an estimate with uncertainty, such as:</p>
+<ul class="simple">
+<li><p>Estimating the mean fill weight of a packaging line from a sample.</p></li>
+<li><p>Estimating average response time of a service desk from sampled tickets.</p></li>
+<li><p>Estimating mean sensor bias during calibration checks.</p></li>
+<li><p>Reporting a mean KPI and its uncertainty to operations management.</p></li>
+<li><p>Deciding whether a process mean is safely above or below a target.</p></li>
+</ul>
+</section>
+<section id="core-concept-and-notation">
+<h2>Core Concept and Notation<a class="headerlink" href="#core-concept-and-notation" title="Link to this heading"></a></h2>
+<p>We observe a random sample <span class="math notranslate nohighlight">\(X_1, X_2, \dots, X_n\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> = population mean (true long-run average).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> = population standard deviation (true long-run spread).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{X}\)</span> = sample mean (Statistic (calculated sample value)).</p></li>
+<li><p><span class="math notranslate nohighlight">\(\bar{x}\)</span> = the observed value of <span class="math notranslate nohighlight">\(\bar{X}\)</span> from the data.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\alpha\)</span> = tail probability outside the confidence interval.</p></li>
+<li><p><span class="math notranslate nohighlight">\(1-\alpha\)</span> = confidence level (for example, 0.95).</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i\]</div>
+<p>If <span class="math notranslate nohighlight">\(\sigma\)</span> is known and the population is Normal, then:</p>
+<div class="math notranslate nohighlight">
+\[\bar{X} \sim \text{Normal}\!\left(\mu,\; \frac{\sigma^2}{n}\right)\]</div>
+<p>Even when the population is not perfectly Normal, the method is often stable for moderate-to-large <span class="math notranslate nohighlight">\(n\)</span>.
+(Note: CLT makes <span class="math notranslate nohighlight">\(\bar{X}\)</span> close to Normal for many practical cases.)</p>
+</section>
+<section id="definition-and-interpretation">
+<h2>Definition and Interpretation<a class="headerlink" href="#definition-and-interpretation" title="Link to this heading"></a></h2>
+<section id="a-key-standardization">
+<h3>A key standardization<a class="headerlink" href="#a-key-standardization" title="Link to this heading"></a></h3>
+<p>Define a standardized variable:</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\]</div>
+<p>When the Normal model is appropriate (or <span class="math notranslate nohighlight">\(n\)</span> is large), <span class="math notranslate nohighlight">\(Z\)</span> behaves like a standard normal variable.
+(Note: this converts “distance from <span class="math notranslate nohighlight">\(\mu\)</span>” into “number of standard errors”.)</p>
+</section>
+<section id="two-sided-z-confidence-interval-for-mu-variance-known">
+<h3>Two-sided Z confidence interval for <span class="math notranslate nohighlight">\(\mu\)</span> (variance known)<a class="headerlink" href="#two-sided-z-confidence-interval-for-mu-variance-known" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(z_{\alpha/2}\)</span> be the standard normal cut value that leaves area <span class="math notranslate nohighlight">\(\alpha/2\)</span> in the upper tail.</p>
+<p>A <span class="math notranslate nohighlight">\(100(1-\alpha)\%\)</span> confidence interval for <span class="math notranslate nohighlight">\(\mu\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} - z_{\alpha/2}\frac{\sigma}{\sqrt{n}}
+\;\le\; \mu \;\le\;
+\bar{x} + z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]</div>
+</section>
+<section id="random-interval-view-why-interpretation-is-subtle">
+<h3>Random-interval view (why interpretation is subtle)<a class="headerlink" href="#random-interval-view-why-interpretation-is-subtle" title="Link to this heading"></a></h3>
+<p>Before sampling, the endpoints depend on <span class="math notranslate nohighlight">\(\bar{X}\)</span>, so the interval is random.
+After sampling, you observe numbers <span class="math notranslate nohighlight">\(l\)</span> and <span class="math notranslate nohighlight">\(u\)</span>.</p>
+<ul class="simple">
+<li><p>The correct meaning is about the <strong>procedure</strong>:
+if you repeat the sampling many times, a fraction <span class="math notranslate nohighlight">\(1-\alpha\)</span> of the intervals will include the true <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>For one computed interval, <span class="math notranslate nohighlight">\(\mu\)</span> is either inside or outside.
+(Note: the probability statement is about repeated intervals, not about a fixed <span class="math notranslate nohighlight">\(\mu\)</span>.)</p></li>
+</ul>
+</section>
+<section id="margin-of-error-and-interval-length">
+<h3>Margin of error and interval length<a class="headerlink" href="#margin-of-error-and-interval-length" title="Link to this heading"></a></h3>
+<p>Define the <strong>error bound (margin of error)</strong>:</p>
+<div class="math notranslate nohighlight">
+\[E = z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]</div>
+<p>Then the interval is <span class="math notranslate nohighlight">\(\bar{x}\pm E\)</span>, and its full length is <span class="math notranslate nohighlight">\(2E\)</span>.</p>
+<p>Key implications:</p>
+<ul class="simple">
+<li><p>Higher confidence (smaller <span class="math notranslate nohighlight">\(\alpha\)</span>) increases <span class="math notranslate nohighlight">\(z_{\alpha/2}\)</span>, so the interval becomes longer.</p></li>
+<li><p>Larger <span class="math notranslate nohighlight">\(n\)</span> reduces <span class="math notranslate nohighlight">\(E\)</span> through <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>.</p></li>
+<li><p>Larger <span class="math notranslate nohighlight">\(\sigma\)</span> increases <span class="math notranslate nohighlight">\(E\)</span> linearly.</p></li>
+</ul>
+</section>
+</section>
+<section id="connection-to-previous-ideas">
+<h2>Connection to Previous Ideas<a class="headerlink" href="#connection-to-previous-ideas" title="Link to this heading"></a></h2>
+<p>The Z-interval is a direct continuation of CLT and Standard Error:</p>
+<ul class="simple">
+<li><p>CLT motivates a Normal model for <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p></li>
+<li><p>Standard Error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> sets the sampling spread.</p></li>
+<li><p>The confidence level selects a central region of the standardized variable <span class="math notranslate nohighlight">\(Z\)</span>.</p></li>
+<li><p>Solving that probability statement for <span class="math notranslate nohighlight">\(\mu\)</span> produces the interval.</p></li>
+</ul>
+</section>
+<section id="worked-example">
+<h2>Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading"></a></h2>
+<section id="description">
+<h3>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h3>
+<p>A filling process dispenses a product into containers.
+Each container has fill weight <span class="math notranslate nohighlight">\(X\)</span> in grams.</p>
+<p>From long-run monitoring, the process standard deviation is stable and known:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma = 12\)</span> g</p></li>
+</ul>
+<p>A supervisor samples <span class="math notranslate nohighlight">\(n = 36\)</span> containers.
+The observed sample mean is:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\bar{x} = 503.2\)</span> g</p></li>
+</ul>
+<p>Assume the process is stable and the CLT model for <span class="math notranslate nohighlight">\(\bar{X}\)</span> is reasonable.</p>
+</section>
+<section id="question">
+<h3>Question<a class="headerlink" href="#question" title="Link to this heading"></a></h3>
+<p>Find a 95% confidence interval for the true mean fill weight <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+</section>
+<section id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Link to this heading"></a></h3>
+<section id="sampling-spread-of-the-mean">
+<h4>Sampling spread of the mean<a class="headerlink" href="#sampling-spread-of-the-mean" title="Link to this heading"></a></h4>
+<div class="math notranslate nohighlight">
+\[\text{SE}(\bar{X}) = \frac{\sigma}{\sqrt{n}} = \frac{12}{\sqrt{36}} = 2\]</div>
+<p>(Note: we are estimating a mean, so we use the standard error, not <span class="math notranslate nohighlight">\(\sigma\)</span>.)</p>
+</section>
+<section id="critical-value-and-margin-of-error">
+<h4>Critical value and margin of error<a class="headerlink" href="#critical-value-and-margin-of-error" title="Link to this heading"></a></h4>
+<p>For 95% confidence, <span class="math notranslate nohighlight">\(z_{0.025}=1.96\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[E = 1.96(2)=3.92\]</div>
+<p>(Note: the 1.96 value keeps the middle 95% of a standard normal scale.)</p>
+</section>
+<section id="compute-the-interval">
+<h4>Compute the interval<a class="headerlink" href="#compute-the-interval" title="Link to this heading"></a></h4>
+<div class="math notranslate nohighlight">
+\[503.2 \pm 3.92\]</div>
+<div class="math notranslate nohighlight">
+\[(503.2-3.92,\;503.2+3.92) = (499.28,\;507.12)\]</div>
+</section>
+<section id="interpretation">
+<h4>Interpretation<a class="headerlink" href="#interpretation" title="Link to this heading"></a></h4>
+<p>This interval is a range of values for <span class="math notranslate nohighlight">\(\mu\)</span> that is consistent with the sampling model.
+If the same sampling procedure were repeated many times, about 95% of the constructed intervals would cover <span class="math notranslate nohighlight">\(\mu\)</span>.
+(Note: the confidence is attached to the method, not to <span class="math notranslate nohighlight">\(\mu\)</span> moving.)</p>
+</section>
+</section>
+</section>
+<section id="visual-intuition">
+<h2>Visual Intuition<a class="headerlink" href="#visual-intuition" title="Link to this heading"></a></h2>
+<section id="mental-model-1-confidence-level-trades-precision-for-reliability">
+<h3>Mental model 1: Confidence level trades precision for reliability<a class="headerlink" href="#mental-model-1-confidence-level-trades-precision-for-reliability" title="Link to this heading"></a></h3>
+<p>This plot shows the standard normal scale and the cut value that defines the central region.
+Look for how the cut value moves outward as confidence increases.
+This matters because the interval half-length is <span class="math notranslate nohighlight">\(z_{\alpha/2}\sigma/\sqrt{n}\)</span>.</p>
+<iframe src="../_static/08_01_z_confidence_level_demo.html"
+        scrolling="no"
+        style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe></section>
+<section id="mental-model-2-sample-size-has-diminishing-returns">
+<h3>Mental model 2: Sample size has diminishing returns<a class="headerlink" href="#mental-model-2-sample-size-has-diminishing-returns" title="Link to this heading"></a></h3>
+<p>This plot shows <span class="math notranslate nohighlight">\(E = z_{\alpha/2}\sigma/\sqrt{n}\)</span> as <span class="math notranslate nohighlight">\(n\)</span> increases.
+Look for the curve flattening.
+This matters because cutting the margin of error in half usually requires about four times the sample size.</p>
+<iframe src="../_static/08_02_margin_of_error_vs_n.html"
+        scrolling="no"
+        style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe></section>
+<section id="coverage-idea-why-some-intervals-miss">
+<h3>Coverage idea: Why some intervals miss<a class="headerlink" href="#coverage-idea-why-some-intervals-miss" title="Link to this heading"></a></h3>
+<p>This plot simulates repeated samples and displays many intervals.
+Look for a small portion that do not include the true <span class="math notranslate nohighlight">\(\mu\)</span>.
+This matters because “95% confidence” does not mean “never wrong.”</p>
+<iframe src="../_static/08_03_ci_coverage_clean_highlight_misses.html"
+        scrolling="no"
+        style="width:95%; height:580px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe></section>
+</section>
+<section id="choice-of-sample-size">
+<h2>Choice of Sample Size<a class="headerlink" href="#choice-of-sample-size" title="Link to this heading"></a></h2>
+<section id="why-sample-size-planning-matters">
+<h3>Why sample size planning matters<a class="headerlink" href="#why-sample-size-planning-matters" title="Link to this heading"></a></h3>
+<p>Often you decide the maximum error you can tolerate before you collect data.
+Then you select <span class="math notranslate nohighlight">\(n\)</span> to achieve that precision at a chosen confidence level.</p>
+</section>
+<section id="how-to-choose-n-known-sigma">
+<h3>How to choose <span class="math notranslate nohighlight">\(n\)</span> (known <span class="math notranslate nohighlight">\(\sigma\)</span>)<a class="headerlink" href="#how-to-choose-n-known-sigma" title="Link to this heading"></a></h3>
+<p>Set the desired bound on estimation error to <span class="math notranslate nohighlight">\(E\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[E = z_{\alpha/2}\frac{\sigma}{\sqrt{n}}\]</div>
+<p>Solve for <span class="math notranslate nohighlight">\(n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[n = \left(\frac{z_{\alpha/2}\sigma}{E}\right)^2\]</div>
+<p>Practical rule:</p>
+<ul class="simple">
+<li><p>Round up to the next integer.
+(Note: rounding down can make the interval longer than planned.)</p></li>
+</ul>
+</section>
+</section>
+<section id="one-sided-confidence-bounds">
+<h2>One-Sided Confidence Bounds<a class="headerlink" href="#one-sided-confidence-bounds" title="Link to this heading"></a></h2>
+<section id="why-one-sided-bounds-are-used">
+<h3>Why one-sided bounds are used<a class="headerlink" href="#why-one-sided-bounds-are-used" title="Link to this heading"></a></h3>
+<p>Sometimes only one direction matters for a decision.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>Underfilling is costly, so you need a lower bound for <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+<li><p>Mean waiting time must not exceed a target, so you need an upper bound for <span class="math notranslate nohighlight">\(\mu\)</span>.</p></li>
+</ul>
+</section>
+<section id="upper-and-lower-one-sided-z-bounds-known-sigma">
+<h3>Upper and lower one-sided Z bounds (known <span class="math notranslate nohighlight">\(\sigma\)</span>)<a class="headerlink" href="#upper-and-lower-one-sided-z-bounds-known-sigma" title="Link to this heading"></a></h3>
+<p>For a <span class="math notranslate nohighlight">\(100(1-\alpha)\%\)</span> one-sided bound, use <span class="math notranslate nohighlight">\(z_{\alpha}\)</span> (not <span class="math notranslate nohighlight">\(z_{\alpha/2}\)</span>).</p>
+<p>Upper bound:</p>
+<div class="math notranslate nohighlight">
+\[\mu \le \bar{x} + z_{\alpha}\frac{\sigma}{\sqrt{n}}\]</div>
+<p>Lower bound:</p>
+<div class="math notranslate nohighlight">
+\[\mu \ge \bar{x} - z_{\alpha}\frac{\sigma}{\sqrt{n}}\]</div>
+<p>(Note: one-sided puts all of <span class="math notranslate nohighlight">\(\alpha\)</span> into one tail, so the cut value is smaller than the two-sided cut.)</p>
+</section>
+</section>
+<section id="general-method-to-derive-a-confidence-interval">
+<h2>General Method to Derive a Confidence Interval<a class="headerlink" href="#general-method-to-derive-a-confidence-interval" title="Link to this heading"></a></h2>
+<section id="why-a-general-method-is-useful">
+<h3>Why a general method is useful<a class="headerlink" href="#why-a-general-method-is-useful" title="Link to this heading"></a></h3>
+<p>Many confidence intervals come from the same blueprint.
+You find a statistic that has a distribution not depending on the unknown parameter.
+Then you “invert” a probability statement to isolate the parameter.</p>
+</section>
+<section id="how-it-looks-here-pivotal-quantity-idea">
+<h3>How it looks here (pivotal quantity idea)<a class="headerlink" href="#how-it-looks-here-pivotal-quantity-idea" title="Link to this heading"></a></h3>
+<p>Use the standardized form:</p>
+<div class="math notranslate nohighlight">
+\[g(X_1,\dots,X_n;\mu)=\frac{\bar{X}-\mu}{\sigma/\sqrt{n}}\]</div>
+<p>Choose constants <span class="math notranslate nohighlight">\(C_L\)</span> and <span class="math notranslate nohighlight">\(C_U\)</span> so that:</p>
+<div class="math notranslate nohighlight">
+\[P(C_L \le g \le C_U)=1-\alpha\]</div>
+<p>Then rearrange to obtain:</p>
+<div class="math notranslate nohighlight">
+\[P(L(X_1,\dots,X_n) \le \mu \le U(X_1,\dots,X_n))=1-\alpha\]</div>
+<p>(Note: the confidence limits are functions of the data.)</p>
+</section>
+</section>
+<section id="large-sample-confidence-interval-for-mu">
+<h2>Large-Sample Confidence Interval for <span class="math notranslate nohighlight">\(\mu\)</span><a class="headerlink" href="#large-sample-confidence-interval-for-mu" title="Link to this heading"></a></h2>
+<section id="why-we-need-a-large-sample-version">
+<h3>Why we need a large-sample version<a class="headerlink" href="#why-we-need-a-large-sample-version" title="Link to this heading"></a></h3>
+<p>The known-<span class="math notranslate nohighlight">\(\sigma\)</span> case is conceptually clean but often unrealistic.
+In many settings, <span class="math notranslate nohighlight">\(\sigma\)</span> is not truly known.</p>
+<p>When <span class="math notranslate nohighlight">\(n\)</span> is large, replacing <span class="math notranslate nohighlight">\(\sigma\)</span> with the sample standard deviation <span class="math notranslate nohighlight">\(s\)</span> is typically acceptable.
+However, the substitution adds uncertainty, so a larger <span class="math notranslate nohighlight">\(n\)</span> is preferred for reliability.</p>
+</section>
+<section id="large-sample-interval-approximate">
+<h3>Large-sample interval (approximate)<a class="headerlink" href="#large-sample-interval-approximate" title="Link to this heading"></a></h3>
+<p>When <span class="math notranslate nohighlight">\(n\)</span> is large, an approximate interval is:</p>
+<div class="math notranslate nohighlight">
+\[\bar{x} - z_{\alpha/2}\frac{s}{\sqrt{n}}
+\;\le\; \mu \;\le\;
+\bar{x} + z_{\alpha/2}\frac{s}{\sqrt{n}}\]</div>
+<p>Practical guideline:</p>
+<ul class="simple">
+<li><p>Use this when <span class="math notranslate nohighlight">\(n\)</span> is sufficiently large (a conservative rule is around <span class="math notranslate nohighlight">\(n \ge 40\)</span>).
+(Note: this reflects both CLT and the extra variability from estimating the spread.)</p></li>
+</ul>
+</section>
+</section>
+<section id="bridge-to-the-next-subtopic-variance-unknown-and-the-t-distribution">
+<h2>Bridge to the Next Subtopic: Variance Unknown and the t Distribution<a class="headerlink" href="#bridge-to-the-next-subtopic-variance-unknown-and-the-t-distribution" title="Link to this heading"></a></h2>
+<section id="why-z-is-not-enough-for-small-samples">
+<h3>Why Z is not enough for small samples<a class="headerlink" href="#why-z-is-not-enough-for-small-samples" title="Link to this heading"></a></h3>
+<p>If <span class="math notranslate nohighlight">\(\sigma\)</span> is unknown and <span class="math notranslate nohighlight">\(n\)</span> is small, using Z cut values can be too optimistic.
+The uncertainty in <span class="math notranslate nohighlight">\(s\)</span> must be included.</p>
+</section>
+<section id="key-result-t-statistic">
+<h3>Key result (t statistic)<a class="headerlink" href="#key-result-t-statistic" title="Link to this heading"></a></h3>
+<p>For Normal data with unknown <span class="math notranslate nohighlight">\(\sigma\)</span>, the standardized mean becomes:</p>
+<div class="math notranslate nohighlight">
+\[T = \frac{\bar{X}-\mu}{S/\sqrt{n}}\]</div>
+<p>This variable follows a <strong>t distribution</strong> with <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom.
+The t distribution has heavier tails than the standard normal when degrees of freedom are small.
+As degrees of freedom grow, the t distribution approaches the standard normal.</p>
+<p>This is why the next session uses <span class="math notranslate nohighlight">\(t_{\alpha/2,n-1}\)</span> in place of <span class="math notranslate nohighlight">\(z_{\alpha/2}\)</span>.</p>
+</section>
+</section>
+<section id="discussion-and-common-errors">
+<h2>Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
+<section id="error-1-saying-95-probability-that-mu-is-in-this-interval">
+<h3>Error 1: Saying “95% probability that <span class="math notranslate nohighlight">\(\mu\)</span> is in this interval”<a class="headerlink" href="#error-1-saying-95-probability-that-mu-is-in-this-interval" title="Link to this heading"></a></h3>
+<p>What goes wrong:
+It assigns probability to a fixed, unknown constant.
+That is not the standard frequentist meaning.</p>
+<p>How to avoid it:
+Use the repeated-sampling statement:
+“95% of intervals from this method would cover <span class="math notranslate nohighlight">\(\mu\)</span>.”</p>
+</section>
+<section id="error-2-using-sigma-instead-of-sigma-sqrt-n">
+<h3>Error 2: Using <span class="math notranslate nohighlight">\(\sigma\)</span> instead of <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span><a class="headerlink" href="#error-2-using-sigma-instead-of-sigma-sqrt-n" title="Link to this heading"></a></h3>
+<p>What goes wrong:
+You use individual-unit variability instead of mean variability.
+The interval becomes much wider than needed.</p>
+<p>How to avoid it:
+Ask “Is this about a mean or a single observation?”
+For a mean, the spread is the standard error.</p>
+</section>
+<section id="error-3-using-a-z-interval-when-sigma-is-unknown-and-n-is-small">
+<h3>Error 3: Using a Z-interval when <span class="math notranslate nohighlight">\(\sigma\)</span> is unknown and <span class="math notranslate nohighlight">\(n\)</span> is small<a class="headerlink" href="#error-3-using-a-z-interval-when-sigma-is-unknown-and-n-is-small" title="Link to this heading"></a></h3>
+<p>What goes wrong:
+The interval can be too narrow because it ignores uncertainty in estimating spread.</p>
+<p>How to avoid it:
+Use the t-based method when the Normal model is reasonable and <span class="math notranslate nohighlight">\(n\)</span> is small.
+Use the large-sample version only when <span class="math notranslate nohighlight">\(n\)</span> is sufficiently large.</p>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>A confidence interval is a data-based range for <span class="math notranslate nohighlight">\(\mu\)</span> with a stated reliability level.</p></li>
+<li><p>With known <span class="math notranslate nohighlight">\(\sigma\)</span>, the Z-interval is <span class="math notranslate nohighlight">\(\bar{x} \pm z_{\alpha/2}\sigma/\sqrt{n}\)</span>.</p></li>
+<li><p>The margin of error is <span class="math notranslate nohighlight">\(E=z_{\alpha/2}\sigma/\sqrt{n}\)</span>, and the interval length is <span class="math notranslate nohighlight">\(2E\)</span>.</p></li>
+<li><p>Higher confidence makes intervals longer; larger <span class="math notranslate nohighlight">\(n\)</span> makes intervals shorter.</p></li>
+<li><p>Sample size planning uses <span class="math notranslate nohighlight">\(n=\left(z_{\alpha/2}\sigma/E\right)^2\)</span> and rounds up.</p></li>
+<li><p>One-sided bounds use <span class="math notranslate nohighlight">\(z_{\alpha}\)</span> and protect only one decision direction.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(\sigma\)</span> is unknown, large samples can use <span class="math notranslate nohighlight">\(s\)</span> with Z, but small samples require the t approach.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,415 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>7. Central Limit Theorem CLT and Standard Error &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">7. Central Limit Theorem CLT and Standard Error</a><ul>
+<li><a class="reference internal" href="#learning-outcomes">Learning Outcomes</a></li>
+<li><a class="reference internal" href="#purpose-and-use-cases">Purpose and Use Cases</a></li>
+<li><a class="reference internal" href="#core-concept-and-notation">Core Concept and Notation</a><ul>
+<li><a class="reference internal" href="#revisit-what-is-random-and-what-is-fixed">Revisit: what is random and what is fixed?</a></li>
+<li><a class="reference internal" href="#two-important-distributions">Two important distributions</a></li>
+<li><a class="reference internal" href="#visual-a-single-measurement-can-be-skewed">Visual: a single measurement can be skewed</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#definition-and-interpretation">Definition and Interpretation</a><ul>
+<li><a class="reference internal" href="#the-magic-of-averages">The “Magic of Averages”</a></li>
+<li><a class="reference internal" href="#the-central-limit-theorem-clt">The Central Limit Theorem (CLT)</a></li>
+<li><a class="reference internal" href="#what-the-clt-does-not-say">What the CLT does <em>not</em> say</a></li>
+<li><a class="reference internal" href="#standard-error">Standard Error</a></li>
+<li><a class="reference internal" href="#visual-the-bell-curve-emerges-for-the-average">Visual: the bell curve emerges for the average</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#connection-to-previous-ideas">Connection to Previous Ideas</a><ul>
+<li><a class="reference internal" href="#why-independence-matters">Why independence matters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#worked-example">Worked Example</a><ul>
+<li><a class="reference internal" href="#description">Description</a></li>
+<li><a class="reference internal" href="#question">Question</a></li>
+<li><a class="reference internal" href="#analysis">Analysis</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#visual-intuition">Visual Intuition</a><ul>
+<li><a class="reference internal" href="#two-mental-models">1. Two mental models</a></li>
+<li><a class="reference internal" href="#standard-error-shrinks-with-sample-size">2. Standard error shrinks with sample size</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#discussion-and-common-errors">Discussion and Common Errors</a><ul>
+<li><a class="reference internal" href="#common-error-1-mixing-up-sigma-and-standard-error">Common Error 1: Mixing up <span class="math notranslate nohighlight">\(\sigma\)</span> and standard error</a></li>
+<li><a class="reference internal" href="#common-error-2-treating-the-clt-as-exact-for-very-small-n">Common Error 2: Treating the CLT as exact for very small <span class="math notranslate nohighlight">\(n\)</span></a></li>
+<li><a class="reference internal" href="#common-error-3-forgetting-the-sampling-distribution-is-about-repeated-samples">Common Error 3: Forgetting the sampling distribution is about repeated samples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">7. Central Limit Theorem CLT and Standard Error</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stat2/stat2_07.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="central-limit-theorem-clt-and-standard-error">
+<h1>7. Central Limit Theorem CLT and Standard Error<a class="headerlink" href="#central-limit-theorem-clt-and-standard-error" title="Link to this heading"></a></h1>
+<p>In the previous session, we studied <strong>correlation</strong>.
+Correlation helps us describe how two variables move together.</p>
+<p>However, many decisions in practice use an <strong>average</strong>.
+We average sensor readings.
+We average daily output.
+We average customer waiting times.</p>
+<p>A key gap remains.
+Even if the process is stable, the average from a sample will still move.
+We need a way to predict how much the average moves.</p>
+<p>This is the main idea today.
+We study the <strong>Central Limit Theorem (CLT)</strong>.
+We also define the <strong>standard error (typical sampling spread)</strong>.</p>
+<section id="learning-outcomes">
+<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
+<p>After this session, you should be able to:</p>
+<ul class="simple">
+<li><p>Explain why averages often look Normal (bell-shaped).</p></li>
+<li><p>Distinguish a population distribution from a sampling distribution.</p></li>
+<li><p>Use the CLT to standardize a sample mean into a Z-score.</p></li>
+<li><p>Compute probabilities about a sample mean using a Z-table.</p></li>
+<li><p>Interpret the standard error as the spread of the average.</p></li>
+</ul>
+</section>
+<section id="purpose-and-use-cases">
+<h2>Purpose and Use Cases<a class="headerlink" href="#purpose-and-use-cases" title="Link to this heading"></a></h2>
+<p>CLT and standard error are used whenever we make decisions from sampled data.
+Common examples include:</p>
+<ul class="simple">
+<li><p>Quality control: mean thickness from a small batch of parts.</p></li>
+<li><p>Operations: mean picking time from a set of orders.</p></li>
+<li><p>Sensors: mean temperature from repeated measurements.</p></li>
+<li><p>Service systems: mean waiting time during one shift.</p></li>
+<li><p>Management reports: mean daily demand from recent days.</p></li>
+</ul>
+</section>
+<section id="core-concept-and-notation">
+<h2>Core Concept and Notation<a class="headerlink" href="#core-concept-and-notation" title="Link to this heading"></a></h2>
+<section id="revisit-what-is-random-and-what-is-fixed">
+<h3>Revisit: what is random and what is fixed?<a class="headerlink" href="#revisit-what-is-random-and-what-is-fixed" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>A <strong>random variable (chance-based value)</strong> can change from trial to trial.</p></li>
+<li><p>A <strong>parameter (fixed long-run value)</strong> describes the population.</p></li>
+</ul>
+<p>We will use this notation.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> = one process measurement.
+Example: one cycle time from a machine.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu\)</span> = population mean of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> = population standard deviation of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+</ul>
+<p>Now we take a sample of size <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_n\)</span> = independent measurements from the same process.</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> = the sample mean (average) of the sample.</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[Y = \bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i\]</div>
+</section>
+<section id="two-important-distributions">
+<h3>Two important distributions<a class="headerlink" href="#two-important-distributions" title="Link to this heading"></a></h3>
+<p>These two distributions are different.</p>
+<ul class="simple">
+<li><p><strong>Population distribution</strong>: the distribution of <span class="math notranslate nohighlight">\(X\)</span>.
+It describes single observations.</p></li>
+<li><p><strong>Sampling distribution (distribution of a statistic)</strong>: the distribution of <span class="math notranslate nohighlight">\(Y\)</span>.
+It describes the average across repeated samples of size <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ul>
+</section>
+<section id="visual-a-single-measurement-can-be-skewed">
+<h3>Visual: a single measurement can be skewed<a class="headerlink" href="#visual-a-single-measurement-can-be-skewed" title="Link to this heading"></a></h3>
+<p>In many real processes, single measurements are not bell-shaped.
+Look for the long right tail.</p>
+<p>A single measurement <span class="math notranslate nohighlight">\(X\)</span> (for example, one order picking time or one machine cycle time)
+often has a hard lower bound but no hard upper bound.
+Most cases finish in a normal time window.
+But a few cases take much longer because of interruptions, rework, setup delays, or congestion.
+This creates a long right tail.
+In the figure, focus on the right tail.
+Those rare long cases explain why the population distribution of <span class="math notranslate nohighlight">\(X\)</span> is often not bell-shaped,
+even when the process is stable.</p>
+<iframe src="../_static/07_01_clt_population_X_skewed.html" width="100%" height="420px" style="border:none;"></iframe></section>
+</section>
+<section id="definition-and-interpretation">
+<h2>Definition and Interpretation<a class="headerlink" href="#definition-and-interpretation" title="Link to this heading"></a></h2>
+<section id="the-magic-of-averages">
+<h3>The “Magic of Averages”<a class="headerlink" href="#the-magic-of-averages" title="Link to this heading"></a></h3>
+<p>A single measurement can be messy.
+It can be skewed.
+It can have spikes.</p>
+<p>But the <strong>average</strong> of many measurements is more stable.
+Large positive and negative deviations tend to cancel.
+This is why the bell curve appears.</p>
+</section>
+<section id="the-central-limit-theorem-clt">
+<h3>The Central Limit Theorem (CLT)<a class="headerlink" href="#the-central-limit-theorem-clt" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> be independent and identically distributed.
+Assume <span class="math notranslate nohighlight">\(E(X_i) = \mu\)</span> and <span class="math notranslate nohighlight">\(SD(X_i) = \sigma\)</span>.</p>
+<p>Then, for large <span class="math notranslate nohighlight">\(n\)</span>, the distribution of the sample mean <span class="math notranslate nohighlight">\(Y = \bar{X}\)</span> is approximately Normal.</p>
+<div class="math notranslate nohighlight">
+\[Y \approx N\left(\mu,\ \frac{\sigma^2}{n}\right)\]</div>
+<p>This leads to a standard Z-score.</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{Y - \mu}{\sigma / \sqrt{n}} \approx N(0, 1)\]</div>
+<p>(Note: we convert the mean into “standard deviation units” so we can use the Z-table.)</p>
+</section>
+<section id="what-the-clt-does-not-say">
+<h3>What the CLT does <em>not</em> say<a class="headerlink" href="#what-the-clt-does-not-say" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>It does <strong>not</strong> say the population <span class="math notranslate nohighlight">\(X\)</span> must be Normal.</p></li>
+<li><p>It does <strong>not</strong> say <span class="math notranslate nohighlight">\(n = 2\)</span> is always enough.</p></li>
+<li><p>It does say that as <span class="math notranslate nohighlight">\(n\)</span> grows, the distribution of the mean becomes more bell-shaped.</p></li>
+</ul>
+</section>
+<section id="standard-error">
+<h3>Standard Error<a class="headerlink" href="#standard-error" title="Link to this heading"></a></h3>
+<p>The <strong>standard error (typical sampling spread)</strong> of the sample mean is:</p>
+<div class="math notranslate nohighlight">
+\[SE(Y) = \frac{\sigma}{\sqrt{n}}\]</div>
+<p>Interpretation:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma\)</span> is the typical spread of single measurements.</p></li>
+<li><p><span class="math notranslate nohighlight">\(SE(Y)\)</span> is the typical spread of averages.</p></li>
+<li><p>When <span class="math notranslate nohighlight">\(n\)</span> increases, <span class="math notranslate nohighlight">\(SE(Y)\)</span> decreases.</p></li>
+</ul>
+</section>
+<section id="visual-the-bell-curve-emerges-for-the-average">
+<h3>Visual: the bell curve emerges for the average<a class="headerlink" href="#visual-the-bell-curve-emerges-for-the-average" title="Link to this heading"></a></h3>
+<p>The next figure shows the distribution of <span class="math notranslate nohighlight">\(Y\)</span> for different sample sizes.
+Use the slider.
+As <span class="math notranslate nohighlight">\(n\)</span> increases, the histogram becomes more bell-shaped.</p>
+<p>Here, <span class="math notranslate nohighlight">\(Y = \bar{X}\)</span> is the average of <span class="math notranslate nohighlight">\(n\)</span> independent measurements.
+Each time we take a new sample of size <span class="math notranslate nohighlight">\(n\)</span>, we get a new value of <span class="math notranslate nohighlight">\(Y\)</span>.
+The histogram shows how <span class="math notranslate nohighlight">\(Y\)</span> would vary if we repeated sampling many times.
+When <span class="math notranslate nohighlight">\(n\)</span> is small, the distribution of <span class="math notranslate nohighlight">\(Y\)</span> can still look skewed.
+When <span class="math notranslate nohighlight">\(n\)</span> grows, extreme values in <span class="math notranslate nohighlight">\(X\)</span> have less influence on the average.
+Positive and negative deviations tend to cancel.
+This is the key reason the bell curve appears for averages.</p>
+<iframe src="../_static/07_02_clt_sampling_mean_animation.html" width="100%" height="420px" style="border:none;"></iframe></section>
+</section>
+<section id="connection-to-previous-ideas">
+<h2>Connection to Previous Ideas<a class="headerlink" href="#connection-to-previous-ideas" title="Link to this heading"></a></h2>
+<section id="why-independence-matters">
+<h3>Why independence matters<a class="headerlink" href="#why-independence-matters" title="Link to this heading"></a></h3>
+<p>The CLT for averages relies on many small contributions adding up.
+Independence helps the contributions cancel in a balanced way.</p>
+<p>If measurements are strongly dependent (linked), the average may not stabilize as expected.
+In practice, dependence can happen when:</p>
+<ul class="simple">
+<li><p>the sensor has drift over time,</p></li>
+<li><p>consecutive items are from the same warm-up period,</p></li>
+<li><p>a queue builds up and affects several customers in a row.</p></li>
+</ul>
+</section>
+</section>
+<section id="worked-example">
+<h2>Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading"></a></h2>
+<section id="description">
+<h3>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h3>
+<p>A filling machine dispenses a product.
+Each unit has a fill weight <span class="math notranslate nohighlight">\(X\)</span> (in grams).
+The process is stable, but <span class="math notranslate nohighlight">\(X\)</span> is not perfectly Normal.</p>
+<p>From long-run data, we know:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu = 500\)</span> g</p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma = 12\)</span> g</p></li>
+</ul>
+<p>A supervisor takes a sample of <span class="math notranslate nohighlight">\(n = 36\)</span> units and computes the sample mean <span class="math notranslate nohighlight">\(Y = \bar{X}\)</span>.</p>
+</section>
+<section id="question">
+<h3>Question<a class="headerlink" href="#question" title="Link to this heading"></a></h3>
+<p>Find <span class="math notranslate nohighlight">\(P(Y &gt; 503)\)</span>.</p>
+</section>
+<section id="analysis">
+<h3>Analysis<a class="headerlink" href="#analysis" title="Link to this heading"></a></h3>
+<p>Model the sample mean using the CLT:</p>
+<div class="math notranslate nohighlight">
+\[Y \approx N\left(\mu, \frac{\sigma^2}{n}\right)\]</div>
+<p>So the mean and standard deviation of <span class="math notranslate nohighlight">\(Y\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[E(Y) = \mu = 500\]</div>
+<div class="math notranslate nohighlight">
+\[SD(Y) = SE(Y) = \frac{\sigma}{\sqrt{n}} = \frac{12}{\sqrt{36}} = 2\]</div>
+<p>(Note: the average has less spread than single items, so we use the standard error.)</p>
+<p>Standardize to a Z-score:</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{Y - \mu}{\sigma/\sqrt{n}}\]</div>
+<p>For <span class="math notranslate nohighlight">\(Y = 503\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{503 - 500}{2} = 1.5\]</div>
+<p>(Note: the Z-score measures distance in standard error units.)</p>
+<p>Now compute the probability:</p>
+<div class="math notranslate nohighlight">
+\[P(Y &gt; 503) = P(Z &gt; 1.5)\]</div>
+<p>From the Z-table:</p>
+<div class="math notranslate nohighlight">
+\[P(Z &gt; 1.5) \approx 0.0668\]</div>
+<p>Final answer:</p>
+<div class="math notranslate nohighlight">
+\[P(Y &gt; 503) \approx 0.067\]</div>
+<p>(Note: this probability is small because 503 is 1.5 standard errors above the mean.)</p>
+</section>
+</section>
+<section id="visual-intuition">
+<h2>Visual Intuition<a class="headerlink" href="#visual-intuition" title="Link to this heading"></a></h2>
+<section id="two-mental-models">
+<h3>1. Two mental models<a class="headerlink" href="#two-mental-models" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Noise cancels.</strong>
+When you average many noisy readings, high errors and low errors tend to offset.</p></li>
+<li><p><strong>Averages are less variable.</strong>
+The average is more stable than a single observation.
+The stability improves with <span class="math notranslate nohighlight">\(\sqrt{n}\)</span>, not with <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ol>
+</section>
+<section id="standard-error-shrinks-with-sample-size">
+<h3>2. Standard error shrinks with sample size<a class="headerlink" href="#standard-error-shrinks-with-sample-size" title="Link to this heading"></a></h3>
+<p>The next figure shows <span class="math notranslate nohighlight">\(SE(Y) = \sigma/\sqrt{n}\)</span> as a function of <span class="math notranslate nohighlight">\(n\)</span>.
+Look for the steep drop early, and the slower improvement later.</p>
+<p>The standard error is the typical spread of the sample mean <span class="math notranslate nohighlight">\(Y = \bar{X}\)</span> across repeated samples.
+It follows a square-root rule.
+When you increase <span class="math notranslate nohighlight">\(n\)</span>, the average becomes more stable, but not linearly.
+Doubling <span class="math notranslate nohighlight">\(n\)</span> does not cut the standard error in half.
+To reduce <span class="math notranslate nohighlight">\(SE(Y)\)</span> by a factor of 2, you need about 4 times as many observations.
+This explains why early sampling gives large gains, while very large samples give smaller extra gains.</p>
+<iframe src="../_static/07_03_standard_error_vs_n.html" width="100%" height="420px" style="border:none;"></iframe></section>
+</section>
+<section id="discussion-and-common-errors">
+<h2>Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
+<section id="common-error-1-mixing-up-sigma-and-standard-error">
+<h3>Common Error 1: Mixing up <span class="math notranslate nohighlight">\(\sigma\)</span> and standard error<a class="headerlink" href="#common-error-1-mixing-up-sigma-and-standard-error" title="Link to this heading"></a></h3>
+<p>What goes wrong:
+You use <span class="math notranslate nohighlight">\(\sigma\)</span> when the question is about the mean.
+This makes the probability look too extreme.</p>
+<p>How to avoid it:
+Ask: “Is the random variable a single <span class="math notranslate nohighlight">\(X\)</span> or an average <span class="math notranslate nohighlight">\(Y\)</span>?”
+If it is an average, use <span class="math notranslate nohighlight">\(SE(Y) = \sigma/\sqrt{n}\)</span>.</p>
+</section>
+<section id="common-error-2-treating-the-clt-as-exact-for-very-small-n">
+<h3>Common Error 2: Treating the CLT as exact for very small <span class="math notranslate nohighlight">\(n\)</span><a class="headerlink" href="#common-error-2-treating-the-clt-as-exact-for-very-small-n" title="Link to this heading"></a></h3>
+<p>What goes wrong:
+You apply a Normal approximation when <span class="math notranslate nohighlight">\(n\)</span> is too small for a very skewed process.
+The tail probabilities can be inaccurate.</p>
+<p>How to avoid it:
+Check the shape of the population data.
+If it is highly skewed, increase <span class="math notranslate nohighlight">\(n\)</span> before using the CLT.</p>
+</section>
+<section id="common-error-3-forgetting-the-sampling-distribution-is-about-repeated-samples">
+<h3>Common Error 3: Forgetting the sampling distribution is about repeated samples<a class="headerlink" href="#common-error-3-forgetting-the-sampling-distribution-is-about-repeated-samples" title="Link to this heading"></a></h3>
+<p>What goes wrong:
+You treat the sampling distribution as if it described the sample you already took.
+This leads to confused interpretations.</p>
+<p>How to avoid it:
+Say this sentence out loud:
+“If I repeat the sampling many times, how would the mean vary?”
+That is the sampling distribution.</p>
+</section>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Single measurements <span class="math notranslate nohighlight">\(X\)</span> can be skewed and irregular.</p></li>
+<li><p>The sample mean <span class="math notranslate nohighlight">\(Y = \bar{X}\)</span> is an average across <span class="math notranslate nohighlight">\(n\)</span> measurements.</p></li>
+<li><p>The CLT explains why the distribution of <span class="math notranslate nohighlight">\(Y\)</span> becomes approximately Normal.</p></li>
+<li><p>Under the CLT: <span class="math notranslate nohighlight">\(Y \approx N(\mu, \sigma^2/n)\)</span> for large <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>The standard error is <span class="math notranslate nohighlight">\(SE(Y) = \sigma/\sqrt{n}\)</span>.</p></li>
+<li><p>Larger <span class="math notranslate nohighlight">\(n\)</span> makes the average more stable, but with diminishing returns.</p></li>
+<li><p>We compute probabilities about <span class="math notranslate nohighlight">\(Y\)</span> by converting to <span class="math notranslate nohighlight">\(Z\)</span> and using the Z-table.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

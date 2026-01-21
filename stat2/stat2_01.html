@@ -1,0 +1,244 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Joint probability for discrete variables &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">1. Joint probability for discrete variables</a><ul>
+<li><a class="reference internal" href="#joint-probability-distribution">1.1. Joint Probability Distribution</a></li>
+<li><a class="reference internal" href="#joint-probability-mass-function-discrete-case">1.2. Joint Probability Mass Function (Discrete Case)</a></li>
+<li><a class="reference internal" href="#illustration">1.3. Illustration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">1. Joint probability for discrete variables</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stat2/stat2_01.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="joint-probability-for-discrete-variables">
+<h1>1. Joint probability for discrete variables<a class="headerlink" href="#joint-probability-for-discrete-variables" title="Link to this heading"></a></h1>
+<section id="joint-probability-distribution">
+<h2>1.1. Joint Probability Distribution<a class="headerlink" href="#joint-probability-distribution" title="Link to this heading"></a></h2>
+<p>Many real systems produce more than one outcome at the same time. These outcomes are observed from the same process, during the same period, and under the same operating conditions. Because they are generated together, the outcomes often influence each other. Analyzing each outcome separately can hide important relationships. Joint analysis focuses on how outcomes occur together.</p>
+<p>Consider the following situations.</p>
+<ul class="simple">
+<li><p>A production process operates continuously throughout the day. During each shift, the operating condition of the machine is recorded, along with the number of defective items produced. On some days, the machine runs smoothly and only a few defects appear. On other days, small changes in operating conditions are observed and defects increase noticeably. This is a case of a <strong>joint distribution</strong>, because operating condition and product quality are observed together and may be related.</p></li>
+<li><p>A company receives customer orders every day and records the number of units requested. At the same time, it records how long deliveries take to arrive. On certain days, high order volumes are followed by longer delivery times. On other days, orders are fewer and deliveries arrive quickly. This is a case of a <strong>joint distribution</strong>, because demand and delivery time describe the same system behavior and must be studied together.</p></li>
+<li><p>Customers arrive at a service facility and wait for assistance. For each customer, the waiting time before service and the time spent being served are recorded. Some customers wait a long time even when service times are short. Other customers experience long waits mainly when service times are long. This is a case of a <strong>joint distribution</strong>, because waiting time and service time are measured for the same customer and may depend on each other.</p></li>
+<li><p>A computer system processes user requests throughout the day. For each request, the system records the signal condition and the response time. When the signal is strong, responses are usually fast, but not always. When the signal is weak, delays occur more frequently. This is a case of a <strong>joint distribution</strong>, because signal condition and response time describe the same request and are connected.</p></li>
+</ul>
+<p>In each situation above, it is possible to study only one outcome at a time. For example, delivery time can be analyzed without considering demand, or response time can be examined without considering signal condition. Such an analysis can describe typical behavior, such as an average delay, a usual waiting time, or the overall variability of a single outcome. This information is useful, but it is incomplete.</p>
+<p>The limitation becomes clear when we return to the situations described earlier. Suppose long delivery times are observed. Without considering demand, it is not clear whether these delays occur randomly or mainly on days when demand is high. Similarly, suppose a higher number of defects is observed. Without considering operating conditions, it is not clear whether defects increase uniformly or mainly when certain conditions are present. In the service example, knowing the average waiting time does not explain whether long waits occur even when service is fast, or mainly when service itself is slow. In the system example, knowing the overall response time does not explain whether slow responses are equally likely under all signal conditions.</p>
+<p>These questions all have the same structure. They ask whether two outcomes tend to occur <strong>together</strong> in the same observation. They ask whether one outcome changes when the other outcome takes a particular value. Answering such questions requires more than studying each outcome separately. It requires a way to describe how pairs of outcomes appear across repeated observations of the same system.</p>
+<p>A <strong>joint probability distribution</strong> addresses this limitation by describing how two random variables behave at the same time. Instead of assigning probabilities to individual outcomes, it assigns probabilities to <strong>pairs of outcomes</strong> that occur together in a single observation. For example, it can describe how often high demand occurs together with long delivery time, how often specific operating conditions occur together with high defect counts, or how often weak signal conditions occur together with slow system responses. By organizing probabilities around these pairs, a joint probability distribution provides a complete description of how two sources of uncertainty interact within the same system.</p>
+</section>
+<section id="joint-probability-mass-function-discrete-case">
+<h2>1.2. Joint Probability Mass Function (Discrete Case)<a class="headerlink" href="#joint-probability-mass-function-discrete-case" title="Link to this heading"></a></h2>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be two <strong>discrete random variables</strong>. Each time the system is observed, it produces one value of <span class="math notranslate nohighlight">\(X\)</span> and one value of <span class="math notranslate nohighlight">\(Y\)</span> at the same time. Because both values come from the same observation, they must be described together rather than separately.</p>
+<p>The <strong>joint probability mass function (joint pmf)</strong> is defined as</p>
+<div class="math notranslate nohighlight">
+\[f_{XY}(x,y) = P(X = x, Y = y)\]</div>
+<p>This notation should be read carefully. The expression <span class="math notranslate nohighlight">\(X = x\)</span> means that the random variable <span class="math notranslate nohighlight">\(X\)</span> takes the specific value <span class="math notranslate nohighlight">\(x\)</span>. The expression <span class="math notranslate nohighlight">\(Y = y\)</span> means that the random variable <span class="math notranslate nohighlight">\(Y\)</span> takes the specific value <span class="math notranslate nohighlight">\(y\)</span>. The comma indicates that both events occur together in the same observation. The probability operator <span class="math notranslate nohighlight">\(P(\cdot)\)</span> assigns a probability to this joint event. Therefore, <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> represents the probability that <span class="math notranslate nohighlight">\(X\)</span> takes the value <span class="math notranslate nohighlight">\(x\)</span> and, at the same time, <span class="math notranslate nohighlight">\(Y\)</span> takes the value <span class="math notranslate nohighlight">\(y\)</span>.</p>
+<p>A joint pmf assigns a probability to every possible pair <span class="math notranslate nohighlight">\((x,y)\)</span> that the two variables can take. Each pair corresponds to one possible outcome of the system. For discrete variables, the joint pmf is often presented as a table, where rows correspond to values of one variable, columns correspond to values of the other variable, and each cell contains the probability of a specific pair. Each cell describes what happens when both variables take particular values together, not separately.</p>
+<p>The joint pmf must satisfy two basic properties.</p>
+<ol class="arabic">
+<li><p><strong>Non-negativity.</strong></p>
+<p>For all values of <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, the joint pmf must satisfy</p>
+<div class="math notranslate nohighlight">
+\[f_{XY}(x,y) \ge 0\]</div>
+<p>This means that probabilities cannot be negative. A value of zero indicates that a particular pair <span class="math notranslate nohighlight">\((x,y)\)</span> never occurs, while larger values indicate pairs that occur more frequently in the observed system.</p>
+</li>
+<li><p><strong>Total probability equals one.</strong></p>
+<p>The probabilities assigned to all possible pairs of values must add up to one:</p>
+<div class="math notranslate nohighlight">
+\[\sum_x \sum_y f_{XY}(x,y) = 1\]</div>
+<p>The inner sum adds probabilities across all possible values of <span class="math notranslate nohighlight">\(Y\)</span> for a fixed value of <span class="math notranslate nohighlight">\(X\)</span>. The outer sum then adds across all possible values of <span class="math notranslate nohighlight">\(X\)</span>. Together, these sums account for every possible outcome of the system. This reflects the fact that, in each observation, one and only one pair <span class="math notranslate nohighlight">\((x,y)\)</span> must occur.</p>
+</li>
+</ol>
+<p>When reading a joint pmf, attention should remain on <strong>joint occurrence</strong>. The value <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> refers to a specific pair of values observed together in the same outcome. It does not describe how <span class="math notranslate nohighlight">\(X\)</span> behaves on its own, and it does not describe how <span class="math notranslate nohighlight">\(Y\)</span> behaves on its own. Each value of the joint pmf answers a localized question: how frequently does this particular combination appear among all observations? Understanding this point is essential before extracting any further information from the joint distribution.</p>
+</section>
+<section id="illustration">
+<h2>1.3. Illustration<a class="headerlink" href="#illustration" title="Link to this heading"></a></h2>
+<p>To make the idea of a joint pmf concrete, consider again the inspection scenario in which two outcomes are recorded at the same time during each inspection.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X\)</span> denotes the machine status during inspection:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(X = 1\)</span> for a normal state</p></li>
+<li><p><span class="math notranslate nohighlight">\(X = 2\)</span> for a warning signal</p></li>
+<li><p><span class="math notranslate nohighlight">\(X = 3\)</span> for an alarm signal</p></li>
+</ul>
+</li>
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> denotes the inspection result:</p>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(Y = 0\)</span> if no defect is found</p></li>
+<li><p><span class="math notranslate nohighlight">\(Y = 1\)</span> if a defect is found</p></li>
+</ul>
+</li>
+</ul>
+<p>Each inspection produces one <strong>paired outcome</strong> <span class="math notranslate nohighlight">\((X,Y)\)</span>.</p>
+<p><strong>Observation-level view.</strong>
+Before working with probabilities, it is useful to look at the data at the level of individual inspections. Each row in the table below corresponds to one inspection, and each inspection produces one pair of outcomes.</p>
+<table class="docutils align-center">
+<thead>
+<tr class="row-odd"><th class="head"><p>Inspection</p></th>
+<th class="head"><p>Machine Status <span class="math notranslate nohighlight">\(X\)</span></p></th>
+<th class="head"><p>Inspection Result <span class="math notranslate nohighlight">\(Y\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>⋮</p></td>
+<td><p>⋮</p></td>
+<td><p>⋮</p></td>
+</tr>
+</tbody>
+</table>
+<p>The important point here is that the values of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> in each row are observed <strong>together</strong>. They describe the same inspection and should not be separated.</p>
+<p><strong>Joint pmf table.</strong>
+When the number of inspections is large, the individual observations can be summarized by counting how frequently each possible pair <span class="math notranslate nohighlight">\((x,y)\)</span> appears and then converting those counts into probabilities.</p>
+<table class="docutils align-center">
+<thead>
+<tr class="row-odd"><th class="head"><p><span class="math notranslate nohighlight">\(X \backslash Y\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(Y = 0\)</span> (No defect)</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(Y = 1\)</span> (Defect)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(X = 1\)</span> (Normal)</p></td>
+<td><p>0.30</p></td>
+<td><p>0.10</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(X = 2\)</span> (Warning)</p></td>
+<td><p>0.20</p></td>
+<td><p>0.15</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(X = 3\)</span> (Alarm)</p></td>
+<td><p>0.10</p></td>
+<td><p>0.15</p></td>
+</tr>
+</tbody>
+</table>
+<p>Each entry in this table represents a joint probability. For example, the value 0.15 in the row <span class="math notranslate nohighlight">\(X = 2\)</span> and column <span class="math notranslate nohighlight">\(Y = 1\)</span> is <span class="math notranslate nohighlight">\(f_{XY}(2,1)\)</span>.</p>
+<p><strong>Visual representation of the joint pmf.</strong>
+The same joint pmf can also be represented visually.</p>
+<iframe src="../_static/joint_pmf_interactive.html"
+        width="100%"
+        height="500px"
+        style="border:none;">
+</iframe><p>Difficulties arise when this visual representation is not treated as a joint description. One common mistake is to focus on only one variable while ignoring the paired structure of the bars. Doing so removes the pairing <span class="math notranslate nohighlight">\((x,y)\)</span> that defines each bar, and the interaction between variables is lost.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
