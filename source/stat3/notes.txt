@@ -1,0 +1,55 @@
+Week 01 — adv_01_continuous_joint_distributions_and_support_regions.rst
+Primary spine: B2 5.1–5.3 (continuous joint pdf work), B1 3.4 (joint distributions)
+Support: B3 2.7.4 (joint density functions)
+
+Week 02 — adv_02_conditional_expectation_and_variance.rst
+Primary spine: B2 5.2 (conditional distributions) + B2 5.6–5.7 (functions context)
+Support: B3 3.5.1–3.5.3 (conditional expectation; total expectation), 3.5.4 (conditional variance optional)
+
+Week 03 — adv_03_transformations_1d_and_2d_jacobians.rst
+Primary spine: B1 7.2 (transformations), B2 5.7 (general functions)
+Support: B3 2.6 (1D change of variable), 2.9 (multidimensional change of variable); B4 3.7 (functions of RVs)
+
+Week 04 — adv_04_convolution_and_sums_of_random_variables.rst
+Primary spine: B2 5.6–5.7 (sums/functions), (B1 7.2 as supporting transformation skill)
+Support: B3 2.9.3 (convolution)
+
+Week 05 — adv_05_multinomial_and_bivariate_normal_models.rst
+Primary spine: B2 5.5.1–5.5.2 (multinomial, bivariate normal); (B1 5.2 multinomial; B1 3.4 joint basics)
+Support: B3 2.7–2.8 (joint/conditioning foundations)
+
+Week 06 — adv_06_moment_generating_functions_as_a_tool.rst
+Primary spine: B1 7.3 (moments/MGFs), B2 5.8 (MGFs)
+Support: B3 3.4 (generating functions)
+
+Week 07 — adv_07_estimator_theory_bias_mse_consistency.rst
+Primary spine: B2 7.3.1–7.3.5 (unbiasedness, variance, SE, MSE); B1 9.3–9.5 (estimation concepts)
+Support: B3 6.3.1 (SE, bias, consistency)
+
+Week 08 — adv_08_likelihood_and_maximum_likelihood_estimation.rst
+Primary spine: B2 7.4.2 (MLE) and B1 9.14 (MLE optional)
+Support: B3 6.1–6.2 (likelihood; MLE computation)
+
+Week 09 — adv_09_mle_based_inference_wald_and_lr_tests.rst
+Primary spine: (Limited direct coverage in B1/B2; treat as extension of their MLE optional sections)
+Support: B3 6.3.2–6.3.3 (CI/testing from MLE), 8.2.5 (likelihood ratio tests—optional depth)
+
+Week 10 — adv_10_bayesian_inference_conjugate_models.rst
+Primary spine: B2 7.4.3 (Bayesian estimation); (B1 has no matching chapter block; treat as enrichment)
+Support: B3 7.1–7.2 (prior/posterior; credible intervals; prediction)
+
+Week 11 — adv_11_resampling_and_distribution_free_methods.rst
+Primary spine: B2 7.3.4 (bootstrap SE), 8.6 (bootstrap CI), 9.9 (nonparametric procedures as optional); B1 optional links via exercises/sections
+Support: B3 6.4.2 (bootstrapping), 6.4.3 (sign statistic)
+
+Week 12 — adv_12_multiple_regression_matrix_form.rst
+Primary spine: B2 12.3 (matrix approach), 12.1–12.5 (as needed); B1 12.3
+Support: B3 10.3.4 (multiple regression model)
+
+Week 13 — adv_13_model_checking_and_model_selection.rst
+Primary spine: B2 12.10–12.11; B1 12.10–12.11
+Support: B3 9.1.1–9.1.4 (residual/probability plots; cross-validation; what to do when model fails)
+
+Week 14 — adv_14_logistic_regression_or_anova_track.rst
+Track A (Logistic): Primary spine: B2 11.10; B1 11.10. Support: B3 10.5
+Track B (ANOVA concepts via regression): Primary spine: B2 12.8 (indicator variables) + regression framing. Support: B3 10.4.1–10.4.3 (ANOVA blocks)

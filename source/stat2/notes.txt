@@ -1,0 +1,18 @@
+Legend (reading load control)
+Required = assigned reading; lecture assumes familiarity.
+Recommended = helpful but not assumed.
+Optional = enrichment only.
+
+B1 = Probability & Statistics for Engineers & Scientists (your “book 1” with Ch8–13, 11–12 as listed)
+B2 = Applied Statistics and Probability for Engineers
+B3 = Probability and Statistics: The Science of Uncertainty
+B4 = Introduction to Probability
+
+MODULE MAP (for syllabus front page)
+
+Module A. Sampling Distributions & Normal Theory (Weeks 1–4)
+Module B. Estimation & Statistical Intervals (Weeks 5–8)
+Module C. Hypothesis Testing & Categorical Inference (Weeks 9–12)
+Module D. ANOVA (Weeks 13–14)
+Module E. Regression (Weeks 15–17)
+Module F. Integrated Case & Reporting (Week 18)

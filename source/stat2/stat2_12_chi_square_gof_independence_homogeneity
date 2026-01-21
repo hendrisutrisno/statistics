@@ -1,0 +1,4 @@
+Compact title: Chi-Square Methods
+Core topics: χ² GOF; contingency tables; independence vs homogeneity; expected counts; interpretation pitfalls.
+Lab: table construction; standardized residuals; practical recommendations when assumptions fail (combine categories, alternative methods).
+Reading: B1 Required Ch10.11–10.13; B2 Recommended 10.11–10.13; B3 Optional 9.1.2 + 10.2; B4 Optional.

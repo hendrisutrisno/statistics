@@ -1,0 +1,73 @@
+STAT 1 (18 weeks) — mapped to books (lighter, applied)
+
+Week 01 — stat1_01_orientation_and_roadmap.rst
+Primary spine: B2 1.1–1.4; B1 1.1–1.2, 1.7
+Support: B3 1.1–1.2; B4 1.1
+
+Week 02 — stat1_02_descriptive_statistics_for_decision_support.rst
+Primary spine: B1 1.3–1.6; B2 6.1–6.6
+Support: B3 5.5.1–5.5.2 (descriptive stats/plotting), 5.4.3 (histograms)
+
+Week 03 — stat1_03_probability_basics_events_and_rules.rst
+Primary spine: B1 2.1–2.5; B2 2.1, 2.3–2.4
+Support: B3 1.2–1.3; B4 1.2–1.6
+
+Week 04 — stat1_04_counting_and_finite_probability_models.rst
+Primary spine: B1 2.3; B2 2.2
+Support: B3 1.4–1.4.1; B4 1.4
+
+Week 05 — stat1_05_conditional_probability_and_independence.rst
+Primary spine: B1 2.6; B2 2.5–2.7
+Support: B3 1.5–1.5.2; B4 2.1–2.5
+
+Week 06 — stat1_06_bayes_rule_diagnostic_reasoning.rst
+Primary spine: B1 2.7; B2 2.8
+Support: B3 1.5.1 (conditional probability framing); B4 2.3 (Bayes), 2.8 (pitfalls optional)
+
+Week 07 — stat1_07_random_variables_pmf_pdf_cdf_support.rst
+Primary spine: B1 3.1–3.3; B2 2.9, 3.1–3.3, 4.1–4.2
+Support: B3 2.1–2.5; B4 3.1–3.6
+
+Week 08 — stat1_08_binomial_model.rst
+Primary spine: B2 3.5; B1 5.2 (binomial), plus B1 3.2 (discrete distribution basics)
+Support: B3 2.3.1; B4 3.3
+
+Week 09 — stat1_09_geometric_waiting_time_model.rst
+Primary spine: B2 3.6; B1 5.4 (geometric/negative binomial; geometric emphasis)
+Support: B3 2.3.1; B4 4.3
+
+Week 10 — stat1_10_poisson_rate_model.rst
+Primary spine: B2 3.8; B1 5.5 (Poisson; Poisson process optional)
+Support: B3 2.3.1; B4 4.7 (Poisson distribution), 5.6 (Poisson process optional)
+
+Week 11 — stat1_11_expectation_and_variance_practical_summaries.rst
+Primary spine: B1 4.1–4.2; B2 3.3, 4.3, 5.4 (cov/corr preview if desired)
+Support: B3 3.1–3.3; B4 4.1–4.2, 4.6
+
+Week 12 — stat1_12_continuous_probability_pdf_cdf_mechanics.rst
+Primary spine: B2 4.1–4.2; B1 3.3 (continuous distributions foundations)
+Support: B3 2.4–2.5; B4 5.1 (pdf fundamentals)
+
+Week 13 — stat1_13_uniform_and_exponential_models.rst
+Primary spine: B2 4.4 (uniform), 4.7 (exponential); B1 6.1 (uniform), 6.6 (gamma/exponential—exponential emphasis)
+Support: B3 2.4.1; B4 5.2 (uniform), 5.5 (exponential)
+
+Week 14 — stat1_14_normal_model_and_standardization.rst
+Primary spine: B2 4.5–4.6; B1 6.2–6.4 (normal + applications)
+Support: B3 2.4.1; B4 5.4 (normal)
+
+Week 15 — stat1_15_model_choice_workflow.rst
+Primary spine: B1 1.6 (modeling + graphical diagnostics), B2 6.3–6.7 (histograms/boxplots/time plots/scatter/probability plots as “workflow tools”)
+Support: B3 9.1.1 (probability plots) as instructor reference only; B4 recaps in Ch1–Ch5 for extra practice
+
+Week 16 — stat1_16_paired_data_and_correlation_preview.rst
+Primary spine: B2 6.6 (scatter), B2 5.4 (corr); B1 4.2 (cov), B1 11.12 (correlation—preview only)
+Support: B3 3.3 (corr), 10.1 (relationship framing)
+
+Week 17 — stat1_17_linear_functions_of_random_variables.rst
+Primary spine: B1 4.3; B2 5.6 (linear functions), plus B2 4.3 for variance basics
+Support: B3 3.3 (variance/covariance identities); B4 4.2 (linearity), 4.4 (indicator RVs optional)
+
+Week 18 — stat1_18_integrated_cases_and_stat2_readiness.rst
+Primary spine: Review integration of B1 2–6 and B2 2–5 (core topics only)
+Support: B3 5.2 (inference using a probability model—only as a “bridge reading”, not required)
