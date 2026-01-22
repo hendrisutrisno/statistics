@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2. Marginal Distributions &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Courses</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stat1/index.html">Statistics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Statistics 2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">2. Marginal Distributions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/stat2/others/stat2_02.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="marginal-distributions">
+<h1>2. Marginal Distributions<a class="headerlink" href="#marginal-distributions" title="Link to this heading"></a></h1>
+<p>A joint distribution describes how two random variables behave <strong>together</strong>, assigning probabilities to pairs of outcomes observed in the same realization. In many situations, however, interest lies in understanding the behavior of <strong>one variable by itself</strong>, without explicitly tracking the value of the other. A <strong>marginal distribution</strong> provides exactly this perspective.</p>
+<p>The term <em>marginal</em> reflects the idea of moving from a two-dimensional description to a one-dimensional one by <em>summing out</em> the other variable. Although the resulting distribution involves only a single variable, it is still derived entirely from the joint model and therefore remains consistent with the underlying joint structure.</p>
+<section id="discrete-case">
+<h2>Discrete Case<a class="headerlink" href="#discrete-case" title="Link to this heading"></a></h2>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> be discrete random variables with joint probability mass function <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span>.</p>
+<p>The marginal probability mass function (pmf) of <span class="math notranslate nohighlight">\(X\)</span> is obtained by summing the joint pmf over <strong>all possible values of</strong> <span class="math notranslate nohighlight">\(Y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f_X(x) = \sum_y f_{XY}(x,y)\]</div>
+<p>Similarly, the marginal pmf of <span class="math notranslate nohighlight">\(Y\)</span> is obtained by summing the joint pmf over <strong>all possible values of</strong> <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f_Y(y) = \sum_x f_{XY}(x,y)\]</div>
+<p>In each case, the summation aggregates the probabilities of <strong>all joint outcomes</strong> for which the variable of interest takes a particular value. The other variable is not held fixed; instead, every value it can possibly assume is taken into account.</p>
+<p>As a result, a marginal pmf describes how frequently a particular value of <span class="math notranslate nohighlight">\(X\)</span> (or <span class="math notranslate nohighlight">\(Y\)</span>) occurs <strong>overall</strong>, regardless of what value the other variable takes.</p>
+<p>Conceptually, marginalization answers questions such as:</p>
+<ul class="simple">
+<li><p>How often does <span class="math notranslate nohighlight">\(X = x\)</span> occur <em>across all observations</em>?</p></li>
+<li><p>How does <span class="math notranslate nohighlight">\(Y\)</span> vary when the specific value of <span class="math notranslate nohighlight">\(X\)</span> is ignored?</p></li>
+</ul>
+<p>Marginal distributions therefore serve as <strong>one-dimensional summaries</strong> of joint behavior. They are useful for describing overall variability of individual variables, but they do not describe how variables interact with one another.</p>
+</section>
+<section id="illustration-marginal-distributions-from-a-joint-pmf">
+<h2>Illustration: Marginal Distributions from a Joint pmf<a class="headerlink" href="#illustration-marginal-distributions-from-a-joint-pmf" title="Link to this heading"></a></h2>
+<p>We now return to the inspection example introduced earlier. Recall that each inspection produces a <strong>paired outcome</strong> <span class="math notranslate nohighlight">\((X,Y)\)</span>, where machine status <span class="math notranslate nohighlight">\(X\)</span> and inspection result <span class="math notranslate nohighlight">\(Y\)</span> are observed <strong>together</strong> in the same inspection.</p>
+<table class="docutils align-center">
+<thead>
+<tr class="row-odd"><th class="head"><p>Inspection</p></th>
+<th class="head"><p>Machine Status <span class="math notranslate nohighlight">\(X\)</span></p></th>
+<th class="head"><p>Inspection Result <span class="math notranslate nohighlight">\(Y\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>2</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>1</p></td>
+<td><p>0</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>3</p></td>
+<td><p>1</p></td>
+</tr>
+<tr class="row-even"><td><p>⋮</p></td>
+<td><p>⋮</p></td>
+<td><p>⋮</p></td>
+</tr>
+</tbody>
+</table>
+<p>The joint pmf <span class="math notranslate nohighlight">\(f_{XY}(x,y)\)</span> assigns probability to each such pair. It answers questions about <strong>co-occurrence</strong>, such as how often a particular machine status and inspection result appear together.</p>
+<p>Marginal distributions address a different type of question. Instead of focusing on pairs, they describe how <strong>one variable behaves on its own</strong>, while still being derived from the joint description.</p>
+<section id="marginal-distribution-of-x">
+<h3>Marginal Distribution of <span class="math notranslate nohighlight">\(X\)</span><a class="headerlink" href="#marginal-distribution-of-x" title="Link to this heading"></a></h3>
+<p>The marginal pmf of the machine status <span class="math notranslate nohighlight">\(X\)</span> is obtained by summing the joint pmf over all possible values of <span class="math notranslate nohighlight">\(Y\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f_X(x) = \sum_y f_{XY}(x,y)\]</div>
+<p>Operationally, this corresponds to adding probabilities <strong>across each row</strong> of the joint pmf table. For each machine status, we collect the probability of observing that status regardless of whether a defect is found.</p>
+<p>For example:</p>
+<ul>
+<li><p>For <span class="math notranslate nohighlight">\(X=1\)</span> (Normal):</p>
+<div class="math notranslate nohighlight">
+\[f_X(1) = f_{XY}(1,0) + f_{XY}(1,1) = 0.30 + 0.10 = 0.40\]</div>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(X=2\)</span> (Warning):</p>
+<div class="math notranslate nohighlight">
+\[f_X(2) = 0.20 + 0.15 = 0.35\]</div>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(X=3\)</span> (Alarm):</p>
+<div class="math notranslate nohighlight">
+\[f_X(3) = 0.10 + 0.15 = 0.25\]</div>
+</li>
+</ul>
+<p>The marginal distribution of <span class="math notranslate nohighlight">\(X\)</span> therefore summarizes how frequently each machine state occurs <strong>overall</strong>, without distinguishing between defect and non-defect outcomes.</p>
+<iframe src="../_static/02_01_marginal_pmf_X_plotly.html"
+        width="100%"
+        height="450px"
+        style="border:none;">
+</iframe></section>
+<section id="marginal-distribution-of-y">
+<h3>Marginal Distribution of <span class="math notranslate nohighlight">\(Y\)</span><a class="headerlink" href="#marginal-distribution-of-y" title="Link to this heading"></a></h3>
+<p>Similarly, the marginal pmf of the inspection result <span class="math notranslate nohighlight">\(Y\)</span> is obtained by summing the joint pmf over all possible values of <span class="math notranslate nohighlight">\(X\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[f_Y(y) = \sum_x f_{XY}(x,y)\]</div>
+<p>This corresponds to adding probabilities <strong>down each column</strong> of the joint pmf table.</p>
+<ul>
+<li><p>For <span class="math notranslate nohighlight">\(Y=0\)</span> (No defect):</p>
+<div class="math notranslate nohighlight">
+\[f_Y(0) = 0.30 + 0.20 + 0.10 = 0.60\]</div>
+</li>
+<li><p>For <span class="math notranslate nohighlight">\(Y=1\)</span> (Defect):</p>
+<div class="math notranslate nohighlight">
+\[f_Y(1) = 0.10 + 0.15 + 0.15 = 0.40\]</div>
+</li>
+</ul>
+<p>The marginal distribution of <span class="math notranslate nohighlight">\(Y\)</span> describes how often defects occur <strong>overall</strong>, without regard to the machine status during inspection.</p>
+<iframe src="../_static/02_02_marginal_pmf_Y_plotly.html"
+        width="100%"
+        height="450px"
+        style="border:none;">
+</iframe></section>
+<section id="what-we-can-learn-from-marginal-distributions">
+<h3>What We Can Learn from Marginal Distributions<a class="headerlink" href="#what-we-can-learn-from-marginal-distributions" title="Link to this heading"></a></h3>
+<p>From the marginal distributions of <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, we can draw several meaningful and defensible conclusions about the system:</p>
+<ul class="simple">
+<li><p>We can identify which machine states occur most frequently and which are relatively rare.</p></li>
+<li><p>We can determine the overall defect rate in the inspection process.</p></li>
+<li><p>We can establish baseline, unconditional summaries such as expected values, variances, and long-run proportions.</p></li>
+</ul>
+<p>In the inspection example, marginal analysis shows that non-normal machine states occur regularly and that defects represent a substantial portion of inspection outcomes. These findings describe the <strong>overall operating environment</strong> and provide a reference point for further analysis.</p>
+</section>
+<section id="what-marginal-distributions-cannot-tell-us">
+<h3>What Marginal Distributions Cannot Tell Us<a class="headerlink" href="#what-marginal-distributions-cannot-tell-us" title="Link to this heading"></a></h3>
+<p>Despite their usefulness, marginal distributions have important limitations. By construction, marginalization removes information about how outcomes occur <strong>together</strong>.</p>
+<p>As a result, marginal distributions alone cannot answer questions such as:</p>
+<ul class="simple">
+<li><p>Are defects more likely when the machine is in an alarm state?</p></li>
+<li><p>Do warning signals increase the probability of a defect?</p></li>
+<li><p>Are machine status and inspection outcome statistically related or independent?</p></li>
+</ul>
+<p>Two systems may have identical marginal distributions for <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span> while exhibiting completely different joint behavior. Marginal analysis cannot distinguish between such cases.</p>
+<p>To address questions about association, dependence, or interaction, we must return to the <strong>joint distribution</strong> or move forward to <strong>conditional distributions</strong>, where one variable is examined given specific values of the other. This transition leads naturally to the concept of independence, which will be studied next.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

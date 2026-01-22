@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Statistics</title>
+  <title>3. Sampling Distributions II: The Central Limit Theorem &mdash; Statistics</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
 
@@ -16,9 +16,12 @@
       <script src="../_static/documentation_options.js?v=5929fcd5"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="2. Sampling Distributions I: Random Sampling and Standard Error" href="stat2_02_sampling_distributions_random_sampling.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -40,10 +43,43 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul class="simple">
+              <p class="caption" role="heading"><span class="caption-text">Courses</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../stat1/index.html">Statistics 1</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Statistics 2</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="stat2_01_orientation_and_inference_roadmap.html">1. Orientation &amp; Inference Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat2_02_sampling_distributions_random_sampling.html">2. Sampling Distributions I: Random Sampling and Standard Error</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">3. Sampling Distributions II: The Central Limit Theorem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">3.1 Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learning-outcomes">3.2 Learning Outcomes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#connection-to-previous-ideas">3.3 Connection to Previous Ideas</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#core-sections">3.4 Core Sections</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sampling-distribution-of-the-sample-mean">3.4.1 Sampling Distribution of the Sample Mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exact-normal-case-a-special-baseline">3.4.2 Exact Normal Case (a special baseline)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-central-limit-theorem-approximate-normality">3.4.3 The Central Limit Theorem (approximate Normality)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standardization-and-the-z-statistic">3.4.4 Standardization and the Z Statistic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-does-the-clt-work-well">3.4.5 When does the CLT work well?</a></li>
 </ul>
-</div>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#worked-example">3.5 Worked Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#description">3.5.1 Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#question">3.5.2 Question</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#analysis">3.5.3 Analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#intuition">3.6 Intuition</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#averaging-cancels-irregularity">3.6.1 Averaging cancels irregularity</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standard-error-is-a-units-conversion">3.6.2 Standard error is a “units conversion”</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion-and-common-errors">3.7 Discussion and Common Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">3.8 Summary</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -58,7 +94,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+          <li class="breadcrumb-item"><a href="index.html">Statistics 2</a></li>
+      <li class="breadcrumb-item active">3. Sampling Distributions II: The Central Limit Theorem</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/stat2/stat2_03_sampling_distributions_clt_and_normal_approx.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -68,15 +105,228 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <p>Compact title: Sampling Dist II (CLT)
-Core topics: CLT; when it works; practical normal approximation logic; interpreting “approximately Normal.”
-Lab: CLT simulation under skew/heavy tails; compare tail areas across n.
-Reading: B1 Required Ch8.4; B2 Recommended 7.2 + 8.4; B3 Optional 4.4.1–4.4.2; B4 Optional.</p>
+  <section id="sampling-distributions-ii-the-central-limit-theorem">
+<h1>3. Sampling Distributions II: The Central Limit Theorem<a class="headerlink" href="#sampling-distributions-ii-the-central-limit-theorem" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>3.1 Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In practice, we often report averages.
+Examples include average service time, average defect size, and average daily demand.
+These averages are useful because they reduce noise from individual observations.</p>
+<p>However, an average computed from a sample is still random.
+If we repeat the same sampling plan, the sample mean changes from sample to sample.
+So we need a probability model for the sample mean.</p>
+<p>This session explains why the sample mean often behaves like a Normal random variable.
+This is the role of the Central Limit Theorem (CLT).</p>
+</section>
+<section id="learning-outcomes">
+<h2>3.2 Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
+<p>After this session, we should be able to:</p>
+<ul class="simple">
+<li><p>Define the sampling distribution of the sample mean.</p></li>
+<li><p>State what the CLT guarantees, and what it does not guarantee.</p></li>
+<li><p>Use the standard error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> to quantify typical variation of <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p></li>
+<li><p>Standardize the sample mean using a <span class="math notranslate nohighlight">\(Z\)</span>-statistic.</p></li>
+<li><p>Apply the CLT to approximate probabilities about averages.</p></li>
+<li><p>Explain when a Normal approximation is reasonable in applied work.</p></li>
+</ul>
+</section>
+<section id="connection-to-previous-ideas">
+<h2>3.3 Connection to Previous Ideas<a class="headerlink" href="#connection-to-previous-ideas" title="Link to this heading"></a></h2>
+<p>In the previous session, we treated statistics as random variables.
+In particular, the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span> has its own distribution.</p>
+<p>We also introduced the standard error as a “typical error” size.
+For <span class="math notranslate nohighlight">\(\bar{X}\)</span>, the standard error is controlled by <span class="math notranslate nohighlight">\(n\)</span>.
+As <span class="math notranslate nohighlight">\(n\)</span> increases, we expect the sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> to tighten.</p>
+</section>
+<section id="core-sections">
+<h2>3.4 Core Sections<a class="headerlink" href="#core-sections" title="Link to this heading"></a></h2>
+<section id="sampling-distribution-of-the-sample-mean">
+<h3>3.4.1 Sampling Distribution of the Sample Mean<a class="headerlink" href="#sampling-distribution-of-the-sample-mean" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a population with:</p>
+<ul class="simple">
+<li><p>mean <span class="math notranslate nohighlight">\(\mu\)</span> (parameter (population quantity))</p></li>
+<li><p>standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span></p></li>
+</ul>
+<p>The sample mean is the statistic</p>
+<div class="math notranslate nohighlight">
+\[\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i.\]</div>
+<p>Key facts:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(E(\bar{X}) = \mu\)</span>. (Note: the sample mean targets the population mean.)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathrm{Var}(\bar{X}) = \sigma^2/n\)</span>.</p></li>
+<li><p>The standard deviation of <span class="math notranslate nohighlight">\(\bar{X}\)</span> is</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}}.\]</div>
+<p>We call <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> the standard error of the mean.
+It describes typical sampling-to-sampling variation in <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
+</section>
+<section id="exact-normal-case-a-special-baseline">
+<h3>3.4.2 Exact Normal Case (a special baseline)<a class="headerlink" href="#exact-normal-case-a-special-baseline" title="Link to this heading"></a></h3>
+<p>If the population distribution of <span class="math notranslate nohighlight">\(X\)</span> is Normal, then <span class="math notranslate nohighlight">\(\bar{X}\)</span> is Normal for any <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[X \sim \mathcal{N}(\mu, \sigma^2)
+\quad \Longrightarrow \quad
+\bar{X} \sim \mathcal{N}\!\left(\mu, \frac{\sigma^2}{n}\right).\]</div>
+<p>This case is important because it gives a clean reference.
+But many operational variables (waiting times, repair times, demand bursts) are not Normal.</p>
+</section>
+<section id="the-central-limit-theorem-approximate-normality">
+<h3>3.4.3 The Central Limit Theorem (approximate Normality)<a class="headerlink" href="#the-central-limit-theorem-approximate-normality" title="Link to this heading"></a></h3>
+<p>The CLT explains why <span class="math notranslate nohighlight">\(\bar{X}\)</span> is often approximately Normal even when <span class="math notranslate nohighlight">\(X\)</span> is not Normal.</p>
+<p>Assumptions (practical version):</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> are independent.</p></li>
+<li><p>They share the same mean <span class="math notranslate nohighlight">\(\mu\)</span> and finite variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p></li>
+</ul>
+<p>Conclusion:</p>
+<ul class="simple">
+<li><p>For large <span class="math notranslate nohighlight">\(n\)</span>, the distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> is approximately Normal with mean <span class="math notranslate nohighlight">\(\mu\)</span>
+and variance <span class="math notranslate nohighlight">\(\sigma^2/n\)</span>.</p></li>
+</ul>
+<p>A key message is “approximately.”
+The CLT is a limiting result.
+Accuracy improves as <span class="math notranslate nohighlight">\(n\)</span> grows, and depends on how skewed or heavy-tailed the population is.</p>
+<p>Figure 1 shows the main visual logic of the CLT.</p>
+<p>Figure 1 narrative:
+We model an operational time-to-complete metric <span class="math notranslate nohighlight">\(X\)</span> (in minutes) using a right-skewed distribution.
+This is realistic for service or processing times, where very long delays occur occasionally.
+The figure holds the population distribution fixed and changes only the sample size <span class="math notranslate nohighlight">\(n\)</span>.
+The blue histogram shows simulated values of <span class="math notranslate nohighlight">\(\bar{X}\)</span> from repeated sampling, while the gray curve is a Normal reference with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.
+We read the x-axis as the average time and the y-axis as density (relative frequency on a continuous scale).
+As <span class="math notranslate nohighlight">\(n\)</span> increases, the histogram becomes smoother, more symmetric, and closer to the Normal reference.</p>
+<iframe src="../_static/figures/stat2/03_01_clt_xbar_convergence.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe></section>
+<section id="standardization-and-the-z-statistic">
+<h3>3.4.4 Standardization and the Z Statistic<a class="headerlink" href="#standardization-and-the-z-statistic" title="Link to this heading"></a></h3>
+<p>To use Normal tables or software consistently, we standardize.
+For the sample mean, the standardized variable is</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}.\]</div>
+<p>Interpretation:</p>
+<ul class="simple">
+<li><p>The numerator <span class="math notranslate nohighlight">\(\bar{X} - \mu\)</span> is the deviation of the sample mean from the target mean.</p></li>
+<li><p>The denominator <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> rescales that deviation into “standard error units.”</p></li>
+<li><p>Under the CLT, <span class="math notranslate nohighlight">\(Z\)</span> is approximately <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> for large <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+</ul>
+<p>This is the main bridge from a real operational metric (minutes, grams, dollars)
+to a standard probability scale.</p>
+<p>Figure 2 makes the standardization idea concrete.</p>
+<p>Figure 2 narrative:
+We use the same underlying right-skewed process as in Figure 1, but we now convert each repeated-sample mean into a standardized value <span class="math notranslate nohighlight">\(Z\)</span>.
+The blue histogram is the sampling distribution of the standardized mean <span class="math notranslate nohighlight">\(Z = (\bar{X}-\mu)/(\sigma/\sqrt{n})\)</span>.
+The smooth gray curve is the standard Normal reference <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span>, which is the target shape implied by the CLT.
+The dropdown changes <span class="math notranslate nohighlight">\(n\)</span>, while the x-axis range is held fixed, so we can compare shapes fairly.
+When <span class="math notranslate nohighlight">\(n\)</span> is small, the histogram can be skewed and the tails can differ from the gray curve; when <span class="math notranslate nohighlight">\(n\)</span> is larger, the blue histogram aligns more closely with the reference curve.</p>
+<iframe src="../_static/figures/stat2/03_02_clt_standardized_z.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe></section>
+<section id="when-does-the-clt-work-well">
+<h3>3.4.5 When does the CLT work well?<a class="headerlink" href="#when-does-the-clt-work-well" title="Link to this heading"></a></h3>
+<p>We need a practical decision rule.
+A common guideline is:</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(n \ge 30\)</span>, the Normal approximation for <span class="math notranslate nohighlight">\(\bar{X}\)</span> is often good when the population is not extremely skewed.</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(n &lt; 30\)</span>, the approximation may still be good if the population is close to Normal (roughly symmetric and unimodal).</p></li>
+</ul>
+<p>What can break the approximation?</p>
+<ul class="simple">
+<li><p>Strong skewness with small <span class="math notranslate nohighlight">\(n\)</span> can distort tail probabilities.</p></li>
+<li><p>Heavy tails can require larger <span class="math notranslate nohighlight">\(n\)</span> for stable tail behavior.</p></li>
+<li><p>Dependence (non-independent sampling) can invalidate the usual <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> scaling.</p></li>
+</ul>
+<p>Figure 3 focuses on probability error, because many decisions are threshold-based.</p>
+<p>Figure 3 narrative:
+We compare a skewed population (lognormal-like process time) against a Normal population with the same <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>.
+For each sample size <span class="math notranslate nohighlight">\(n\)</span>, we consider a fixed tail event: <span class="math notranslate nohighlight">\(\bar{X} &gt; \mu + 2(\sigma/\sqrt{n})\)</span>, which represents an “unusually high average” in standard error units.
+The orange trace shows the absolute difference between the simulated tail probability (computed by repeated sampling) and the CLT-based Normal approximation <span class="math notranslate nohighlight">\(P(Z&gt;2)\)</span>.
+The gray trace at (near) zero represents the Normal-population baseline, where the Normal model for <span class="math notranslate nohighlight">\(\bar{X}\)</span> is exact for every <span class="math notranslate nohighlight">\(n\)</span>.
+We read the x-axis as sample size and the y-axis as approximation error; the main pattern is that error decreases as <span class="math notranslate nohighlight">\(n\)</span> increases, but it can be non-negligible for small <span class="math notranslate nohighlight">\(n\)</span> under strong skewness.</p>
+<iframe src="../_static/figures/stat2/03_03_clt_approximation_error.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe></section>
+</section>
+<section id="worked-example">
+<h2>3.5 Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading"></a></h2>
+<section id="description">
+<h3>3.5.1 Description<a class="headerlink" href="#description" title="Link to this heading"></a></h3>
+<p>A warehouse tracks the order picking time <span class="math notranslate nohighlight">\(X\)</span> (minutes) for a specific product category.
+Historical monitoring suggests:</p>
+<ul class="simple">
+<li><p>population mean <span class="math notranslate nohighlight">\(\mu = 9.8\)</span> minutes</p></li>
+<li><p>population standard deviation <span class="math notranslate nohighlight">\(\sigma = 8.5\)</span> minutes</p></li>
+</ul>
+<p>The distribution of individual picking times is right-skewed.
+A supervisor samples <span class="math notranslate nohighlight">\(n = 36\)</span> orders from a shift and computes the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
+</section>
+<section id="question">
+<h3>3.5.2 Question<a class="headerlink" href="#question" title="Link to this heading"></a></h3>
+<p>What is the approximate probability that the shift’s average picking time exceeds 12 minutes?</p>
+</section>
+<section id="analysis">
+<h3>3.5.3 Analysis<a class="headerlink" href="#analysis" title="Link to this heading"></a></h3>
+<p>We want <span class="math notranslate nohighlight">\(P(\bar{X} &gt; 12)\)</span>.
+By the CLT, <span class="math notranslate nohighlight">\(\bar{X}\)</span> is approximately Normal with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{\bar{X}} = \frac{8.5}{\sqrt{36}} = \frac{8.5}{6} \approx 1.4167.\]</div>
+<p>We standardize the threshold 12:</p>
+<div class="math notranslate nohighlight">
+\[z = \frac{12 - 9.8}{1.4167} \approx \frac{2.2}{1.4167} \approx 1.55.\]</div>
+<p>So</p>
+<div class="math notranslate nohighlight">
+\[P(\bar{X} &gt; 12) \approx P(Z &gt; 1.55) \approx 0.061.\]</div>
+<p>(Note: we are measuring “how many standard errors above <span class="math notranslate nohighlight">\(\mu\)</span>” the observed average is, then using the standard Normal tail area.)</p>
+<p>Practical interpretation:
+In repeated shifts of the same design (same sampling plan and stable process),
+we would expect an average above 12 minutes in about 6% of shifts.
+If this event becomes frequent, it can indicate a process change rather than random variation.</p>
+</section>
+</section>
+<section id="intuition">
+<h2>3.6 Intuition<a class="headerlink" href="#intuition" title="Link to this heading"></a></h2>
+<section id="averaging-cancels-irregularity">
+<h3>3.6.1 Averaging cancels irregularity<a class="headerlink" href="#averaging-cancels-irregularity" title="Link to this heading"></a></h3>
+<p>When we average <span class="math notranslate nohighlight">\(n\)</span> observations, positive and negative deviations partly offset.
+Even if <span class="math notranslate nohighlight">\(X\)</span> is skewed, the sum of many independent contributions tends to look more symmetric.</p>
+<p>The rate of improvement is not linear in <span class="math notranslate nohighlight">\(n\)</span>.
+The standard error shrinks like <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>.
+So doubling <span class="math notranslate nohighlight">\(n\)</span> does not halve uncertainty; it reduces it by a factor of <span class="math notranslate nohighlight">\(1/\sqrt{2}\)</span>.</p>
+</section>
+<section id="standard-error-is-a-units-conversion">
+<h3>3.6.2 Standard error is a “units conversion”<a class="headerlink" href="#standard-error-is-a-units-conversion" title="Link to this heading"></a></h3>
+<p>The quantity <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> converts deviations of <span class="math notranslate nohighlight">\(\bar{X}\)</span> into a comparable scale.
+A deviation of 2 standard errors is meaningfully “large” regardless of the original unit (minutes, grams, dollars).
+This is why the standardized statistic <span class="math notranslate nohighlight">\(Z\)</span> is central in inference.</p>
+</section>
+</section>
+<section id="discussion-and-common-errors">
+<h2>3.7 Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Treating <span class="math notranslate nohighlight">\(\bar{X}\)</span> as if it had the same spread as <span class="math notranslate nohighlight">\(X\)</span>.
+What goes wrong: we forget the <span class="math notranslate nohighlight">\(\sqrt{n}\)</span> in the denominator and overstate variability.
+How to avoid: always write <span class="math notranslate nohighlight">\(\sigma_{\bar{X}} = \sigma/\sqrt{n}\)</span> before computing probabilities.</p></li>
+<li><p>Applying the CLT without a random sample assumption.
+What goes wrong: dependence or selection bias can distort the sampling distribution and invalidate the Normal approximation.
+How to avoid: check that the data collection mechanism is close to independent sampling from a stable process.</p></li>
+<li><p>Using the CLT in extreme-tail decisions with small <span class="math notranslate nohighlight">\(n\)</span> and strong skewness.
+What goes wrong: tail probabilities are the last part of the distribution to become well-approximated.
+How to avoid: increase <span class="math notranslate nohighlight">\(n\)</span>, consider a variance-stabilizing transform, or use simulation to validate the approximation.</p></li>
+</ol>
+</section>
+<section id="summary">
+<h2>3.8 Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>The sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> describes how sample averages vary across repeated samples.</p></li>
+<li><p><span class="math notranslate nohighlight">\(E(\bar{X}) = \mu\)</span> and <span class="math notranslate nohighlight">\(\mathrm{Var}(\bar{X}) = \sigma^2/n\)</span>, so the standard error is <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.</p></li>
+<li><p>If the population is Normal, then <span class="math notranslate nohighlight">\(\bar{X}\)</span> is exactly Normal for any <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>The CLT says <span class="math notranslate nohighlight">\(\bar{X}\)</span> is approximately Normal for large <span class="math notranslate nohighlight">\(n\)</span> when the population has finite variance.</p></li>
+<li><p>Standardization via <span class="math notranslate nohighlight">\(Z = (\bar{X}-\mu)/(\sigma/\sqrt{n})\)</span> connects real units to the standard Normal scale.</p></li>
+<li><p>Approximation quality improves with <span class="math notranslate nohighlight">\(n\)</span>, but skewness and tail decisions require extra caution.</p></li>
+</ul>
+</section>
+</section>
 
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="stat2_02_sampling_distributions_random_sampling.html" class="btn btn-neutral float-left" title="2. Sampling Distributions I: Random Sampling and Standard Error" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
 
   <hr/>
 

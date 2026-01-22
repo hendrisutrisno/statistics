@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. Correlation &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Courses</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../stat1/index.html">Statistics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../index.html">Statistics 2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">5. Correlation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/stat2/others/stat2_05.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="correlation">
+<h1>5. Correlation<a class="headerlink" href="#correlation" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In the previous section, we learned <strong>covariance</strong>.</p>
+<p>Covariance tells us the direction of a straight-line relationship:</p>
+<ul class="simple">
+<li><p>If covariance is positive, large <code class="docutils literal notranslate"><span class="pre">X</span></code> values tend to occur with large <code class="docutils literal notranslate"><span class="pre">Y</span></code> values.</p></li>
+<li><p>If covariance is negative, large <code class="docutils literal notranslate"><span class="pre">X</span></code> values tend to occur with small <code class="docutils literal notranslate"><span class="pre">Y</span></code> values.</p></li>
+</ul>
+<p>However, covariance has one important limitation.</p>
+<ul class="simple">
+<li><p>Covariance depends on the <strong>units</strong> of measurement.
+For example, seconds and milliseconds will produce different covariance values.</p></li>
+</ul>
+<p>So, covariance is hard to compare across different situations.</p>
+<p>Now we learn <strong>correlation</strong>.</p>
+<p>Correlation keeps the same direction information as covariance.
+But it rescales the result into a standard range.
+This makes the value easier to interpret and compare.</p>
+</section>
+<section id="learning-outcomes">
+<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
+<p>After this section, you should be able to:</p>
+<ul class="simple">
+<li><p>Explain correlation in plain words.</p></li>
+<li><p>Compute correlation from covariance and standard deviations.</p></li>
+<li><p>Interpret correlation values using the range from -1 to +1.</p></li>
+<li><p>Explain the connection between correlation, covariance, and independence.</p></li>
+</ul>
+</section>
+<section id="purpose-and-use-cases">
+<h2>Purpose and Use Cases<a class="headerlink" href="#purpose-and-use-cases" title="Link to this heading"></a></h2>
+<p>In many real processes, we measure two quantities at the same time.</p>
+<p>Examples:</p>
+<ul class="simple">
+<li><p>A signal quality measure and the system response time.</p></li>
+<li><p>A vibration measure and the surface roughness of parts.</p></li>
+<li><p>Conveyor speed and the number of failed inspections.</p></li>
+</ul>
+<p>We want a number that answers two questions at once:</p>
+<ol class="arabic simple">
+<li><p>What is the <strong>direction</strong> of the straight-line pattern?</p></li>
+<li><p>How <strong>strong</strong> is the straight-line pattern?</p></li>
+</ol>
+<p>Covariance answers direction well, but its size depends on units.</p>
+<p>Correlation solves this by creating a <strong>unit-free</strong> measure.
+“Unit-free” means “no seconds, no meters, no kilograms.”
+It is just a number.</p>
+</section>
+<section id="core-concept-and-notation">
+<h2>Core Concept and Notation<a class="headerlink" href="#core-concept-and-notation" title="Link to this heading"></a></h2>
+<section id="random-variables">
+<h3>Random variables<a class="headerlink" href="#random-variables" title="Link to this heading"></a></h3>
+<p>Let:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> be one random variable (random/unpredictable quantity). We can consider <code class="docutils literal notranslate"><span class="pre">X</span></code> as a condition or input indicator.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code> be another random variable. We can consider <code class="docutils literal notranslate"><span class="pre">Y</span></code> as a performance or output indicator.</p></li>
+</ul>
+</section>
+<section id="means-expected-values-variances-and-standard-deviations">
+<h3>Means (expected values), Variances and standard deviations<a class="headerlink" href="#means-expected-values-variances-and-standard-deviations" title="Link to this heading"></a></h3>
+<p>We understand the following notation:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\mu_X = E[X]\)</span> is the mean (long-run average) of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mu_Y = E[Y]\)</span> is the mean (long-run average) of <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V(X)\)</span> is the variance of <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><p><span class="math notranslate nohighlight">\(V(Y)\)</span> is the variance of <span class="math notranslate nohighlight">\(Y\)</span>.</p></li>
+</ul>
+<p>Variance measures spread (how scattered the values are). Standard deviation is the square root of variance:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\sigma_X = \sqrt{V(X)}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma_Y = \sqrt{V(Y)}\)</span></p></li>
+</ul>
+<p>A standard deviation is in the same unit as the variable.
+It measures a “typical distance” from the mean.</p>
+</section>
+<section id="revisit-covariance">
+<h3>Revisit Covariance<a class="headerlink" href="#revisit-covariance" title="Link to this heading"></a></h3>
+<p>From the previous section:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{cov}(X,Y) = E[(X-\mu_X)(Y-\mu_Y)]\]</div>
+<p>Correlation is built from this covariance.</p>
+</section>
+</section>
+<section id="definition-of-correlation">
+<h2>Definition of Correlation<a class="headerlink" href="#definition-of-correlation" title="Link to this heading"></a></h2>
+<p>Correlation is defined as:</p>
+<div class="math notranslate nohighlight">
+\[\rho_{XY}
+= \frac{\operatorname{cov}(X,Y)}{\sqrt{V(X)}\sqrt{V(Y)}}
+= \frac{\operatorname{cov}(X,Y)}{\sigma_X \sigma_Y}\]</div>
+<p>Here, we</p>
+<ol class="arabic simple">
+<li><p>Start with <span class="math notranslate nohighlight">\(\operatorname{cov}(X,Y)\)</span> (the “raw” together-change score).</p></li>
+<li><p>Divide by <span class="math notranslate nohighlight">\(\sigma_X\sigma_Y\)</span> (the typical spread of each variable).</p></li>
+<li><p>The result is a unit-free number.</p></li>
+</ol>
+<section id="covariance-and-correlation">
+<h3>Covariance and Correlation<a class="headerlink" href="#covariance-and-correlation" title="Link to this heading"></a></h3>
+<p>Covariance can become larger or smaller when units change.</p>
+<p>But standard deviation changes in a matching way.</p>
+<p>When we divide covariance by <span class="math notranslate nohighlight">\(\sigma_X\sigma_Y\)</span>,
+the units cancel out.</p>
+<p>So correlation becomes easy to compare across different unit choices.</p>
+</section>
+<section id="sign-of-correlation">
+<h3>Sign of correlation<a class="headerlink" href="#sign-of-correlation" title="Link to this heading"></a></h3>
+<p>Because <span class="math notranslate nohighlight">\(\sigma_X&gt;0\)</span> and <span class="math notranslate nohighlight">\(\sigma_Y&gt;0\)</span> (when both variables vary):</p>
+<ul class="simple">
+<li><p>Correlation has the same sign as covariance.</p></li>
+</ul>
+<p>So:</p>
+<ul class="simple">
+<li><p>Positive covariance  -&gt; positive correlation.</p></li>
+<li><p>Negative covariance  -&gt; negative correlation.</p></li>
+<li><p>Zero covariance -&gt; zero correlation.</p></li>
+</ul>
+</section>
+<section id="range-of-correlation">
+<h3>Range of correlation<a class="headerlink" href="#range-of-correlation" title="Link to this heading"></a></h3>
+<p>Correlation always satisfies:</p>
+<div class="math notranslate nohighlight">
+\[-1 \le \rho_{XY} \le 1\]</div>
+<p>This is the most useful feature of correlation.</p>
+</section>
+<section id="interpretation-of-values">
+<h3>Interpretation of values<a class="headerlink" href="#interpretation-of-values" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\rho_{XY} \approx +1\)</span>:
+outcomes fall close to an upward straight line.
+This is a strong positive pattern.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho_{XY} \approx -1\)</span>:
+outcomes fall close to a downward straight line.
+This is a strong negative pattern.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\rho_{XY} \approx 0\)</span>:
+no strong straight-line pattern is visible.</p></li>
+</ul>
+</section>
+<section id="connection-to-independence">
+<h3>Connection to independence<a class="headerlink" href="#connection-to-independence" title="Link to this heading"></a></h3>
+<p>If <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> are independent, then:</p>
+<div class="math notranslate nohighlight">
+\[\operatorname{cov}(X,Y)=0
+\quad\text{and}\quad
+\rho_{XY}=0\]</div>
+<p>However, the reverse is not always true.</p>
+<ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(\rho_{XY}=0\)</span>, we cannot conclude independence.</p></li>
+<li><p>Correlation near zero only means “no strong straight-line relationship.”</p></li>
+</ul>
+<iframe src="../_static/05_01_Correlation_Sign_Strength.html"
+        width="100%"
+        height="420px"
+        style="border:none;">
+</iframe></section>
+</section>
+<section id="worked-example">
+<h2>Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading"></a></h2>
+<p>We use the same variables as the covariance example:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">X</span></code> = number of signal bars (1, 2, 3).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Y</span></code> = response time in seconds (1, 2, 3, 4).</p></li>
+</ul>
+<p>From the covariance section, we already have:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\operatorname{cov}(X,Y) = -0.5815\)</span></p></li>
+</ul>
+<p>We also have the variances:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(V(X)=0.6275\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(V(Y)=1.4099\)</span></p></li>
+</ul>
+<p>Goal: compute <span class="math notranslate nohighlight">\(\rho_{XY}\)</span> and interpret it.</p>
+<section id="step-1-convert-variances-to-standard-deviations">
+<h3>Step 1: Convert variances to standard deviations<a class="headerlink" href="#step-1-convert-variances-to-standard-deviations" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[\sigma_X = \sqrt{V(X)} = \sqrt{0.6275}\]</div>
+<p>(Note: correlation uses standard deviations, so we take the square root of variance.)</p>
+<div class="math notranslate nohighlight">
+\[\sigma_Y = \sqrt{V(Y)} = \sqrt{1.4099}\]</div>
+<p>(Note: same step for <span class="math notranslate nohighlight">\(Y\)</span>.)</p>
+</section>
+<section id="step-2-apply-the-correlation-formula">
+<h3>Step 2: Apply the correlation formula<a class="headerlink" href="#step-2-apply-the-correlation-formula" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[\rho_{XY}
+= \frac{\operatorname{cov}(X,Y)}{\sigma_X \sigma_Y}
+= \frac{-0.5815}{\sqrt{0.6275}\sqrt{1.4099}}\]</div>
+<p>(Note: divide the covariance by the product of standard deviations to remove units.)</p>
+</section>
+<section id="step-3-compute-the-numerical-value">
+<h3>Step 3: Compute the numerical value<a class="headerlink" href="#step-3-compute-the-numerical-value" title="Link to this heading"></a></h3>
+<div class="math notranslate nohighlight">
+\[\rho_{XY} \approx -0.62\]</div>
+<p>(Note: the result is negative because the covariance is negative.)</p>
+<p>Interpretation:</p>
+<ul class="simple">
+<li><p>The correlation is about -0.62.</p></li>
+<li><p>This indicates a moderate negative straight-line pattern.</p></li>
+<li><p>Larger signal-bar values tend to occur with smaller response times.</p></li>
+</ul>
+</section>
+</section>
+<section id="intuition">
+<h2>Intuition<a class="headerlink" href="#intuition" title="Link to this heading"></a></h2>
+<section id="correlation-as-a-unit-free-score-idea">
+<h3>Correlation as a “unit-free score” idea<a class="headerlink" href="#correlation-as-a-unit-free-score-idea" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Covariance is a raw score. It depends on how the variables are measured.</p></li>
+<li><p>Correlation is a standardized score. It compares the covariance to the typical spreads <span class="math notranslate nohighlight">\(\sigma_X\)</span> and <span class="math notranslate nohighlight">\(\sigma_Y\)</span>. This makes correlation unit-free.</p></li>
+</ol>
+<iframe src="../_static/05_02_Correlation_Unit_Free.html"
+        width="100%"
+        height="420px"
+        style="border:none;">
+</iframe></section>
+<section id="correlation-as-a-how-close-to-a-line-idea">
+<h3>Correlation as a “how close to a line” idea<a class="headerlink" href="#correlation-as-a-how-close-to-a-line-idea" title="Link to this heading"></a></h3>
+<p>3. Correlation measures how close the outcomes are to a straight line.
+- Near +1 means “almost an upward line.”
+- Near -1 means “almost a downward line.”
+- Near 0 means “not close to any straight line.”</p>
+<iframe src="../_static/05_03_Correlation_Linear_Line.html"
+        width="100%"
+        height="420px"
+        style="border:none;">
+</iframe></section>
+</section>
+<section id="discussion-and-common-errors">
+<h2>Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
+<section id="correlation-versus-covariance">
+<h3>1. Correlation versus covariance<a class="headerlink" href="#correlation-versus-covariance" title="Link to this heading"></a></h3>
+<p>A common error is treating them as unrelated ideas.</p>
+<ul class="simple">
+<li><p>Covariance and correlation have the same sign.</p></li>
+<li><p>Correlation is a scaled version of covariance.</p></li>
+<li><p>Correlation is unit-free, so it is easier to compare.</p></li>
+<li><p>Always remember: correlation is covariance divided by <span class="math notranslate nohighlight">\(\sigma_X\sigma_Y\)</span>.</p></li>
+</ul>
+</section>
+<section id="correlation-near-zero">
+<h3>2. Correlation near zero<a class="headerlink" href="#correlation-near-zero" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>Correlation near zero does not mean “no relationship”, but <strong>no strong straight-line relationship</strong>.</p></li>
+<li><p>We treat correlation as a linear tool.</p></li>
+<li><p>Use a point-cloud picture to judge whether the pattern looks straight-line.</p></li>
+<li><p>Independence implies correlation is zero, but correlation zero does not guarantee independence.</p></li>
+</ul>
+</section>
+<section id="when-correlation-is-not-defined">
+<h3>3. When correlation is not defined<a class="headerlink" href="#when-correlation-is-not-defined" title="Link to this heading"></a></h3>
+<p>If <span class="math notranslate nohighlight">\(V(X)=0\)</span> or <span class="math notranslate nohighlight">\(V(Y)=0\)</span>, then <span class="math notranslate nohighlight">\(\sigma_X\sigma_Y=0\)</span>. It also means that correlation is not defined.</p>
+<p>We want to make sure that both <code class="docutils literal notranslate"><span class="pre">X</span></code> and <code class="docutils literal notranslate"><span class="pre">Y</span></code> has variances. If at least one variable is constant, then correlation is not meaningful.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
