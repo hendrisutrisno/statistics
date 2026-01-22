@@ -1,6 +1,31 @@
 3. Sampling Distributions II: The Central Limit Theorem
 =======================================================
 
+3.0 Notation Table
+------------------
+
+.. list-table::
+   :widths: 65 35
+   :header-rows: 1
+
+   * - Meaning
+     - Notation
+   * - One observation (measurement)
+     - :math:`X`
+   * - Sample size (number of observations)
+     - :math:`n`
+   * - Sample mean (average of the sample)
+     - :math:`\bar{X}`
+   * - Population mean (true long-run average)
+     - :math:`\mu`
+   * - Population standard deviation
+     - :math:`\sigma`
+   * - Standard error of the sample mean
+     - :math:`\sigma_{\bar{X}}=\sigma/\sqrt{n}`
+   * - Standardized value (Z score)
+     - :math:`Z=\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}}`
+
+
 3.1 Introduction
 ----------------
 
