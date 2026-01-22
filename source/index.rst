@@ -5,5 +5,5 @@ Statistics
    :maxdepth: 2
    :caption: Courses
 
-   statistics1/index
-   statistics2/index
+   stat1/index
+   stat2/index

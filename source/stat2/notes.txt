@@ -16,3 +16,25 @@ Module C. Hypothesis Testing & Categorical Inference (Weeks 9–12)
 Module D. ANOVA (Weeks 13–14)
 Module E. Regression (Weeks 15–17)
 Module F. Integrated Case & Reporting (Week 18)
+
+
+Week 1
+stat2_01_orientation_and_inference_roadmap
+Compact title: Orientation & Inference Roadmap
+Core topics: inference workflow; parameters vs statistics; sampling mindset; common assumptions (independent observations, measurement reliability); how Ch8–13 connect.
+Lab: reproducible data workflow; “simulate-first” preview of sampling variability (mean and proportion).
+Reading: B1 Required Ch1.1–1.2 (selected); B2 Recommended Ch1; B3 Optional 5.1–5.5; B4 Optional.
+
+Week 2
+Compact title: Sampling Dist I
+Core topics: random sampling; key statistics (x̄, s², p̂) as RVs; sampling distribution concept; standard error as “typical error.”
+Lab: simulation of x̄ and p̂ for multiple n; visualize SE shrinking.
+Reading: B1 Required Ch8.1–8.3; B2 Recommended 8.1–8.3; B3 Optional 4.1; B4 Optional.
+Compact title: Sampling Dist I Core topics: random sampling; key statistics (x̄, s², p̂) as RVs; sampling distribution concept; standard error as “typical error.” Reading: B1 Required Ch8.1–8.3; B2 Recommended 8.1–8.3; B3 Optional 4.1; B4 Optional.
+
+Week 3
+Compact title: Sampling Dist II (CLT)
+Core topics: CLT; when it works; practical normal approximation logic; interpreting “approximately Normal.”
+Lab: CLT simulation under skew/heavy tails; compare tail areas across n.
+Reading: B1 Required Ch8.4; B2 Recommended 7.2 + 8.4; B3 Optional 4.4.1–4.4.2; B4 Optional.
+
