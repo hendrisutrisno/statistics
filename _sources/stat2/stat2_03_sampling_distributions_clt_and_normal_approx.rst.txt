@@ -1,294 +1,257 @@
-3. Sampling Distributions II: The Central Limit Theorem
-=======================================================
+2. Sampling Dist III: Chi-Square, t, and F
+====================================
 
-3.0 Notation Table
+2.0 Notation Table
 ------------------
 
 .. list-table::
-   :widths: 65 35
    :header-rows: 1
+   :widths: 26 74
 
-   * - Meaning
-     - Notation
-   * - One observation (measurement)
-     - :math:`X`
-   * - Sample size (number of observations)
-     - :math:`n`
-   * - Sample mean (average of the sample)
-     - :math:`\bar{X}`
-   * - Population mean (true long-run average)
-     - :math:`\mu`
-   * - Population standard deviation
-     - :math:`\sigma`
-   * - Standard error of the sample mean
-     - :math:`\sigma_{\bar{X}}=\sigma/\sqrt{n}`
-   * - Standardized value (Z score)
-     - :math:`Z=\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}}`
+   * - Notation
+     - Meaning
+   * - :math:`n`
+     - Sample size in a random sample
+   * - :math:`X_1,\ldots,X_n`
+     - Sample observations
+   * - :math:`\mu,\ \sigma^2`
+     - Population mean and variance (parameters)
+   * - :math:`\bar{X}`
+     - Sample mean :math:`\bar{X}=\frac{1}{n}\sum_{i=1}^n X_i`
+   * - :math:`S^2`
+     - Sample variance :math:`S^2=\frac{1}{n-1}\sum_{i=1}^n (X_i-\bar{X})^2`
+   * - :math:`\chi^2_\nu`
+     - Chi-square distribution with :math:`\nu` degrees of freedom
+   * - :math:`t_\nu`
+     - t distribution with :math:`\nu` degrees of freedom
+   * - :math:`F_{\nu_1,\nu_2}`
+     - F distribution with numerator and denominator degrees of freedom
+   * - :math:`T`
+     - t-statistic :math:`T=\frac{\bar{X}-\mu}{S/\sqrt{n}}`
+   * - :math:`F`
+     - Variance ratio statistic (ratio of two sample variances)
 
-
-3.1 Introduction
+2.1 Introduction
 ----------------
 
-In practice, we often report averages.
-Examples include average service time, average defect size, and average daily demand.
-These averages are useful because they reduce noise from individual observations.
+In the previous sampling distribution sessions, we emphasized the sampling distribution of :math:`\bar{X}` and the role of the Central Limit Theorem for large :math:`n`.
+In this session, the focus shifts to *finite-sample* distributions that become exact under a normal population model.
 
-However, an average computed from a sample is still random.
-If we repeat the same sampling plan, the sample mean changes from sample to sample.
-So we need a probability model for the sample mean.
+These distributions are central for inference when :math:`\sigma` is unknown and must be estimated from the same sample.
+Because the exact results rely on normality, we also introduce quantile and probability plots as practical diagnostics for checking whether the normal model is reasonable.
 
-This session explains why the sample mean often behaves like a Normal random variable.
-This is the role of the Central Limit Theorem (CLT).
-
-3.2 Learning Outcomes
+2.2 Learning Outcomes
 ---------------------
 
-After this session, we should be able to:
+After this section, you should be able to:
 
-- Define the sampling distribution of the sample mean.
-- State what the CLT guarantees, and what it does not guarantee.
-- Use the standard error :math:`\sigma/\sqrt{n}` to quantify typical variation of :math:`\bar{X}`.
-- Standardize the sample mean using a :math:`Z`-statistic.
-- Apply the CLT to approximate probabilities about averages.
-- Explain when a Normal approximation is reasonable in applied work.
+- State the chi-square sampling distribution associated with :math:`S^2` under normal sampling
+- Explain degrees of freedom and why :math:`n-1` appears for sample variance
+- Use the t distribution to standardize :math:`\bar{X}` when :math:`\sigma` is unknown
+- Interpret the F distribution as a ratio of (scaled) sample variances
+- Use quantile plots and normal Q–Q plots to diagnose departures from normality
 
-3.3 Connection to Previous Ideas
---------------------------------
-
-In the previous session, we treated statistics as random variables.
-In particular, the sample mean :math:`\bar{X}` has its own distribution.
-
-We also introduced the standard error as a “typical error” size.
-For :math:`\bar{X}`, the standard error is controlled by :math:`n`.
-As :math:`n` increases, we expect the sampling distribution of :math:`\bar{X}` to tighten.
-
-3.4 Core Sections
+2.3 Main Concepts
 -----------------
 
-3.4.1 Sampling Distribution of the Sample Mean
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2.3.1 Sampling Distribution of :math:`S^2` and the :math:`\chi^2` Distribution
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let :math:`X_1, X_2, \ldots, X_n` be a random sample from a population with:
+When sampling from a normal population, the variability statistic :math:`S^2` has a tractable sampling distribution.
+The key random variable is the scaled sum of squared deviations from the sample mean.
 
-- mean :math:`\mu` (parameter (population quantity))
-- standard deviation :math:`\sigma`
-
-The sample mean is the statistic
+If :math:`X_1,\ldots,X_n` are a random sample from :math:`N(\mu,\sigma^2)`, then
 
 .. math::
 
-   \bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i.
+   \chi^2 = \frac{(n-1)S^2}{\sigma^2} \sim \chi^2_{n-1}
 
-Key facts:
+This result links a *sample statistic* (:math:`S^2`) to a *parameter* (:math:`\sigma^2`) through a known reference distribution.
+The degrees of freedom :math:`n-1` reflects that one linear constraint is introduced when :math:`\bar{X}` is estimated from the same data.
 
-- :math:`E(\bar{X}) = \mu`. (Note: the sample mean targets the population mean.)
-- :math:`\mathrm{Var}(\bar{X}) = \sigma^2/n`.
-- The standard deviation of :math:`\bar{X}` is
+Example 2.1
+"""""""""""
 
-.. math::
+A quality engineer monitors the variance of a filling process.
+A sample of :math:`n=12` bottles is taken in one hour, and the sample variance is :math:`s^2=1.44` (in squared units).
 
-   \sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}}.
+**Question:** Is the claim :math:`\sigma^2=1.00` plausible at the 95% level under normal sampling?
 
-We call :math:`\sigma/\sqrt{n}` the standard error of the mean.
-It describes typical sampling-to-sampling variation in :math:`\bar{X}`.
-
-3.4.2 Exact Normal Case (a special baseline)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-If the population distribution of :math:`X` is Normal, then :math:`\bar{X}` is Normal for any :math:`n`.
+Compute the test statistic:
 
 .. math::
 
-   X \sim \mathcal{N}(\mu, \sigma^2)
-   \quad \Longrightarrow \quad
-   \bar{X} \sim \mathcal{N}\!\left(\mu, \frac{\sigma^2}{n}\right).
+   \chi^2 = \frac{(n-1)s^2}{\sigma_0^2}
 
-This case is important because it gives a clean reference.
-But many operational variables (waiting times, repair times, demand bursts) are not Normal.
+With :math:`n=12`, :math:`\chi^2 = 11(1.44)=15.84`.
+At the 95% reference region, :math:`\chi^2_{0.025,11}\approx 3.816` and :math:`\chi^2_{0.975,11}\approx 21.920`, so :math:`15.84` falls inside the typical range.
+Therefore, the observed sample variance is consistent with :math:`\sigma^2=1.00` under the normal model.
 
-3.4.3 The Central Limit Theorem (approximate Normality)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Figure 2.1 — Sampling distribution of :math:`(n-1)S^2/\sigma^2` vs :math:`\chi^2`**
 
-The CLT explains why :math:`\bar{X}` is often approximately Normal even when :math:`X` is not Normal.
+The figure is based on simulated normal data to isolate the theoretical sampling distribution without relying on a specific real dataset.
+Here, “repetition” means repeating the same sampling procedure many times and recomputing :math:`S^2` each time to build the empirical distribution.
 
-Assumptions (practical version):
-
-- :math:`X_1, \ldots, X_n` are independent.
-- They share the same mean :math:`\mu` and finite variance :math:`\sigma^2`.
-
-Conclusion:
-
-- For large :math:`n`, the distribution of :math:`\bar{X}` is approximately Normal with mean :math:`\mu`
-  and variance :math:`\sigma^2/n`.
-
-A key message is “approximately.”
-The CLT is a limiting result.
-Accuracy improves as :math:`n` grows, and depends on how skewed or heavy-tailed the population is.
-
-Figure 1 shows the main visual logic of the CLT.
-
-Figure 1 narrative:
-We model an operational time-to-complete metric :math:`X` (in minutes) using a right-skewed distribution.
-This is realistic for service or processing times, where very long delays occur occasionally.
-The figure holds the population distribution fixed and changes only the sample size :math:`n`.
-The blue histogram shows simulated values of :math:`\bar{X}` from repeated sampling, while the gray curve is a Normal reference with mean :math:`\mu` and standard deviation :math:`\sigma/\sqrt{n}`.
-We read the x-axis as the average time and the y-axis as density (relative frequency on a continuous scale).
-As :math:`n` increases, the histogram becomes smoother, more symmetric, and closer to the Normal reference.
+In this figure, :math:`n` is the sample size used inside each repeated sample.
+You should compare the simulated histogram to the reference :math:`\chi^2` curve and observe how the distribution shifts and becomes more symmetric as :math:`n` increases.
 
 .. raw:: html
 
-   <iframe src="../_static/figures/stat2/03_01_clt_xbar_convergence.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe>
+   <iframe src="../_static/figures/stat2/sd_s2_chisq.html"
+   scrolling="no"
+   style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+   </iframe>
 
-3.4.4 Standardization and the Z Statistic
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2.3.2 The t Distribution for :math:`\bar{X}` When :math:`\sigma` Is Unknown
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To use Normal tables or software consistently, we standardize.
-For the sample mean, the standardized variable is
+When :math:`\sigma` is unknown, the standardization of the sample mean must use :math:`S` instead of :math:`\sigma`.
+This replacement introduces additional uncertainty, which is captured by the t distribution rather than the standard normal.
+
+If :math:`X_1,\ldots,X_n` are sampled from :math:`N(\mu,\sigma^2)`, then
 
 .. math::
 
-   Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}.
+   T = \frac{\bar{X}-\mu}{S/\sqrt{n}} \sim t_{n-1}
 
-Interpretation:
+The distribution depends on :math:`n-1` degrees of freedom because :math:`S` is estimated from the same sample.
+As :math:`n` increases, the t distribution approaches the standard normal, reflecting that :math:`S` becomes a more stable estimator of :math:`\sigma`.
 
-- The numerator :math:`\bar{X} - \mu` is the deviation of the sample mean from the target mean.
-- The denominator :math:`\sigma/\sqrt{n}` rescales that deviation into “standard error units.”
-- Under the CLT, :math:`Z` is approximately :math:`\mathcal{N}(0,1)` for large :math:`n`.
+Example 2.2
+"""""""""""
 
-This is the main bridge from a real operational metric (minutes, grams, dollars)
-to a standard probability scale.
+A service operation tracks the average handling time for a standardized request type.
+A random sample of :math:`n=16` requests yields :math:`\bar{x}=102.4` seconds and :math:`s=6.8` seconds.
 
-Figure 2 makes the standardization idea concrete.
+**Question:** What is a 95% confidence interval for :math:`\mu` under a normal sampling model?
 
-Figure 2 narrative:
-We use the same underlying right-skewed process as in Figure 1, but we now convert each repeated-sample mean into a standardized value :math:`Z`.
-The blue histogram is the sampling distribution of the standardized mean :math:`Z = (\bar{X}-\mu)/(\sigma/\sqrt{n})`.
-The smooth gray curve is the standard Normal reference :math:`\mathcal{N}(0,1)`, which is the target shape implied by the CLT.
-The dropdown changes :math:`n`, while the x-axis range is held fixed, so we can compare shapes fairly.
-When :math:`n` is small, the histogram can be skewed and the tails can differ from the gray curve; when :math:`n` is larger, the blue histogram aligns more closely with the reference curve.
+Use the t critical value with :math:`n-1=15` degrees of freedom:
+
+.. math::
+
+   \bar{x} \pm t_{0.025,15}\frac{s}{\sqrt{n}}
+
+With :math:`t_{0.025,15}\approx 2.131`, the margin is approximately :math:`2.131(6.8/4)=3.62`.
+Therefore, the 95% CI is approximately :math:`(98.78,\ 106.02)` seconds, which quantifies estimation uncertainty when :math:`\sigma` is unknown.
+
+**Figure 2.2 — Sampling distribution of :math:`T` vs the t reference curve**
+
+The figure uses simulated normal samples so that the target distribution is known and controlled.
+Here, “repetition” means repeatedly sampling :math:`n` observations, computing :math:`\bar{X}` and :math:`S`, and then forming :math:`T`.
+
+In this figure, :math:`n` is the number of observations per repeated sample.
+You should compare the simulated histogram to the t density and also compare the t density to the standard normal density to see the heavier tails at smaller degrees of freedom.
 
 .. raw:: html
 
-   <iframe src="../_static/figures/stat2/03_02_clt_standardized_z.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe>
+   <iframe src="../_static/figures/stat2/t_stat_sampling.html"
+   scrolling="no"
+   style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+   </iframe>
 
-3.4.5 When does the CLT work well?
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2.3.3 The F Distribution and Ratios of Variances
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We need a practical decision rule.
-A common guideline is:
+Many operational decisions require comparing variability across two processes, two machines, or two suppliers.
+Under normal sampling, ratios of (scaled) sample variances follow an F distribution, which is the reference distribution for variance comparisons.
 
-- If :math:`n \ge 30`, the Normal approximation for :math:`\bar{X}` is often good when the population is not extremely skewed.
-- If :math:`n < 30`, the approximation may still be good if the population is close to Normal (roughly symmetric and unimodal).
+If two independent normal samples have sizes :math:`n_1` and :math:`n_2`, then
 
-What can break the approximation?
+.. math::
 
-- Strong skewness with small :math:`n` can distort tail probabilities.
-- Heavy tails can require larger :math:`n` for stable tail behavior.
-- Dependence (non-independent sampling) can invalidate the usual :math:`\sigma/\sqrt{n}` scaling.
+   \frac{S_1^2/\sigma_1^2}{S_2^2/\sigma_2^2} \sim F_{n_1-1,\ n_2-1}
 
-Figure 3 focuses on probability error, because many decisions are threshold-based.
+In the special case :math:`\sigma_1^2=\sigma_2^2`, the statistic :math:`S_1^2/S_2^2` itself follows an F distribution.
+The order of degrees of freedom matters because the numerator and denominator roles are not symmetric.
 
-Figure 3 narrative:
-We compare a skewed population (lognormal-like process time) against a Normal population with the same :math:`\mu` and :math:`\sigma`.
-For each sample size :math:`n`, we consider a fixed tail event: :math:`\bar{X} > \mu + 2(\sigma/\sqrt{n})`, which represents an “unusually high average” in standard error units.
-The orange trace shows the absolute difference between the simulated tail probability (computed by repeated sampling) and the CLT-based Normal approximation :math:`P(Z>2)`.
-The gray trace at (near) zero represents the Normal-population baseline, where the Normal model for :math:`\bar{X}` is exact for every :math:`n`.
-We read the x-axis as sample size and the y-axis as approximation error; the main pattern is that error decreases as :math:`n` increases, but it can be non-negligible for small :math:`n` under strong skewness.
+Example 2.3
+"""""""""""
+
+Two production lines are evaluated for variability in a critical dimension.
+Independent samples give :math:`n_1=12`, :math:`s_1^2=2.25` and :math:`n_2=10`, :math:`s_2^2=1.00`.
+
+**Question:** At the 5% level (two-sided), do these data suggest unequal variances under normal sampling?
+
+Form the ratio with the larger sample variance in the numerator:
+
+.. math::
+
+   F = \frac{s_1^2}{s_2^2}
+
+Here, :math:`F=2.25` with degrees of freedom :math:`(11,9)`.
+The two-sided 95% reference interval is approximately :math:`(0.279,\ 3.912)`, so :math:`2.25` is not in the extreme tails.
+Therefore, the sample evidence does not indicate a statistically unusual variance ratio at the 5% level under the normal model.
+
+**Figure 2.3 — Sampling distribution of a variance ratio vs the F reference curve**
+
+The figure is constructed from simulated normal data to emphasize the reference behavior of the statistic under the modeling assumptions.
+In this context, “repetition” means repeatedly drawing two independent samples with the stated :math:`n_1` and :math:`n_2` and recomputing the ratio of sample variances.
+
+In this figure, :math:`n_1` and :math:`n_2` control the numerator and denominator degrees of freedom.
+You should compare the simulated histogram to the F density and observe how the distribution becomes less skewed as the degrees of freedom increase.
 
 .. raw:: html
 
-   <iframe src="../_static/figures/stat2/03_03_clt_approximation_error.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe>
+   <iframe src="../_static/figures/stat2/f_ratio_sampling.html"
+   scrolling="no"
+   style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+   </iframe>
 
-3.5 Worked Example
-------------------
+2.3.4 Quantile and Probability Plots as Diagnostics
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-3.5.1 Description
-^^^^^^^^^^^^^^^^^
+The exact :math:`\chi^2`, t, and F results are derived under a normal population model.
+For this reason, practice often includes a diagnostic step to check whether normality is a reasonable approximation for the data at hand.
 
-A warehouse tracks the order picking time :math:`X` (minutes) for a specific product category.
-Historical monitoring suggests:
+A quantile plot visualizes the empirical cumulative pattern of the sample by plotting ordered values against plotting positions (empirical fractions).
+A normal Q–Q plot instead compares ordered values to theoretical normal quantiles, and an approximately straight-line pattern supports the normal model.
 
-- population mean :math:`\mu = 9.8` minutes
-- population standard deviation :math:`\sigma = 8.5` minutes
+Example 2.4
+"""""""""""
 
-The distribution of individual picking times is right-skewed.
-A supervisor samples :math:`n = 36` orders from a shift and computes the sample mean :math:`\bar{X}`.
+A logistics analyst models delivery delays using a normal distribution in order to apply a t-based interval for the mean.
+A sample of :math:`n=40` delays is available, and the analyst creates a normal Q–Q plot.
 
-3.5.2 Question
-^^^^^^^^^^^^^^
+**Question:** What plot behavior would raise concern about the normal assumption?
 
-What is the approximate probability that the shift's average picking time exceeds 12 minutes?
+If the points deviate systematically from a straight line, the normal model may be inappropriate.
+A common pattern is curvature where the upper tail bends upward, which is consistent with right-skewness and heavier-than-normal upper tails.
 
-3.5.3 Analysis
-^^^^^^^^^^^^^^
+**Figure 2.4 — Quantile plot and normal Q–Q plot (normal vs right-skewed data)**
 
-We want :math:`P(\bar{X} > 12)`.
-By the CLT, :math:`\bar{X}` is approximately Normal with mean :math:`\mu` and standard error :math:`\sigma/\sqrt{n}`.
+The figure uses simulated data so that the contrast between a normal sample and a right-skewed sample is controlled and easy to interpret.
+In this figure, “repetition” is not used; instead, one fixed sample is displayed for each distribution to emphasize diagnostic shape rather than sampling variability.
 
-.. math::
+Here, :math:`n` is the sample size used to form the ordered values and plotting positions.
+You should compare the normal case (near-linear Q–Q pattern) to the right-skewed case (systematic curvature), and interpret curvature as evidence against the normal model for exact :math:`\chi^2`, t, and F procedures.
 
-   \sigma_{\bar{X}} = \frac{8.5}{\sqrt{36}} = \frac{8.5}{6} \approx 1.4167.
+.. raw:: html
 
-We standardize the threshold 12:
+   <iframe src="../_static/figures/stat2/quantile_qq_diagnostics.html"
+   scrolling="no"
+   style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+   </iframe>
 
-.. math::
-
-   z = \frac{12 - 9.8}{1.4167} \approx \frac{2.2}{1.4167} \approx 1.55.
-
-So
-
-.. math::
-
-   P(\bar{X} > 12) \approx P(Z > 1.55) \approx 0.061.
-
-(Note: we are measuring “how many standard errors above :math:`\mu`” the observed average is, then using the standard Normal tail area.)
-
-Practical interpretation:
-In repeated shifts of the same design (same sampling plan and stable process),
-we would expect an average above 12 minutes in about 6% of shifts.
-If this event becomes frequent, it can indicate a process change rather than random variation.
-
-3.6 Intuition
--------------
-
-3.6.1 Averaging cancels irregularity
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-When we average :math:`n` observations, positive and negative deviations partly offset.
-Even if :math:`X` is skewed, the sum of many independent contributions tends to look more symmetric.
-
-The rate of improvement is not linear in :math:`n`.
-The standard error shrinks like :math:`1/\sqrt{n}`.
-So doubling :math:`n` does not halve uncertainty; it reduces it by a factor of :math:`1/\sqrt{2}`.
-
-3.6.2 Standard error is a “units conversion”
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The quantity :math:`\sigma/\sqrt{n}` converts deviations of :math:`\bar{X}` into a comparable scale.
-A deviation of 2 standard errors is meaningfully “large” regardless of the original unit (minutes, grams, dollars).
-This is why the standardized statistic :math:`Z` is central in inference.
-
-3.7 Discussion and Common Errors
+2.4 Discussion and Common Errors
 --------------------------------
 
-1) Treating :math:`\bar{X}` as if it had the same spread as :math:`X`.
-   What goes wrong: we forget the :math:`\sqrt{n}` in the denominator and overstate variability.
-   How to avoid: always write :math:`\sigma_{\bar{X}} = \sigma/\sqrt{n}` before computing probabilities.
+These sampling distributions are exact only under random sampling from a normal population.
+If the data are strongly non-normal, the t procedure for :math:`\mu` is often moderately robust, but chi-square and F procedures for variances can be sensitive, especially for small :math:`n`.
 
-2) Applying the CLT without a random sample assumption.
-   What goes wrong: dependence or selection bias can distort the sampling distribution and invalidate the Normal approximation.
-   How to avoid: check that the data collection mechanism is close to independent sampling from a stable process.
+Degrees of freedom must match the statistic being used.
+For :math:`S^2`, the standard definition uses :math:`n-1` in the denominator, and the associated chi-square degrees of freedom is also :math:`n-1`.
 
-3) Using the CLT in extreme-tail decisions with small :math:`n` and strong skewness.
-   What goes wrong: tail probabilities are the last part of the distribution to become well-approximated.
-   How to avoid: increase :math:`n`, consider a variance-stabilizing transform, or use simulation to validate the approximation.
+For F procedures, the numerator and denominator order affects the degrees of freedom and the tail area.
+A standard operational practice is to place the larger sample variance in the numerator so that the test is conducted in the right tail and the interpretation is more direct.
 
-3.8 Summary
+For Q–Q plots, random scatter around a line is expected even under normality.
+The diagnostic concern is not small noise, but a systematic pattern such as curvature, strong tail departures, or clustering that contradicts the assumed model.
+
+2.5 Summary
 -----------
 
-- The sampling distribution of :math:`\bar{X}` describes how sample averages vary across repeated samples.
-- :math:`E(\bar{X}) = \mu` and :math:`\mathrm{Var}(\bar{X}) = \sigma^2/n`, so the standard error is :math:`\sigma/\sqrt{n}`.
-- If the population is Normal, then :math:`\bar{X}` is exactly Normal for any :math:`n`.
-- The CLT says :math:`\bar{X}` is approximately Normal for large :math:`n` when the population has finite variance.
-- Standardization via :math:`Z = (\bar{X}-\mu)/(\sigma/\sqrt{n})` connects real units to the standard Normal scale.
-- Approximation quality improves with :math:`n`, but skewness and tail decisions require extra caution.
+The chi-square, t, and F distributions form a connected family of reference distributions for inference under normal sampling.
+They provide exact sampling distributions for :math:`S^2`, for :math:`(\bar{X}-\mu)/(S/\sqrt{n})`, and for ratios of sample variances, respectively.
+
+Quantile and probability plots are practical tools that connect modeling assumptions to observed data behavior.
+They should be viewed as part of the workflow when variance-based inference is required and normality is uncertain.

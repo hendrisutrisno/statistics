@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>1. Sampling Distributions I: Random Sampling, Point Estimation, and Standard Error &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=80f29991" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. Sampling Distributions II: The Central Limit Theorem" href="stat2_02_sampling_distributions_random_sampling.html" />
+    <link rel="prev" title="Statistics 2" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Courses</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../stat1/index.html">Statistics 1</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Statistics 2</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1. Sampling Distributions I: Random Sampling, Point Estimation, and Standard Error</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">1.1 Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learning-outcomes">1.2 Learning Outcomes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#population-sample-and-variables">1.3 Population, Sample, and Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#population-and-parameter">1.3.1 Population and parameter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-1-1-left-handedness">Example 1.1: Left-Handedness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-and-statistic">1.3.2 Sample and statistic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-1-2-left-handedness">Example 1.2: Left-Handedness</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#defining-the-measurement-variable">1.3.3 Defining the measurement variable</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#random-sampling-as-a-probability-model">1.4 Random Sampling as a Probability Model</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#note-on-independence">Note on independence</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#parameters-statistics-and-point-estimation">1.5 Parameters, Statistics, and Point Estimation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#parameter-versus-statistic">1.5.1 Parameter versus statistic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-1-3-left-handed-count-and-proportion">Example 1.3: Left-Handed Count and Proportion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#point-estimation">1.5.2 Point estimation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#core-statistics-as-random-variables">1.6 Core Statistics as Random Variables</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sample-mean">1.6.1 Sample mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-variance">1.6.2 Sample variance</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#sample-proportion">1.6.3 Sample proportion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#standard-error">1.7 Standard Error</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#standard-error-of-the-sample-mean">1.7.1 Standard error of the sample mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standard-error-of-the-sample-proportion">1.7.2 Standard error of the sample proportion</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#the-sampling-perspective-and-sampling-distributions">1.8 The Sampling Perspective and Sampling Distributions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion-and-common-errors">1.9 Discussion and Common Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">1.10 Summary</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="stat2_02_sampling_distributions_random_sampling.html">2. Sampling Distributions II: The Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat2_03_sampling_distributions_clt_and_normal_approx.html">2. Sampling Dist III: Chi-Square, t, and F</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Statistics 2</a></li>
+      <li class="breadcrumb-item active">1. Sampling Distributions I: Random Sampling, Point Estimation, and Standard Error</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/stat2/stat2_01_random_sampling_point_est_std_error.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sampling-distributions-i-random-sampling-point-estimation-and-standard-error">
+<span id="sec-01-01-sampling-dist-i-one-sample"></span><h1>1. Sampling Distributions I: Random Sampling, Point Estimation, and Standard Error<a class="headerlink" href="#sampling-distributions-i-random-sampling-point-estimation-and-standard-error" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>1.1 Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Statistical inference uses a sample to learn about a larger population or process.
+A single sample result is limited unless we understand how it could change under repetition.</p>
+<p>For this reason, common summaries (statistics) are treated as random variables.
+They are produced by a sampling procedure, so they can vary even when the population stays stable.</p>
+<p>This module links three ideas:</p>
+<ul class="simple">
+<li><p>Population and sample, which separate what we want to learn from what we can observe.
+This distinction is the starting point for all inference.</p></li>
+<li><p>Point estimation, which uses a single-number statistic to estimate a parameter.
+The estimate is simple to report, but it does not describe uncertainty by itself.</p></li>
+<li><p>Sampling distributions and standard error, which describe repeated-sample variation.
+They provide a formal meaning for “typical fluctuation” due to sampling.</p></li>
+</ul>
+<p>To keep the discussion concrete, we also use a running illustration of transaction completion time at a convenience-store counter.
+Some transactions are simple and fast, while others include extra services and take longer.
+This mix often produces a right-skewed time distribution.</p>
+</section>
+<section id="learning-outcomes">
+<h2>1.2 Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
+<p>After this module, we should be able to:</p>
+<ul class="simple">
+<li><p>Define population and sample in a probability model.
+We should also explain how a measurement process can represent a population.</p></li>
+<li><p>State the i.i.d. assumptions (identically distributed and independent).
+We should also explain how these assumptions affect sampling distributions.</p></li>
+<li><p>Distinguish a parameter from a statistic.
+We should also explain why uncertainty is attached to statistics, not to parameters.</p></li>
+<li><p>Define point estimation as a statistic used to estimate a parameter.
+We should also interpret a point estimate as random before sampling.</p></li>
+<li><p>Explain the sampling perspective and the meaning of a sampling distribution.
+We should also describe how repeated sampling defines uncertainty.</p></li>
+<li><p>Interpret standard error as typical sampling fluctuation.
+We should also explain how standard error depends on sample size <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
+<li><p>Compute standard errors for <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(\hat{p}\)</span> in standard settings.
+We should also interpret these results in applied contexts.</p></li>
+</ul>
+</section>
+<section id="population-sample-and-variables">
+<h2>1.3 Population, Sample, and Variables<a class="headerlink" href="#population-sample-and-variables" title="Link to this heading"></a></h2>
+<section id="population-and-parameter">
+<h3>1.3.1 Population and parameter<a class="headerlink" href="#population-and-parameter" title="Link to this heading"></a></h3>
+<p>A population is the full set of outcomes that could occur under a measurement process.
+In many applications, a population is not a finite list that can be written down.</p>
+<p>Instead, a population represents the long-run behavior of a stable process or the full target group of interest.
+A parameter is a numerical description of that population or process.</p>
+<p>A parameter is fixed in the model but unknown in practice.
+Common parameters include <span class="math notranslate nohighlight">\(\mu\)</span> (mean), <span class="math notranslate nohighlight">\(\sigma\)</span> (standard deviation), and <span class="math notranslate nohighlight">\(p\)</span> (proportion).</p>
+</section>
+<section id="example-1-1-left-handedness">
+<h3>Example 1.1: Left-Handedness<a class="headerlink" href="#example-1-1-left-handedness" title="Link to this heading"></a></h3>
+<p>Consider a target group, such as all students in a university system in one academic year.
+For each person, define a binary variable <span class="math notranslate nohighlight">\(Y\)</span> with <span class="math notranslate nohighlight">\(Y=1\)</span> for left-handed and <span class="math notranslate nohighlight">\(Y=0\)</span> otherwise.</p>
+<p>A study selects a sample and records <span class="math notranslate nohighlight">\(Y\)</span> for each sampled person.
+The goal is to learn about left-handedness in the target group.</p>
+<p><strong>Question:</strong> In this study, what is the population?</p>
+<p>The population is the full target group that the study aims to describe.
+It is the set of all individuals who could have been selected under the stated sampling rule, using the same definition of left-handedness.</p>
+<p>In this setting, a key population parameter is the left-handed proportion</p>
+<p><span class="math notranslate nohighlight">\(p = P(Y=1)\)</span></p>
+<p>The parameter <span class="math notranslate nohighlight">\(p\)</span> is fixed in the model but unknown in practice.
+Sampling is needed because the population is not fully observed.</p>
+</section>
+<section id="sample-and-statistic">
+<h3>1.3.2 Sample and statistic<a class="headerlink" href="#sample-and-statistic" title="Link to this heading"></a></h3>
+<p>A sample is the set of observed outcomes collected from the population.
+Because only part of the population is observed, we use statistics to summarize what we see.</p>
+<p>A statistic is any function of the sample values.
+If a different sample were selected, the statistic could change, so it is random before sampling.</p>
+<p>Common statistics include <span class="math notranslate nohighlight">\(\bar{X}\)</span> (sample mean), <span class="math notranslate nohighlight">\(S^2\)</span> (sample variance), and <span class="math notranslate nohighlight">\(\hat{p}\)</span> (sample proportion).
+These statistics are central objects in later inference procedures.</p>
+</section>
+<section id="example-1-2-left-handedness">
+<h3>Example 1.2: Left-Handedness<a class="headerlink" href="#example-1-2-left-handedness" title="Link to this heading"></a></h3>
+<p>Continue Example 1.1.
+The population is all students in the university system in one academic year, and <span class="math notranslate nohighlight">\(Y\)</span> is the left-handed indicator.</p>
+<p>In practice, it is not feasible to observe <span class="math notranslate nohighlight">\(Y\)</span> for every student.
+Instead, the study selects a subset and observes <span class="math notranslate nohighlight">\(Y\)</span> only for that subset.</p>
+<p><strong>Question:</strong> In this study, what is the sample, and what statistic estimates <span class="math notranslate nohighlight">\(p\)</span>?</p>
+<p>The sample is the collection of observed outcomes</p>
+<div class="math notranslate nohighlight">
+\[Y_1, Y_2, \ldots, Y_n\]</div>
+<p>A common statistic for estimating <span class="math notranslate nohighlight">\(p\)</span> is the sample proportion</p>
+<div class="math notranslate nohighlight">
+\[\hat{p} = \frac{1}{n}\sum_{i=1}^{n} Y_i\]</div>
+<p>The statistic <span class="math notranslate nohighlight">\(\hat{p}\)</span> is the observed fraction of left-handed students in the sample.
+The parameter <span class="math notranslate nohighlight">\(p\)</span> stays fixed, while <span class="math notranslate nohighlight">\(\hat{p}\)</span> can vary across repeated samples.</p>
+</section>
+<section id="defining-the-measurement-variable">
+<h3>1.3.3 Defining the measurement variable<a class="headerlink" href="#defining-the-measurement-variable" title="Link to this heading"></a></h3>
+<p>Statistical symbols have meaning only when the measurement is defined.
+A good definition states the unit and the measurement rule.</p>
+<p>For transaction completion time, one operational definition is:
+Start time is when a customer becomes the next person to be served at the counter.
+End time is when payment is confirmed and the customer leaves the counter.</p>
+<p>If different observers use different rules, the data may not represent the same variable.
+This is a measurement reliability issue, and it can affect inference.</p>
+</section>
+</section>
+<section id="random-sampling-as-a-probability-model">
+<h2>1.4 Random Sampling as a Probability Model<a class="headerlink" href="#random-sampling-as-a-probability-model" title="Link to this heading"></a></h2>
+<p>A random sample is produced by repeating the same measurement under essentially the same conditions.
+The key requirement is that outcomes are independent and generated from the same population distribution.</p>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> represent one measurement from the population.
+A random sample of size <span class="math notranslate nohighlight">\(n\)</span> is written as <span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_n\)</span>.</p>
+<p>The i.i.d. model states two assumptions:</p>
+<ul class="simple">
+<li><p>Identically distributed: each <span class="math notranslate nohighlight">\(X_i\)</span> follows the same distribution.
+This means each observation targets the same population.</p></li>
+<li><p>Independent: one outcome does not change the distribution of another.
+This means information accumulates cleanly as <span class="math notranslate nohighlight">\(n\)</span> increases.</p></li>
+</ul>
+<p>Under the i.i.d. model, the joint probability model factors as</p>
+<div class="math notranslate nohighlight">
+\[f(x_1, x_2, \ldots, x_n) = \prod_{i=1}^{n} f(x_i)\]</div>
+<p>This factorization is the mathematical meaning of random sampling.
+It is also the reason many standard error formulas have simple closed forms.</p>
+<section id="note-on-independence">
+<h3>Note on independence<a class="headerlink" href="#note-on-independence" title="Link to this heading"></a></h3>
+<p>Independence can fail when observations are collected in clusters rather than spread across the target group.
+For example, if many sampled students come from the same class, club, or dormitory floor, their outcomes can be more similar.</p>
+<p>When dependence is present, the sample contains less effective information than its size suggests.
+As a result, the sampling distribution of statistics such as <span class="math notranslate nohighlight">\(\hat{p}\)</span> can be wider than the i.i.d. model predicts.</p>
+</section>
+</section>
+<section id="parameters-statistics-and-point-estimation">
+<h2>1.5 Parameters, Statistics, and Point Estimation<a class="headerlink" href="#parameters-statistics-and-point-estimation" title="Link to this heading"></a></h2>
+<section id="parameter-versus-statistic">
+<h3>1.5.1 Parameter versus statistic<a class="headerlink" href="#parameter-versus-statistic" title="Link to this heading"></a></h3>
+<p>Inference uses two types of quantities.
+This separation determines how uncertainty is defined.</p>
+<ul class="simple">
+<li><p>A parameter describes the population or process.
+It is fixed in the model but unknown in practice.</p></li>
+<li><p>A statistic is computed from a sample.
+It is random before sampling because the sample itself is random.</p></li>
+</ul>
+<p>Uncertainty in inference is not about the parameter changing.
+Uncertainty comes from the fact that the statistic would change if sampling were repeated.</p>
+</section>
+<section id="example-1-3-left-handed-count-and-proportion">
+<h3>Example 1.3: Left-Handed Count and Proportion<a class="headerlink" href="#example-1-3-left-handed-count-and-proportion" title="Link to this heading"></a></h3>
+<p>Consider a population of <span class="math notranslate nohighlight">\(N\)</span> people.
+Let <span class="math notranslate nohighlight">\(M\)</span> be the number of left-handed people in the population, and <span class="math notranslate nohighlight">\(M\)</span> is fixed at a given time.</p>
+<p>A common population parameter is the proportion of left-handed people</p>
+<div class="math notranslate nohighlight">
+\[p = \frac{M}{N}\]</div>
+<p>Now take a sample of <span class="math notranslate nohighlight">\(n=100\)</span> people and record handedness.
+Let <span class="math notranslate nohighlight">\(Y_i=1\)</span> if sampled person <span class="math notranslate nohighlight">\(i\)</span> is left-handed and <span class="math notranslate nohighlight">\(Y_i=0\)</span> otherwise.</p>
+<p>Let <span class="math notranslate nohighlight">\(T\)</span> be the number of left-handed people observed in the sample</p>
+<div class="math notranslate nohighlight">
+\[T = \sum_{i=1}^{n} Y_i\]</div>
+<p>The sample proportion is the statistic</p>
+<div class="math notranslate nohighlight">
+\[\hat{p} = \frac{T}{n} = \frac{1}{n}\sum_{i=1}^{n} Y_i\]</div>
+<p><strong>Question:</strong> Which quantities are parameters, and which are statistics?</p>
+<p>The population quantities <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(p\)</span> are parameters, so they are fixed for the population at a given time.
+The sample quantities <span class="math notranslate nohighlight">\(T\)</span> and <span class="math notranslate nohighlight">\(\hat{p}\)</span> are statistics, so they can vary across repeated samples.</p>
+</section>
+<section id="point-estimation">
+<h3>1.5.2 Point estimation<a class="headerlink" href="#point-estimation" title="Link to this heading"></a></h3>
+<p>A point estimate is a single-number estimate of a parameter.
+The estimate is a statistic, so it is random before sampling.</p>
+<p>Common examples include <span class="math notranslate nohighlight">\(\bar{X}\)</span> as an estimate of <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(S^2\)</span> as an estimate of <span class="math notranslate nohighlight">\(\sigma^2\)</span>, and <span class="math notranslate nohighlight">\(\hat{p}\)</span> as an estimate of <span class="math notranslate nohighlight">\(p\)</span>.
+Point estimates are compact and easy to communicate, but they do not describe uncertainty on their own.</p>
+<p>Uncertainty is described by the sampling distribution of the estimator.
+Standard error summarizes the typical spread of the estimator under repeated sampling.</p>
+</section>
+</section>
+<section id="core-statistics-as-random-variables">
+<h2>1.6 Core Statistics as Random Variables<a class="headerlink" href="#core-statistics-as-random-variables" title="Link to this heading"></a></h2>
+<section id="sample-mean">
+<h3>1.6.1 Sample mean<a class="headerlink" href="#sample-mean" title="Link to this heading"></a></h3>
+<p>The sample mean is</p>
+<div class="math notranslate nohighlight">
+\[\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i\]</div>
+<p>The statistic <span class="math notranslate nohighlight">\(\bar{X}\)</span> estimates the population mean <span class="math notranslate nohighlight">\(\mu\)</span>.
+The difference <span class="math notranslate nohighlight">\(\bar{X}-\mu\)</span> is sampling fluctuation under repeated sampling.</p>
+</section>
+<section id="sample-variance">
+<span id="sec-01-01-sample-variance"></span><h3>1.6.2 Sample variance<a class="headerlink" href="#sample-variance" title="Link to this heading"></a></h3>
+<p>The sample variance is</p>
+<div class="math notranslate nohighlight">
+\[S^2 = \frac{1}{n-1}\sum_{i=1}^{n}\left(X_i-\bar{X}\right)^2\]</div>
+<p>The statistic <span class="math notranslate nohighlight">\(S^2\)</span> estimates the population variance <span class="math notranslate nohighlight">\(\sigma^2\)</span>.
+When <span class="math notranslate nohighlight">\(n\)</span> is small, <span class="math notranslate nohighlight">\(S^2\)</span> can vary substantially across repeated samples.</p>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Understand more: <a class="reference internal" href="../useful_concepts/variance_n_minus_one.html#sec-variance-n-minus-one"><span class="std std-ref">Why the Sample Variance Uses n-1</span></a></p>
+</div>
+</section>
+<section id="sample-proportion">
+<h3>1.6.3 Sample proportion<a class="headerlink" href="#sample-proportion" title="Link to this heading"></a></h3>
+<p>Many inference questions concern an event rate.
+For each observation <span class="math notranslate nohighlight">\(i\)</span>, define an indicator <span class="math notranslate nohighlight">\(Y_i\)</span> with <span class="math notranslate nohighlight">\(Y_i=1\)</span> if the event occurs and <span class="math notranslate nohighlight">\(Y_i=0\)</span> otherwise.</p>
+<p>The sample proportion is</p>
+<div class="math notranslate nohighlight">
+\[\hat{p} = \frac{1}{n}\sum_{i=1}^{n} Y_i\]</div>
+<p>The statistic <span class="math notranslate nohighlight">\(\hat{p}\)</span> estimates the population proportion <span class="math notranslate nohighlight">\(p\)</span>.
+It is random before sampling because the set of sampled units can change.</p>
+</section>
+</section>
+<section id="standard-error">
+<h2>1.7 Standard Error<a class="headerlink" href="#standard-error" title="Link to this heading"></a></h2>
+<p>The standard error of a statistic is the standard deviation of its sampling distribution.
+It measures typical sampling fluctuation around the target parameter.</p>
+<p>Standard error is defined by the sampling model, even if only one sample is observed.
+It is the key quantity for describing precision of point estimates.</p>
+<p>It is also important to separate two questions.
+A larger sample size <span class="math notranslate nohighlight">\(n\)</span> makes an estimator more stable within one study, which reduces standard error.
+Repeating the same study many times is a conceptual device that defines the sampling distribution and justifies probability statements.</p>
+<section id="standard-error-of-the-sample-mean">
+<h3>1.7.1 Standard error of the sample mean<a class="headerlink" href="#standard-error-of-the-sample-mean" title="Link to this heading"></a></h3>
+<p>Assume an i.i.d. sample <span class="math notranslate nohighlight">\(X_1,\dots,X_n\)</span> with mean <span class="math notranslate nohighlight">\(\mu\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></p>
+<div class="math notranslate nohighlight">
+\[E(\bar{X})=\mu\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{Var}(\bar{X})=\frac{\sigma^2}{n}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{SE}(\bar{X})=\frac{\sigma}{\sqrt{n}}\]</div>
+<p>The standard error decreases as <span class="math notranslate nohighlight">\(n\)</span> increases, so averages become more stable across repeated samples.
+This does not require knowing the full population distribution, but it requires a stable target population and a valid sampling model.</p>
+<p>In practice, <span class="math notranslate nohighlight">\(\sigma\)</span> is often unknown, so it is replaced by the sample standard deviation <span class="math notranslate nohighlight">\(s\)</span></p>
+<div class="math notranslate nohighlight">
+\[\widehat{\mathrm{SE}}(\bar{X})=\frac{s}{\sqrt{n}}\]</div>
+</section>
+<section id="standard-error-of-the-sample-proportion">
+<h3>1.7.2 Standard error of the sample proportion<a class="headerlink" href="#standard-error-of-the-sample-proportion" title="Link to this heading"></a></h3>
+<p>Assume a Bernoulli outcome <span class="math notranslate nohighlight">\(Y\)</span> with <span class="math notranslate nohighlight">\(P(Y=1)=p\)</span> and i.i.d. sampling</p>
+<div class="math notranslate nohighlight">
+\[E(\hat{p})=p\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{Var}(\hat{p})=\frac{p(1-p)}{n}\]</div>
+<div class="math notranslate nohighlight">
+\[\mathrm{SE}(\hat{p})=\sqrt{\frac{p(1-p)}{n}}\]</div>
+<p>The standard error decreases as <span class="math notranslate nohighlight">\(n\)</span> increases, so event-rate estimates become more stable across repeated samples.
+If <span class="math notranslate nohighlight">\(p\)</span> is unknown, it is often replaced by <span class="math notranslate nohighlight">\(\hat{p}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\widehat{\mathrm{SE}}(\hat{p})=\sqrt{\frac{\hat{p}(1-\hat{p})}{n}}\]</div>
+</section>
+</section>
+<section id="the-sampling-perspective-and-sampling-distributions">
+<h2>1.8 The Sampling Perspective and Sampling Distributions<a class="headerlink" href="#the-sampling-perspective-and-sampling-distributions" title="Link to this heading"></a></h2>
+<p>The sampling perspective treats inference as repeatable.
+In this view, a statistic is a random variable produced by a sampling procedure.</p>
+<p>A sampling distribution is defined by a thought experiment.
+We imagine repeating the same study design many times, under the same target population and the same measurement rule.</p>
+<p>Across repetitions, only the random sample changes.
+The parameter values remain fixed, and the statistic changes because the sample changes.</p>
+<p>This thought experiment supports probability statements about statistics.
+It also provides a formal definition of standard error as the spread of the statistic across repetitions.</p>
+<p class="rubric">Figure 1 — Population variability and the sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span></p>
+<p>This figure connects a population distribution to repeated-sample behavior of the sample mean.
+A manager studies transaction time under stable operation and repeats the sampling plan <span class="math notranslate nohighlight">\(R=100\)</span> times.</p>
+<p>In each repetition, the manager samples <span class="math notranslate nohighlight">\(n\)</span> customers and computes the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span>.
+The dropdown changes <span class="math notranslate nohighlight">\(n\)</span>, the number of customers per sample.</p>
+<iframe src="../_static/figures/stat2/01_01_population_vs_sampling_mean.html"
+scrolling="no"
+style="width:95%; height:600px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe><p>The top panel shows the right-skewed population distribution of transaction time <span class="math notranslate nohighlight">\(X\)</span> in seconds.
+The red vertical line marks the population mean <span class="math notranslate nohighlight">\(\mu\)</span>, and thin vertical lines mark the 100 realized sample means.</p>
+<p>The bottom panel shows the same 100 sample means as repeated outcomes of <span class="math notranslate nohighlight">\(\bar{X}\)</span>.
+The red line marks <span class="math notranslate nohighlight">\(\mu\)</span>, and the gray band marks <span class="math notranslate nohighlight">\(\mu \pm 2\cdot\mathrm{SE}\)</span> with <span class="math notranslate nohighlight">\(\mathrm{SE}=\sigma/\sqrt{n}\)</span>.</p>
+<p>As <span class="math notranslate nohighlight">\(n\)</span> increases, the repeated values of <span class="math notranslate nohighlight">\(\bar{X}\)</span> concentrate more tightly around <span class="math notranslate nohighlight">\(\mu\)</span>.
+This concentration indicates smaller standard error and higher precision of <span class="math notranslate nohighlight">\(\bar{X}\)</span> as an estimator of <span class="math notranslate nohighlight">\(\mu\)</span>.</p>
+<p class="rubric">Figure 2 — Sampling distribution of <span class="math notranslate nohighlight">\(\hat{p}\)</span> for a slow-transaction event</p>
+<p>This figure applies the same logic to an event rate.
+A manager defines an indicator <span class="math notranslate nohighlight">\(Y\)</span> with <span class="math notranslate nohighlight">\(Y=1\)</span> for a slow transaction and <span class="math notranslate nohighlight">\(Y=0\)</span> otherwise.</p>
+<p>Here, “slow” is defined by a threshold on time, so the population parameter is <span class="math notranslate nohighlight">\(p=P(X&gt;40)\)</span>.
+For each selected <span class="math notranslate nohighlight">\(n\)</span>, the manager repeatedly samples <span class="math notranslate nohighlight">\(n\)</span> transactions and recomputes <span class="math notranslate nohighlight">\(\hat{p}\)</span>.</p>
+<iframe src="../_static/figures/stat2/01_02_sampling_dist_I_sampling_dist_phat.html"
+scrolling="no"
+style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe><p>The histogram shows the sampling distribution of <span class="math notranslate nohighlight">\(\hat{p}\)</span> under repetition.
+The vertical reference marks <span class="math notranslate nohighlight">\(p\)</span>, estimated from a large baseline dataset that represents the process.</p>
+<p>As <span class="math notranslate nohighlight">\(n\)</span> increases, the histogram becomes narrower around <span class="math notranslate nohighlight">\(p\)</span>.
+This indicates smaller typical sampling fluctuation, consistent with the standard error <span class="math notranslate nohighlight">\(\sqrt{p(1-p)/n}\)</span>.</p>
+</section>
+<section id="discussion-and-common-errors">
+<h2>1.9 Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
+<p>In many applications, the full population distribution is unknown.
+Even so, key parameters such as mean level and event rate can still be estimated from samples.</p>
+<p>Increasing <span class="math notranslate nohighlight">\(n\)</span> improves precision because standard error decreases with <span class="math notranslate nohighlight">\(n\)</span>.
+This explains why we often focus on collecting more data within one study rather than repeating many separate studies.</p>
+<p>Later modules introduce results that support inference when the population distribution is not fully specified.
+These results require careful attention to sampling assumptions and measurement definitions.</p>
+<ol class="arabic simple">
+<li><p>Confusing parameters with statistics
+A parameter such as <span class="math notranslate nohighlight">\(\mu\)</span> or <span class="math notranslate nohighlight">\(p\)</span> is fixed in the model.
+A statistic such as <span class="math notranslate nohighlight">\(\bar{X}\)</span> or <span class="math notranslate nohighlight">\(\hat{p}\)</span> is random before sampling and should be treated as such.</p></li>
+<li><p>Confusing standard deviation and standard error
+The standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> describes variability of individual observations.
+The standard error describes variability of a statistic across repeated samples and is typically smaller.</p></li>
+<li><p>Assuming i.i.d. sampling without checking the design
+Clustered or selective sampling can create dependence or bias.
+When this occurs, sampling distributions can be wider or shifted relative to i.i.d. expectations.</p></li>
+</ol>
+</section>
+<section id="summary">
+<h2>1.10 Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<p>A population is the target group or stable process that generates outcomes.
+A parameter describes the population and is fixed in the model but unknown in practice.</p>
+<p>A sample is the set of observed outcomes collected from the population.
+A statistic summarizes the sample and is random before sampling because it depends on which units are observed.</p>
+<p>Point estimation uses a statistic, such as <span class="math notranslate nohighlight">\(\bar{X}\)</span> or <span class="math notranslate nohighlight">\(\hat{p}\)</span>, to estimate a parameter.
+Uncertainty is described by the sampling distribution of the estimator, not by the point estimate alone.</p>
+<p>Standard error is the standard deviation of the sampling distribution of a statistic.
+Under i.i.d. sampling, <span class="math notranslate nohighlight">\(\mathrm{SE}(\bar{X})=\sigma/\sqrt{n}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{SE}(\hat{p})=\sqrt{p(1-p)/n}\)</span>.</p>
+<p>Larger sample size <span class="math notranslate nohighlight">\(n\)</span> reduces standard error and improves precision.
+A valid interpretation requires a clear measurement rule and a sampling design that supports i.i.d. assumptions.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Statistics 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stat2_02_sampling_distributions_random_sampling.html" class="btn btn-neutral float-right" title="2. Sampling Distributions II: The Central Limit Theorem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -6,9 +6,10 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2. Sampling Distributions I: Random Sampling and Standard Error &mdash; Statistics</title>
+  <title>2. Sampling Distributions II: The Central Limit Theorem &mdash; Statistics</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=80f29991" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -21,8 +22,8 @@
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3. Sampling Distributions II: The Central Limit Theorem" href="stat2_03_sampling_distributions_clt_and_normal_approx.html" />
-    <link rel="prev" title="1. Orientation &amp; Inference Roadmap" href="stat2_01_orientation_and_inference_roadmap.html" /> 
+    <link rel="next" title="2. Sampling Dist III: Chi-Square, t, and F" href="stat2_03_sampling_distributions_clt_and_normal_approx.html" />
+    <link rel="prev" title="1. Sampling Distributions I: Random Sampling, Point Estimation, and Standard Error" href="stat2_01_random_sampling_point_est_std_error.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -48,37 +49,25 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../stat1/index.html">Statistics 1</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Statistics 2</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="stat2_01_orientation_and_inference_roadmap.html">1. Orientation &amp; Inference Roadmap</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Sampling Distributions I: Random Sampling and Standard Error</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#learning-outcomes">Learning Outcomes</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#connection-to-previous-ideas">Connection to Previous Ideas</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#random-sampling-and-the-i-i-d-model">Random Sampling and the i.i.d. Model</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#statistics-as-random-variables">Statistics as Random Variables</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#sample-mean-center">Sample mean (center)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sample-variance-spread">Sample variance (spread)</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#sample-proportion-rate">Sample proportion (rate)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat2_01_random_sampling_point_est_std_error.html">1. Sampling Distributions I: Random Sampling, Point Estimation, and Standard Error</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2. Sampling Distributions II: The Central Limit Theorem</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">2.1 Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#learning-outcomes">2.2 Learning Outcomes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#main-concepts">2.3 Main Concepts</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sampling-distribution-of-the-sample-mean">2.3.1 Sampling Distribution of the Sample Mean</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exact-normal-case-a-special-baseline">2.3.2 Exact Normal Case (a special baseline)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#central-limit-theorem-approximate-normality">2.3.3 Central Limit Theorem (approximate Normality)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standardization-and-the-z-statistic">2.3.4 Standardization and the Z Statistic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#when-does-the-clt-work-well-in-practice">2.3.5 When Does the CLT Work Well in Practice?</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2-1">2.3.6 Example 2.1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-2-2">2.3.7 Example 2.2</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#sampling-distributions">Sampling Distributions</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#standard-error-as-typical-error">Standard Error as “Typical Error”</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#worked-example">Worked Example</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#question">Question</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#analysis">Analysis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#discussion-and-common-errors">2.4 Discussion and Common Errors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#summary">2.5 Summary</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#intuition">Intuition</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#figure-1-one-sample-and-its-statistics">Figure 1 — One sample and its statistics</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#figure-2-sampling-distribution-of-the-sample-mean-and-standard-error">Figure 2 — Sampling distribution of the sample mean and standard error</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#figure-3-sampling-distribution-of-the-sample-proportion-for-an-underfill-event">Figure 3 — Sampling distribution of the sample proportion for an underfill event</a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#discussion-and-common-errors">Discussion and Common Errors</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#summary">Summary</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="stat2_03_sampling_distributions_clt_and_normal_approx.html">3. Sampling Distributions II: The Central Limit Theorem</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stat2_03_sampling_distributions_clt_and_normal_approx.html">2. Sampling Dist III: Chi-Square, t, and F</a></li>
 </ul>
 </li>
 </ul>
@@ -98,7 +87,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="index.html">Statistics 2</a></li>
-      <li class="breadcrumb-item active">2. Sampling Distributions I: Random Sampling and Standard Error</li>
+      <li class="breadcrumb-item active">2. Sampling Distributions II: The Central Limit Theorem</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/stat2/stat2_02_sampling_distributions_random_sampling.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -108,420 +97,233 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="sampling-distributions-i-random-sampling-and-standard-error">
-<h1>2. Sampling Distributions I: Random Sampling and Standard Error<a class="headerlink" href="#sampling-distributions-i-random-sampling-and-standard-error" title="Link to this heading"></a></h1>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
-<p>In statistical inference, we learn about a population using a sample.
-We cannot trust a single sample result unless we understand how it would change under repetition.
-This session introduces the idea that common summaries—such as the sample mean, sample variance, and sample proportion—are themselves random variables.
-Their probability distributions are called sampling distributions.
-From these sampling distributions, we define standard error, which we interpret as a “typical error” caused by sampling variation.</p>
-</section>
-<section id="learning-outcomes">
-<h2>Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
-<p>After this session, we should be able to:</p>
-<ul class="simple">
-<li><p>Define a random sample using the independence and identical distribution (i.i.d.) idea.</p></li>
-<li><p>Distinguish a parameter (population quantity) from a statistic (sample quantity).</p></li>
-<li><p>Treat <span class="math notranslate nohighlight">\(\bar{X}\)</span>, <span class="math notranslate nohighlight">\(S^2\)</span>, and <span class="math notranslate nohighlight">\(\hat{p}\)</span> as random variables.</p></li>
-<li><p>Explain what a sampling distribution is and why it matters for inference.</p></li>
-<li><p>Interpret standard error as the typical size of sampling fluctuation.</p></li>
-<li><p>Compute standard errors for <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(\hat{p}\)</span> in standard settings.</p></li>
-</ul>
-</section>
-<section id="connection-to-previous-ideas">
-<h2>Connection to Previous Ideas<a class="headerlink" href="#connection-to-previous-ideas" title="Link to this heading"></a></h2>
-<p>In the orientation session, we emphasized the inference workflow: define a target parameter, collect data, compute statistics, and then reason from sample to population.
-In this workflow, the key conceptual shift is a “sampling mindset.”
-A statistic is not a fixed number before we observe data.
-It is a random variable generated by the sampling process, so it has its own distribution.</p>
-</section>
-<section id="random-sampling-and-the-i-i-d-model">
-<h2>Random Sampling and the i.i.d. Model<a class="headerlink" href="#random-sampling-and-the-i-i-d-model" title="Link to this heading"></a></h2>
-<p>We begin with three levels of description.</p>
-<p>A population is the full set of outcomes that could occur for a measurement process.
-A sample is a subset of observed outcomes.
-A random sample is a sample produced by repeating the same measurement under essentially the same conditions, with independent outcomes.</p>
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> represent a measurement from the population.
-A random sample of size <span class="math notranslate nohighlight">\(n\)</span> is written as <span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_n\)</span>.</p>
-<p>The i.i.d. model (independent and identically distributed) states two key assumptions:</p>
-<ul class="simple">
-<li><p>Identically distributed: each <span class="math notranslate nohighlight">\(X_i\)</span> follows the same population distribution.</p></li>
-<li><p>Independent: knowing one outcome does not change the distribution of another.</p></li>
-</ul>
-<p>Under the i.i.d. model, the joint probability model factors as a product:</p>
-<div class="math notranslate nohighlight">
-\[f(x_1, x_2, \ldots, x_n) \;=\; \prod_{i=1}^{n} f(x_i).\]</div>
-<p>This factorization is the mathematical expression of “random sampling.”
-When independence fails (for example, measurements taken in clusters or time bursts), the sampling distributions of statistics can be much wider than we expect.</p>
-</section>
-<section id="statistics-as-random-variables">
-<h2>Statistics as Random Variables<a class="headerlink" href="#statistics-as-random-variables" title="Link to this heading"></a></h2>
-<p>A statistic is any function of the sample values.
-Because the sample changes from repetition to repetition, a statistic also changes.
-Therefore, a statistic is a random variable.</p>
-<p>We focus on three statistics that appear throughout Statistics 2.</p>
-<section id="sample-mean-center">
-<h3>Sample mean (center)<a class="headerlink" href="#sample-mean-center" title="Link to this heading"></a></h3>
-<div class="math notranslate nohighlight">
-\[\bar{X} \;=\; \frac{1}{n}\sum_{i=1}^{n} X_i.\]</div>
-<p>Symbols:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(n\)</span> is the sample size.</p></li>
-<li><p><span class="math notranslate nohighlight">\(X_i\)</span> is the <span class="math notranslate nohighlight">\(i\)</span>-th observation.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\bar{X}\)</span> is the sample mean statistic.</p></li>
-</ul>
-<p>Interpretation:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\bar{X}\)</span> estimates <span class="math notranslate nohighlight">\(\mu\)</span> (the population mean).</p></li>
-<li><p>The difference <span class="math notranslate nohighlight">\(\bar{X} - \mu\)</span> is a sampling fluctuation, not necessarily a process change.</p></li>
-</ul>
-</section>
-<section id="sample-variance-spread">
-<h3>Sample variance (spread)<a class="headerlink" href="#sample-variance-spread" title="Link to this heading"></a></h3>
-<div class="math notranslate nohighlight">
-\[S^2 \;=\; \frac{1}{n-1}\sum_{i=1}^{n}\left(X_i-\bar{X}\right)^2.\]</div>
-<p>Symbols:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(S^2\)</span> is the sample variance statistic.</p></li>
-<li><p>The divisor <span class="math notranslate nohighlight">\(n-1\)</span> adjusts for the fact that <span class="math notranslate nohighlight">\(\bar{X}\)</span> is estimated from the same data.</p></li>
-</ul>
-<p>Interpretation:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(S^2\)</span> estimates <span class="math notranslate nohighlight">\(\sigma^2\)</span> (the population variance).</p></li>
-<li><p><span class="math notranslate nohighlight">\(S^2\)</span> often has a right-skewed sampling distribution, especially when <span class="math notranslate nohighlight">\(n\)</span> is small.</p></li>
-</ul>
-</section>
-<section id="sample-proportion-rate">
-<h3>Sample proportion (rate)<a class="headerlink" href="#sample-proportion-rate" title="Link to this heading"></a></h3>
-<p>For an attribute that is coded as 1 (event occurs) or 0 (event does not occur), we define:</p>
-<div class="math notranslate nohighlight">
-\[\hat{p} \;=\; \frac{1}{n}\sum_{i=1}^{n} Y_i,\]</div>
-<p>where <span class="math notranslate nohighlight">\(Y_i \in \{0,1\}\)</span> indicates whether the event occurred on trial <span class="math notranslate nohighlight">\(i\)</span>.</p>
-<p>Symbols:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(p\)</span> is the population proportion (parameter), meaning <span class="math notranslate nohighlight">\(p = P(Y=1)\)</span>.</p></li>
-<li><p><span class="math notranslate nohighlight">\(\hat{p}\)</span> is the sample proportion (statistic).</p></li>
-</ul>
-<p>Interpretation:</p>
-<ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\hat{p}\)</span> estimates <span class="math notranslate nohighlight">\(p\)</span>.</p></li>
-<li><p>When <span class="math notranslate nohighlight">\(n\)</span> is small, <span class="math notranslate nohighlight">\(\hat{p}\)</span> can take only a few discrete values (multiples of <span class="math notranslate nohighlight">\(1/n\)</span>).</p></li>
-</ul>
-</section>
-</section>
-<section id="sampling-distributions">
-<h2>Sampling Distributions<a class="headerlink" href="#sampling-distributions" title="Link to this heading"></a></h2>
-<p>Because a statistic is a random variable, it has a probability distribution.
-The sampling distribution of a statistic is the distribution induced by the sampling process.</p>
-<p>We can describe the idea using a thought experiment:</p>
-<ul class="simple">
-<li><p>Fix a population model (with parameters <span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(\sigma\)</span>, or <span class="math notranslate nohighlight">\(p\)</span>).</p></li>
-<li><p>Repeatedly take random samples of the same size <span class="math notranslate nohighlight">\(n\)</span>.</p></li>
-<li><p>Compute the statistic each time (such as <span class="math notranslate nohighlight">\(\bar{X}\)</span>).</p></li>
-<li><p>The resulting collection of statistic values forms a distribution.</p></li>
-</ul>
-<p>This distribution depends on:</p>
-<ul class="simple">
-<li><p>the population distribution,</p></li>
-<li><p>the sample size <span class="math notranslate nohighlight">\(n\)</span>,</p></li>
-<li><p>and the sampling design (especially independence).</p></li>
-</ul>
-<p>When an exact sampling distribution is difficult to derive, simulation (Monte Carlo approximation) is a practical alternative.
-In simulation, we generate many random samples on a computer and approximate the distribution of the statistic by the empirical histogram or empirical probabilities.</p>
-</section>
-<section id="standard-error-as-typical-error">
-<h2>Standard Error as “Typical Error”<a class="headerlink" href="#standard-error-as-typical-error" title="Link to this heading"></a></h2>
-<p>The standard error of a statistic is the standard deviation of its sampling distribution.
-It measures the typical size of sampling fluctuation around the target parameter.</p>
-<p>For the sample mean, when the population variance is <span class="math notranslate nohighlight">\(\sigma^2\)</span> and the sample is i.i.d., we have:</p>
-<div class="math notranslate nohighlight">
-\[E(\bar{X}) = \mu,
-\qquad
-\mathrm{Var}(\bar{X}) = \frac{\sigma^2}{n},
-\qquad
-\mathrm{SE}(\bar{X}) = \frac{\sigma}{\sqrt{n}}.\]</div>
-<p>Key implications:</p>
-<ul class="simple">
-<li><p>If <span class="math notranslate nohighlight">\(n\)</span> increases, <span class="math notranslate nohighlight">\(\mathrm{SE}(\bar{X})\)</span> decreases like <span class="math notranslate nohighlight">\(1/\sqrt{n}\)</span>.</p></li>
-<li><p>Doubling <span class="math notranslate nohighlight">\(n\)</span> does not halve the standard error.
-We need <span class="math notranslate nohighlight">\(4\times\)</span> the sample size to cut standard error in half.</p></li>
-</ul>
-<p>For a Bernoulli outcome <span class="math notranslate nohighlight">\(Y\)</span> with <span class="math notranslate nohighlight">\(P(Y=1)=p\)</span>, the sample proportion has:</p>
-<div class="math notranslate nohighlight">
-\[E(\hat{p}) = p,
-\qquad
-\mathrm{Var}(\hat{p}) = \frac{p(1-p)}{n},
-\qquad
-\mathrm{SE}(\hat{p}) = \sqrt{\frac{p(1-p)}{n}}.\]</div>
-<p>In practice, <span class="math notranslate nohighlight">\(\sigma\)</span> and <span class="math notranslate nohighlight">\(p\)</span> are often unknown.
-A common operational approach is to estimate them from the sample, and then interpret the resulting standard error as an estimated typical error.</p>
-</section>
-<section id="worked-example">
-<h2>Worked Example<a class="headerlink" href="#worked-example" title="Link to this heading"></a></h2>
-<section id="description">
-<h3>Description<a class="headerlink" href="#description" title="Link to this heading"></a></h3>
-<p>A filling machine dispenses detergent into bottles, as in the table below.</p>
-<table class="docutils align-default" id="id1">
-<caption><span class="caption-text">Example sample from the filling machine (n=36)</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
+  <section id="sampling-distributions-ii-the-central-limit-theorem">
+<h1>2. Sampling Distributions II: The Central Limit Theorem<a class="headerlink" href="#sampling-distributions-ii-the-central-limit-theorem" title="Link to this heading"></a></h1>
+<table class="compact-notation docutils align-default" id="id1">
+<caption><span class="caption-text">Notations used in this module</span><a class="headerlink" href="#id1" title="Link to this table"></a></caption>
 <colgroup>
-<col style="width: 22.2%" />
-<col style="width: 38.9%" />
-<col style="width: 38.9%" />
+<col style="width: 65.0%" />
+<col style="width: 35.0%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>i</p></th>
-<th class="head"><p>X_mL</p></th>
-<th class="head"><p>Y_underfill</p></th>
+<tr class="row-odd"><th class="head"><p>Meaning</p></th>
+<th class="head"><p>Notation</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>1</p></td>
-<td><p>250.14</p></td>
-<td><p>0</p></td>
+<tr class="row-even"><td><p>One observation (measurement)</p></td>
+<td><p><span class="math notranslate nohighlight">\(X\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>2</p></td>
-<td><p>237.2</p></td>
-<td><p>0</p></td>
+<tr class="row-odd"><td><p>Sample size (number of observations)</p></td>
+<td><p><span class="math notranslate nohighlight">\(n\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>3</p></td>
-<td><p>240.2</p></td>
-<td><p>0</p></td>
+<tr class="row-even"><td><p>Sample mean (average of the sample)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\bar{X}\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>4</p></td>
-<td><p>242.45</p></td>
-<td><p>0</p></td>
+<tr class="row-odd"><td><p>Population mean (true long-run average)</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>5</p></td>
-<td><p>235.27</p></td>
-<td><p>0</p></td>
+<tr class="row-even"><td><p>Population standard deviation</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>6</p></td>
-<td><p>240.01</p></td>
-<td><p>0</p></td>
+<tr class="row-odd"><td><p>Standard error of the sample mean</p></td>
+<td><p><span class="math notranslate nohighlight">\(\sigma_{\bar{X}}=\sigma/\sqrt{n}\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>7</p></td>
-<td><p>239.99</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>8</p></td>
-<td><p>229.47</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>9</p></td>
-<td><p>246.11</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>10</p></td>
-<td><p>243.6</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>11</p></td>
-<td><p>236.25</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>12</p></td>
-<td><p>238.97</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>13</p></td>
-<td><p>243.03</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>14</p></td>
-<td><p>238.43</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>15</p></td>
-<td><p>238.54</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>16</p></td>
-<td><p>231.28</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>17</p></td>
-<td><p>243.33</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>18</p></td>
-<td><p>240.74</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>19</p></td>
-<td><p>241.65</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>20</p></td>
-<td><p>230.84</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>21</p></td>
-<td><p>249.9</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>22</p></td>
-<td><p>240.93</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>23</p></td>
-<td><p>237.68</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>24</p></td>
-<td><p>252.17</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>25</p></td>
-<td><p>239.73</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>26</p></td>
-<td><p>231.3</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>27</p></td>
-<td><p>237.57</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>28</p></td>
-<td><p>226.27</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-even"><td><p>29</p></td>
-<td><p>246.3</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>30</p></td>
-<td><p>237.5</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>31</p></td>
-<td><p>235.54</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-odd"><td><p>32</p></td>
-<td><p>246.43</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>33</p></td>
-<td><p>230.09</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-odd"><td><p>34</p></td>
-<td><p>243.21</p></td>
-<td><p>0</p></td>
-</tr>
-<tr class="row-even"><td><p>35</p></td>
-<td><p>227.61</p></td>
-<td><p>1</p></td>
-</tr>
-<tr class="row-odd"><td><p>36</p></td>
-<td><p>236.03</p></td>
-<td><p>0</p></td>
+<tr class="row-even"><td><p>Standardized value (Z score)</p></td>
+<td><p><span class="math notranslate nohighlight">\(Z=(\bar{X}-\mu)/(\sigma/\sqrt{n})\)</span></p></td>
 </tr>
 </tbody>
 </table>
-<p>Let <span class="math notranslate nohighlight">\(X\)</span> be the fill volume (mL) for one bottle under stable operation.</p>
-<p>Historical engineering studies support:</p>
+<section id="introduction">
+<h2>2.1 Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>In Module 1, we introduced random sampling and the idea that statistics are random variables.
+We used the standard error to describe the typical sampling-to-sampling variation of common statistics, especially the sample mean.
+In this module, we move from “how variable is <span class="math notranslate nohighlight">\(\bar{X}\)</span>?” to “what is the shape of the distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span>?”, because shape is what we need for probability calculations.</p>
+<p>We use a convenience-store counter to motivate the setting.
+A single counter may handle checkout plus additional services such as coffee orders, bill payment, document printing, meal heating, or kiosk confirmation.
+Most transactions are short, but some are much longer, so completion time is often right-skewed.</p>
+<p>One observation is one customer transaction.
+Let <span class="math notranslate nohighlight">\(X\)</span> be the transaction completion time (minutes), defined by a fixed measurement rule:</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(\mu = 240\)</span> mL,</p></li>
-<li><p><span class="math notranslate nohighlight">\(\sigma = 6\)</span> mL,</p></li>
-<li><p>and the process is approximately normal during stable operation.</p></li>
+<li><p>Start time: when the customer becomes the next person to be served at the counter</p></li>
+<li><p>End time: when payment is confirmed and the customer leaves the counter</p></li>
 </ul>
-<p>A quality engineer takes a random sample of <span class="math notranslate nohighlight">\(n = 36\)</span> bottles and computes <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
+<p>This definition should be used consistently across shifts and observers.
+If the measurement rule changes, then the recorded values do not represent the same variable, and comparisons across days become unreliable.</p>
 </section>
-<section id="question">
-<h3>Question<a class="headerlink" href="#question" title="Link to this heading"></a></h3>
-<p>If the machine is truly operating at <span class="math notranslate nohighlight">\(\mu = 240\)</span>, what is the probability that the sample mean is at most <span class="math notranslate nohighlight">\(238.5\)</span> mL?</p>
+<section id="learning-outcomes">
+<h2>2.2 Learning Outcomes<a class="headerlink" href="#learning-outcomes" title="Link to this heading"></a></h2>
+<p>After this session, we should be able to:</p>
+<ul class="simple">
+<li><p>Define the sampling distribution of the sample mean</p></li>
+<li><p>State what the CLT guarantees, and what it does not guarantee</p></li>
+<li><p>Use the standard error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> to quantify typical variation of <span class="math notranslate nohighlight">\(\bar{X}\)</span></p></li>
+<li><p>Standardize the sample mean using a <span class="math notranslate nohighlight">\(Z\)</span>-statistic</p></li>
+<li><p>Apply the CLT to approximate probabilities about averages</p></li>
+<li><p>Explain when a Normal approximation is reasonable in applied work</p></li>
+</ul>
 </section>
-<section id="analysis">
-<h3>Analysis<a class="headerlink" href="#analysis" title="Link to this heading"></a></h3>
-<p>We focus on the statistic <span class="math notranslate nohighlight">\(\bar{X}\)</span> because the question is about a sample average, not a single bottle.</p>
-<p>For i.i.d. sampling from a normal population, the sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> is normal with:</p>
+<section id="main-concepts">
+<h2>2.3 Main Concepts<a class="headerlink" href="#main-concepts" title="Link to this heading"></a></h2>
+<section id="sampling-distribution-of-the-sample-mean">
+<h3>2.3.1 Sampling Distribution of the Sample Mean<a class="headerlink" href="#sampling-distribution-of-the-sample-mean" title="Link to this heading"></a></h3>
+<p>Let <span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_n\)</span> be a random sample from a population with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span>.
+The sample mean is the statistic</p>
 <div class="math notranslate nohighlight">
-\[E(\bar{X}) = \mu,
-\qquad
-\mathrm{SE}(\bar{X}) = \frac{\sigma}{\sqrt{n}}.\]</div>
-<p>Here:</p>
+\[\bar{X} = \frac{1}{n}\sum_{i=1}^{n} X_i\]</div>
+<p>The sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> describes how <span class="math notranslate nohighlight">\(\bar{X}\)</span> varies across repeated samples of the same size <span class="math notranslate nohighlight">\(n\)</span>.
+Its center and spread follow two key results:</p>
 <div class="math notranslate nohighlight">
-\[\mathrm{SE}(\bar{X})
-= \frac{6}{\sqrt{36}}
-= \frac{6}{6}
-= 1 \text{ mL}.\]</div>
-<p>(Note: this means a typical gap between <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(\mu\)</span> is about 1 mL under repeated sampling.)</p>
-<p>We standardize the event <span class="math notranslate nohighlight">\(\bar{X} \le 238.5\)</span>:</p>
+\[E(\bar{X}) = \mu\]</div>
 <div class="math notranslate nohighlight">
-\[Z
-= \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}
-= \frac{238.5 - 240}{1}
-= -1.5.\]</div>
-<p>Therefore:</p>
+\[\mathrm{Var}(\bar{X}) = \frac{\sigma^2}{n}\]</div>
+<p>Therefore, the standard deviation of <span class="math notranslate nohighlight">\(\bar{X}\)</span> is</p>
 <div class="math notranslate nohighlight">
-\[P(\bar{X} \le 238.5) = P(Z \le -1.5) \approx 0.0668.\]</div>
-<p>Interpretation: even when the machine is correctly centered at 240 mL, a sample mean as low as 238.5 mL can occur about 6–7% of the time due to sampling variation.</p>
+\[\sigma_{\bar{X}} = \frac{\sigma}{\sqrt{n}}\]</div>
+<p>We call <span class="math notranslate nohighlight">\(\sigma_{\bar{X}}\)</span> the standard error of the sample mean.
+It measures typical sampling-to-sampling variation of <span class="math notranslate nohighlight">\(\bar{X}\)</span> under repeated sampling.
+As <span class="math notranslate nohighlight">\(n\)</span> increases, <span class="math notranslate nohighlight">\(\sigma_{\bar{X}}\)</span> decreases, so averages become more stable.</p>
+<p>In the convenience-store case, a manager may monitor the average transaction time during a lunch period.
+That reported average is one realized value of <span class="math notranslate nohighlight">\(\bar{X}\)</span>, based on a sample of transactions from that period.
+The sampling distribution describes how that average would vary if we repeated the same sampling plan on many comparable days.</p>
 </section>
+<section id="exact-normal-case-a-special-baseline">
+<h3>2.3.2 Exact Normal Case (a special baseline)<a class="headerlink" href="#exact-normal-case-a-special-baseline" title="Link to this heading"></a></h3>
+<p>If the population distribution of <span class="math notranslate nohighlight">\(X\)</span> is Normal, then the sample mean is Normal for any sample size.
+This result is exact:</p>
+<div class="math notranslate nohighlight">
+\[X \sim \mathcal{N}(\mu, \sigma^2)
+\quad \Longrightarrow \quad
+\bar{X} \sim \mathcal{N}\!\left(\mu, \frac{\sigma^2}{n}\right)\]</div>
+<p>This baseline is important because it provides a clean reference case where Normal probability calculations for <span class="math notranslate nohighlight">\(\bar{X}\)</span> are always correct.
+However, operational time variables (service times, transaction times, repair times) are often not Normal and are frequently right-skewed.
+This motivates the need for an approximation result.</p>
 </section>
-<section id="intuition">
-<h2>Intuition<a class="headerlink" href="#intuition" title="Link to this heading"></a></h2>
-<p>A useful mental model is that sampling creates a “distribution of summaries.”
-We do not only have a distribution for individual measurements <span class="math notranslate nohighlight">\(X\)</span>.
-We also have a distribution for <span class="math notranslate nohighlight">\(\bar{X}\)</span>, and this distribution is tighter.</p>
-<p>Another useful mental model is to treat standard error as an operational yardstick.
-If the observed statistic is only one or two standard errors away from the parameter value suggested by historical baselines, the discrepancy may be typical sampling noise.
-If it is many standard errors away, the discrepancy is less compatible with the baseline model and may justify deeper investigation.</p>
-<section id="figure-1-one-sample-and-its-statistics">
-<h3>Figure 1 — One sample and its statistics<a class="headerlink" href="#figure-1-one-sample-and-its-statistics" title="Link to this heading"></a></h3>
-<p>In this figure, the data represent one random sample of <span class="math notranslate nohighlight">\(n=30\)</span> fill volumes from a stable filling machine.
-We hold the baseline process mean <span class="math notranslate nohighlight">\(\mu\)</span> fixed, but the observed points change because sampling is random.
-The markers are the individual observations in the order they were collected (each dot is one bottle).
-The horizontal line labeled <span class="math notranslate nohighlight">\(\bar{x}\)</span> is the sample mean, and the shaded band shows <span class="math notranslate nohighlight">\(\bar{x} \pm s\)</span>, using the sample standard deviation as a within-sample spread measure.
-The key interpretation is that <span class="math notranslate nohighlight">\(\bar{x}\)</span> is not guaranteed to equal <span class="math notranslate nohighlight">\(\mu\)</span>; the gap is a sampling fluctuation, which motivates studying the sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
-<iframe src="../_static/figures/stat2/02_01_sampling_dist_I_fig1_random_sample.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe></section>
-<section id="figure-2-sampling-distribution-of-the-sample-mean-and-standard-error">
-<h3>Figure 2 — Sampling distribution of the sample mean and standard error<a class="headerlink" href="#figure-2-sampling-distribution-of-the-sample-mean-and-standard-error" title="Link to this heading"></a></h3>
-<p>In this figure, the process context is the same filling operation, but now we repeat the sampling experiment many times on a computer.
-We hold the population model fixed at <span class="math notranslate nohighlight">\(\mu=240\)</span> mL and <span class="math notranslate nohighlight">\(\sigma=6\)</span> mL, and we change only the sample size <span class="math notranslate nohighlight">\(n\)</span>.
-The light-gray histogram (trace: “Individual observations <span class="math notranslate nohighlight">\(X\)</span>”) shows the variability of single-bottle fill volumes.
-The colored histogram (trace: “Sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span>”) shows the distribution of the sample mean from repeated samples of size <span class="math notranslate nohighlight">\(n\)</span>.
-The black curve (trace: “Reference Normal for <span class="math notranslate nohighlight">\(\bar{X}\)</span>”) is the model-based sampling distribution with standard error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.
-Because the x-axis range is fixed, we can directly compare spreads as <span class="math notranslate nohighlight">\(n\)</span> increases, and we observe that the sampling distribution becomes tighter, which operationally means the typical error of <span class="math notranslate nohighlight">\(\bar{X}\)</span> decreases.</p>
-<iframe src="../_static/figures/stat2/02_02_sampling_dist_I_fig2_sampling_dist_mean.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe></section>
-<section id="figure-3-sampling-distribution-of-the-sample-proportion-for-an-underfill-event">
-<h3>Figure 3 — Sampling distribution of the sample proportion for an underfill event<a class="headerlink" href="#figure-3-sampling-distribution-of-the-sample-proportion-for-an-underfill-event" title="Link to this heading"></a></h3>
-<p>In this figure, we convert the same quality problem into an event-rate problem.
-Each bottle is labeled <span class="math notranslate nohighlight">\(Y=1\)</span> if it is underfilled (below a specification threshold) and <span class="math notranslate nohighlight">\(Y=0\)</span> otherwise, so <span class="math notranslate nohighlight">\(p=P(Y=1)\)</span> is the underfill rate.
-The light-gray bar trace (trace: “Individual observations <span class="math notranslate nohighlight">\(Y\)</span>”) shows the population probabilities at 0 and 1.
-The colored bar trace (trace: “Sampling distribution of <span class="math notranslate nohighlight">\(\hat{p}\)</span>”) shows how the observed sample proportion varies across repeated samples of size <span class="math notranslate nohighlight">\(n\)</span>.
-The black curve (trace: “Reference Normal for <span class="math notranslate nohighlight">\(\hat{p}\)</span>”) is a model-based approximation centered at <span class="math notranslate nohighlight">\(p\)</span> with standard error <span class="math notranslate nohighlight">\(\sqrt{p(1-p)/n}\)</span>.
-The comparison is meaningful because the x-axis is fixed from 0 to 1, so tightening of the <span class="math notranslate nohighlight">\(\hat{p}\)</span> distribution reflects a real reduction in typical sampling error as <span class="math notranslate nohighlight">\(n\)</span> increases.</p>
-<iframe src="../_static/figures/stat2/02_03_sampling_dist_I_fig3_sampling_dist_phat.html" scrolling="no" style="width:95%; height:520px; border:none; overflow:hidden; display:block; margin:0 auto;"> </iframe></section>
+<section id="central-limit-theorem-approximate-normality">
+<h3>2.3.3 Central Limit Theorem (approximate Normality)<a class="headerlink" href="#central-limit-theorem-approximate-normality" title="Link to this heading"></a></h3>
+<p>The Central Limit Theorem (CLT) explains why the sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> is often close to Normal even when the population is not Normal.
+A practical version uses these assumptions:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(X_1, \ldots, X_n\)</span> are independent</p></li>
+<li><p>They share the same mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>They have finite variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></p></li>
+</ul>
+<p>Under these conditions, the distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> becomes approximately Normal as <span class="math notranslate nohighlight">\(n\)</span> increases.
+The approximation has mean close to <span class="math notranslate nohighlight">\(\mu\)</span> and variance close to <span class="math notranslate nohighlight">\(\sigma^2/n\)</span>.
+The word “approximately” is essential, because the accuracy depends on <span class="math notranslate nohighlight">\(n\)</span> and on how skewed or heavy-tailed the population is.</p>
+<p>Figure 1 illustrates the CLT using simulated transaction completion times from a right-skewed population.
+The population is generated to represent “many short transactions and a few long transactions,” which is common in service operations.
+A repetition means drawing a new random sample of size <span class="math notranslate nohighlight">\(n\)</span> from this fixed population model and computing the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
+<p>The dropdown changes <span class="math notranslate nohighlight">\(n\)</span>, while the population mechanism is held fixed.
+We compare the blue histogram (the sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> across repetitions) to the gray Normal reference curve with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.
+As <span class="math notranslate nohighlight">\(n\)</span> increases, the distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> becomes more symmetric and closer to the Normal reference.</p>
+<p>Figure 1 illustrates this idea using simulated transaction-time data from a right-skewed population.
+The data are simulated, but the mechanism is designed to represent “many short transactions and a few long transactions.”
+A repetition means drawing a new random sample of <span class="math notranslate nohighlight">\(n\)</span> transactions from the same population and recomputing <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
+<p>The figure holds the population fixed and changes only the sample size <span class="math notranslate nohighlight">\(n\)</span>.
+We compare the blue histogram (the simulated sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span>) to the gray Normal reference curve with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.
+The main comparison is across values of <span class="math notranslate nohighlight">\(n\)</span>: as <span class="math notranslate nohighlight">\(n\)</span> increases, the histogram becomes more symmetric and aligns more closely with the Normal reference.</p>
+<iframe src="../_static/figures/stat2/02_01_clt_xbar_convergence.html"
+scrolling="no"
+style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe></section>
+<section id="standardization-and-the-z-statistic">
+<h3>2.3.4 Standardization and the Z Statistic<a class="headerlink" href="#standardization-and-the-z-statistic" title="Link to this heading"></a></h3>
+<p>To use a Normal approximation consistently, we standardize the sample mean.
+The standardized statistic is</p>
+<div class="math notranslate nohighlight">
+\[Z = \frac{\bar{X} - \mu}{\sigma/\sqrt{n}}\]</div>
+<p>The numerator <span class="math notranslate nohighlight">\(\bar{X}-\mu\)</span> is the deviation of the sample mean from the population mean.
+The denominator <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> converts that deviation into standard-error units.
+Under the CLT, <span class="math notranslate nohighlight">\(Z\)</span> is approximately <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span> when <span class="math notranslate nohighlight">\(n\)</span> is large enough for the approximation to be accurate.</p>
+<p>Figure 2 shows this standardization using the same simulated right-skewed transaction-time process as Figure 1.
+Each repetition produces a new sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span>, which is then converted into a standardized value <span class="math notranslate nohighlight">\(Z\)</span>.
+The dropdown changes <span class="math notranslate nohighlight">\(n\)</span>, and the x-axis range is fixed so that comparisons across <span class="math notranslate nohighlight">\(n\)</span> are fair.</p>
+<p>We compare the blue histogram (the sampling distribution of <span class="math notranslate nohighlight">\(Z\)</span>) to the gray standard Normal reference curve.
+For small <span class="math notranslate nohighlight">\(n\)</span>, the standardized distribution can still show skewness and tail differences.
+For larger <span class="math notranslate nohighlight">\(n\)</span>, the histogram aligns more closely with <span class="math notranslate nohighlight">\(\mathcal{N}(0,1)\)</span>, which supports the practical use of Normal probability calculations on the <span class="math notranslate nohighlight">\(Z\)</span> scale.</p>
+<iframe src="../_static/figures/stat2/02_02_clt_standardized_z.html"
+scrolling="no"
+style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe></section>
+<section id="when-does-the-clt-work-well-in-practice">
+<h3>2.3.5 When Does the CLT Work Well in Practice?<a class="headerlink" href="#when-does-the-clt-work-well-in-practice" title="Link to this heading"></a></h3>
+<p>In practice, we use the CLT to approximate probabilities about averages.
+A common guideline is that the approximation improves as <span class="math notranslate nohighlight">\(n\)</span> increases, and it improves faster when the population is not extremely skewed.
+When <span class="math notranslate nohighlight">\(n\)</span> is small and the population is strongly right-skewed, tail probabilities can be noticeably inaccurate.</p>
+<p>The sampling mechanism also matters.
+The CLT assumes independence, but operational data can violate independence when system conditions persist over time.
+In a convenience-store setting, transactions during a rush period can be similar because the queue, cashier, and service mix remain stable for several minutes.
+This can increase the true sampling variability of <span class="math notranslate nohighlight">\(\bar{X}\)</span> beyond what <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> suggests.</p>
+<p>Figure 3 focuses on tail-probability accuracy, because many operational decisions are threshold-based.
+The data are simulated under two population types with the same <span class="math notranslate nohighlight">\(\mu\)</span> and <span class="math notranslate nohighlight">\(\sigma\)</span>: one is strongly right-skewed (service-time-like) and one is Normal (a baseline where the Normal model is exact for <span class="math notranslate nohighlight">\(\bar{X}\)</span>).
+A repetition means drawing a new sample of size <span class="math notranslate nohighlight">\(n\)</span>, computing <span class="math notranslate nohighlight">\(\bar{X}\)</span>, and checking whether a threshold event occurs.</p>
+<p>For each <span class="math notranslate nohighlight">\(n\)</span>, we evaluate the event <span class="math notranslate nohighlight">\(\bar{X} &gt; \mu + 2(\sigma/\sqrt{n})\)</span>, which represents an “unusually high” average in standard-error units.
+The orange trace reports the absolute difference between the simulated tail probability and the CLT-based approximation <span class="math notranslate nohighlight">\(P(Z&gt;2)\)</span>.
+The gray baseline stays at zero because, when the population is Normal, the probability statement for <span class="math notranslate nohighlight">\(\bar{X}\)</span> is exactly the same as <span class="math notranslate nohighlight">\(P(Z&gt;2)\)</span> for every <span class="math notranslate nohighlight">\(n\)</span>.
+The main comparison is how error changes with <span class="math notranslate nohighlight">\(n\)</span>: the overall trend decreases, even if small <span class="math notranslate nohighlight">\(n\)</span> values do not decrease perfectly monotonically.</p>
+<iframe src="../_static/figures/stat2/02_03_clt_approximation_error.html"
+scrolling="no"
+style="width:95%; height:560px; border:none; overflow:hidden; display:block; margin:0 auto;">
+</iframe></section>
+<section id="example-2-1">
+<h3>2.3.6 Example 2.1<a class="headerlink" href="#example-2-1" title="Link to this heading"></a></h3>
+<p>A convenience store monitors transaction completion time <span class="math notranslate nohighlight">\(X\)</span> (minutes) during a stable period.
+Historical monitoring suggests that <span class="math notranslate nohighlight">\(\mu = 1.24\)</span> minutes and <span class="math notranslate nohighlight">\(\sigma = 0.99\)</span> minutes for individual transactions.
+A supervisor samples <span class="math notranslate nohighlight">\(n = 36\)</span> transactions from the lunch period and computes the sample mean <span class="math notranslate nohighlight">\(\bar{X}\)</span>.</p>
+<p><strong>Question:</strong>
+What is the approximate probability that the lunch-period average transaction time exceeds 1.50 minutes?</p>
+<p>We want <span class="math notranslate nohighlight">\(P(\bar{X} &gt; 1.50)\)</span>.
+By the CLT, <span class="math notranslate nohighlight">\(\bar{X}\)</span> is approximately Normal with mean <span class="math notranslate nohighlight">\(\mu\)</span> and standard error <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.
+We first compute the standard error:</p>
+<div class="math notranslate nohighlight">
+\[\sigma_{\bar{X}} = \frac{0.99}{\sqrt{36}} = \frac{0.99}{6} = 0.165\]</div>
+<p>We standardize the threshold 1.50:</p>
+<div class="math notranslate nohighlight">
+\[z = \frac{1.50 - 1.24}{0.165} \approx 1.58\]</div>
+<p>Therefore,</p>
+<div class="math notranslate nohighlight">
+\[P(\bar{X} &gt; 1.50) \approx P(Z &gt; 1.58) \approx 0.057\]</div>
+<p>This probability is about 5–6% under the Normal approximation.
+In repeated lunch periods with the same stable process and the same sampling plan, an average above 1.50 minutes would be uncommon but not impossible.
+If such events become frequent, it suggests a process change rather than random sampling variation.</p>
+</section>
+<section id="example-2-2">
+<h3>2.3.7 Example 2.2<a class="headerlink" href="#example-2-2" title="Link to this heading"></a></h3>
+<p>A manager wants to estimate the average transaction time during a rush period.
+To save time, the manager samples <span class="math notranslate nohighlight">\(n = 30\)</span> consecutive customers from 12:00 to 12:10 and reports the sample mean.
+This procedure is operationally convenient, but it can change the statistical properties of the sampling distribution.</p>
+<p><strong>Question:</strong>
+Why can consecutive sampling during a rush increase uncertainty in the sample mean?</p>
+<p>During a rush, system conditions can persist.
+For several minutes, the same cashier, queue length, and service mix can affect many consecutive customers in a similar way.
+This creates dependence, meaning that transaction times can be positively correlated, and the effective information is smaller than <span class="math notranslate nohighlight">\(n\)</span> independent observations.
+As a result, the true sampling variability of <span class="math notranslate nohighlight">\(\bar{X}\)</span> can be larger than <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>, and probability calculations based on independence can underestimate risk.</p>
+</section>
 </section>
 <section id="discussion-and-common-errors">
-<h2>Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
-<p>1) Confusing parameters with statistics.
-A parameter (such as <span class="math notranslate nohighlight">\(\mu\)</span> or <span class="math notranslate nohighlight">\(p\)</span>) is a population quantity and is fixed in the model.
-A statistic (such as <span class="math notranslate nohighlight">\(\bar{X}\)</span> or <span class="math notranslate nohighlight">\(\hat{p}\)</span>) is random before sampling.
-To avoid the error, we explicitly state whether a symbol refers to the population model or to the realized sample.</p>
-<p>2) Treating standard deviation and standard error as the same concept.
-The standard deviation <span class="math notranslate nohighlight">\(\sigma\)</span> describes variability of individual observations.
-The standard error describes variability of a statistic across repeated samples.
-To avoid the error, we always attach the name of the object: “spread of <span class="math notranslate nohighlight">\(X\)</span>” versus “spread of <span class="math notranslate nohighlight">\(\bar{X}\)</span>.”</p>
-<p>3) Using a convenience sample but reasoning as if it were random.
-Nonrandom selection can create systematic bias, even if <span class="math notranslate nohighlight">\(n\)</span> is large.
-The resulting sampling distribution may be centered away from the parameter.
-To avoid the error, we check the data collection mechanism and ensure independence and representativeness are plausible.</p>
+<h2>2.4 Discussion and Common Errors<a class="headerlink" href="#discussion-and-common-errors" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Confusing the variability of <span class="math notranslate nohighlight">\(X\)</span> with the variability of <span class="math notranslate nohighlight">\(\bar{X}\)</span>.
+Individual transaction times can be highly variable, especially under right-skewness.
+The sample mean is less variable, and its typical variation is measured by <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span>.</p></li>
+<li><p>Applying the CLT without stating and checking the sampling mechanism.
+Operational data can be dependent, especially when observations are collected consecutively in time during stable system conditions.
+When dependence is present, <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span> can be too small, and CLT-based probability calculations can be too optimistic.</p></li>
+<li><p>Using a Normal approximation for extreme-tail decisions with small <span class="math notranslate nohighlight">\(n\)</span> under strong skewness.
+Tail probabilities are often the last part of a distribution to be approximated well.
+If tail accuracy is important, larger samples or simulation-based validation should be considered.</p></li>
+</ol>
 </section>
 <section id="summary">
-<h2>Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
+<h2>2.5 Summary<a class="headerlink" href="#summary" title="Link to this heading"></a></h2>
 <ul class="simple">
-<li><p>Random sampling is modeled by i.i.d. observations <span class="math notranslate nohighlight">\(X_1,\ldots,X_n\)</span> from a population distribution.</p></li>
-<li><p>A statistic is a function of the sample, so it is a random variable before we observe data.</p></li>
-<li><p>The sampling distribution of a statistic describes how that statistic behaves under repeated sampling.</p></li>
-<li><p>Standard error is the standard deviation of a statistic’s sampling distribution and acts as a typical sampling error.</p></li>
-<li><p>For i.i.d. sampling, <span class="math notranslate nohighlight">\(\mathrm{SE}(\bar{X})=\sigma/\sqrt{n}\)</span> and <span class="math notranslate nohighlight">\(\mathrm{SE}(\hat{p})=\sqrt{p(1-p)/n}\)</span> in standard settings.</p></li>
-<li><p>Source alignment: definitions and motivation follow standard treatments of random sampling and sampling distributions. :contentReference[oaicite:0]{index=0} :contentReference[oaicite:1]{index=1}</p></li>
+<li><p>The sampling distribution of <span class="math notranslate nohighlight">\(\bar{X}\)</span> describes how sample averages vary across repeated samples of size <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(E(\bar{X})=\mu\)</span> and <span class="math notranslate nohighlight">\(\mathrm{Var}(\bar{X})=\sigma^2/n\)</span>, so the standard error is <span class="math notranslate nohighlight">\(\sigma/\sqrt{n}\)</span></p></li>
+<li><p>If the population is Normal, then <span class="math notranslate nohighlight">\(\bar{X}\)</span> is exactly Normal for any <span class="math notranslate nohighlight">\(n\)</span></p></li>
+<li><p>The CLT implies that <span class="math notranslate nohighlight">\(\bar{X}\)</span> is approximately Normal for large <span class="math notranslate nohighlight">\(n\)</span> under independence and finite variance</p></li>
+<li><p>Standardization via <span class="math notranslate nohighlight">\(Z=(\bar{X}-\mu)/(\sigma/\sqrt{n})\)</span> supports Normal probability calculations on a common scale</p></li>
+<li><p>Skewness, dependence, and tail decisions can reduce approximation accuracy and require caution</p></li>
 </ul>
 </section>
 </section>
@@ -530,8 +332,8 @@ To avoid the error, we check the data collection mechanism and ensure independen
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="stat2_01_orientation_and_inference_roadmap.html" class="btn btn-neutral float-left" title="1. Orientation &amp; Inference Roadmap" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="stat2_03_sampling_distributions_clt_and_normal_approx.html" class="btn btn-neutral float-right" title="3. Sampling Distributions II: The Central Limit Theorem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="stat2_01_random_sampling_point_est_std_error.html" class="btn btn-neutral float-left" title="1. Sampling Distributions I: Random Sampling, Point Estimation, and Standard Error" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="stat2_03_sampling_distributions_clt_and_normal_approx.html" class="btn btn-neutral float-right" title="2. Sampling Dist III: Chi-Square, t, and F" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

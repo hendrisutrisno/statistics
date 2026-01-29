@@ -1,0 +1,231 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why the Sample Variance Uses \(n-1\) &mdash; Statistics</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=80f29991" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+      <script src="../_static/doctools.js?v=fd6eb6e6"></script>
+      <script src="../_static/sphinx_highlight.js?v=6ffebe34"></script>
+      <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "displayMath": [["$$", "$$"], ["\\[", "\\]"]]}, "options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+      <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Statistics
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Courses</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../stat1/index.html">Statistics 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../stat2/index.html">Statistics 2</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Statistics</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Why the Sample Variance Uses <span class="math notranslate nohighlight">\(n-1\)</span></li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/useful_concepts/variance_n_minus_one.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="why-the-sample-variance-uses-n-1">
+<span id="sec-variance-n-minus-one"></span><h1>Why the Sample Variance Uses <span class="math notranslate nohighlight">\(n-1\)</span><a class="headerlink" href="#why-the-sample-variance-uses-n-1" title="Link to this heading"></a></h1>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p>Back to Module 1 (Sample variance subsection): <a class="reference internal" href="../stat2/stat2_01_random_sampling_point_est_std_error.html#sec-01-01-sample-variance"><span class="std std-ref">1.6.2 Sample variance</span></a></p>
+</div>
+<section id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Link to this heading"></a></h2>
+<p>In Module 1, the sample variance is defined as</p>
+<div class="math notranslate nohighlight">
+\[S^2=\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar{X})^2\]</div>
+<p>This page explains why the denominator is <span class="math notranslate nohighlight">\(n-1\)</span> rather than <span class="math notranslate nohighlight">\(n\)</span>.
+The explanation has two parts.</p>
+<ol class="arabic simple">
+<li><p>A <em>degrees of freedom</em> argument: once the sample mean is fixed, only <span class="math notranslate nohighlight">\(n-1\)</span> deviations can vary independently.</p></li>
+<li><p>An <em>unbiasedness</em> argument: dividing by <span class="math notranslate nohighlight">\(n-1\)</span> makes <span class="math notranslate nohighlight">\(S^2\)</span> match the long-run variance level <span class="math notranslate nohighlight">\(\sigma^2\)</span> under i.i.d. sampling.</p></li>
+</ol>
+</section>
+<section id="two-objects-population-variance-vs-sample-variance">
+<h2>Two objects: population variance vs sample variance<a class="headerlink" href="#two-objects-population-variance-vs-sample-variance" title="Link to this heading"></a></h2>
+<p>Let <span class="math notranslate nohighlight">\(X\)</span> represent a population or process measurement.</p>
+<ul class="simple">
+<li><p>The population variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> is a parameter.
+It describes the long-run spread of the population distribution.</p></li>
+<li><p>The sample variance <span class="math notranslate nohighlight">\(S^2\)</span> is a statistic.
+It is computed from a finite sample and changes from sample to sample.</p></li>
+</ul>
+<p>The sample variance measures spread by using deviations from the sample mean.
+For each observation, define the deviation</p>
+<div class="math notranslate nohighlight">
+\[d_i=X_i-\bar{X}\]</div>
+<p>The quantity <span class="math notranslate nohighlight">\(\sum_{i=1}^{n}d_i^2\)</span> measures the total squared spread of the sample around its own center <span class="math notranslate nohighlight">\(\bar{X}\)</span>.
+The denominator determines how we scale this total spread into an average-like measure.</p>
+</section>
+<section id="key-constraint-deviations-must-sum-to-zero">
+<h2>Key constraint: deviations must sum to zero<a class="headerlink" href="#key-constraint-deviations-must-sum-to-zero" title="Link to this heading"></a></h2>
+<p>The sample mean is</p>
+<div class="math notranslate nohighlight">
+\[\bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_i\]</div>
+<p>Now consider the sum of deviations from <span class="math notranslate nohighlight">\(\bar{X}\)</span></p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^{n}(X_i-\bar{X})
+=\sum_{i=1}^{n}X_i-n\bar{X}\]</div>
+<p>Since <span class="math notranslate nohighlight">\(n\bar{X}=\sum_{i=1}^{n}X_i\)</span>, we obtain</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^{n}(X_i-\bar{X})=0\]</div>
+<p>This is not an optional property.
+It is automatically true for any dataset once <span class="math notranslate nohighlight">\(\bar{X}\)</span> is computed.</p>
+<p>Interpretation.
+The deviations around the sample mean must balance.
+If some observations are above <span class="math notranslate nohighlight">\(\bar{X}\)</span>, then others must be below <span class="math notranslate nohighlight">\(\bar{X}\)</span> so that the total deviation is exactly zero.</p>
+</section>
+<section id="degrees-of-freedom-why-only-n-1-can-vary-freely">
+<h2>Degrees of freedom: why only <span class="math notranslate nohighlight">\(n-1\)</span> can vary freely<a class="headerlink" href="#degrees-of-freedom-why-only-n-1-can-vary-freely" title="Link to this heading"></a></h2>
+<p>Define the deviations <span class="math notranslate nohighlight">\(d_i=X_i-\bar{X}\)</span> for <span class="math notranslate nohighlight">\(i=1,\dots,n\)</span>.
+From the previous section,</p>
+<div class="math notranslate nohighlight">
+\[\sum_{i=1}^{n}d_i=0\]</div>
+<p>This equation is a <em>linear constraint</em> that ties all <span class="math notranslate nohighlight">\(n\)</span> deviations together.</p>
+<p>A useful way to see the consequence is to treat the first <span class="math notranslate nohighlight">\(n-1\)</span> deviations as free choices.
+Once <span class="math notranslate nohighlight">\(d_1,\dots,d_{n-1}\)</span> are fixed, the last deviation must satisfy the constraint, so it is forced to be</p>
+<div class="math notranslate nohighlight">
+\[d_n=-\sum_{i=1}^{n-1}d_i\]</div>
+<p>Therefore, only <span class="math notranslate nohighlight">\(n-1\)</span> deviations can vary independently.
+The remaining deviation is determined by the requirement that deviations sum to zero.</p>
+<p>This is the meaning of “<span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom” in this setting:
+after estimating the center with <span class="math notranslate nohighlight">\(\bar{X}\)</span>, the sample contains only <span class="math notranslate nohighlight">\(n-1\)</span> independent pieces of information about spread.</p>
+</section>
+<section id="example-the-last-deviation-is-determined">
+<h2>Example: the last deviation is determined<a class="headerlink" href="#example-the-last-deviation-is-determined" title="Link to this heading"></a></h2>
+<p>Suppose <span class="math notranslate nohighlight">\(n=3\)</span> and the deviations from the sample mean are <span class="math notranslate nohighlight">\(d_1,d_2,d_3\)</span>.
+The constraint is</p>
+<div class="math notranslate nohighlight">
+\[d_1+d_2+d_3=0\]</div>
+<p>If <span class="math notranslate nohighlight">\(d_1=2\)</span> and <span class="math notranslate nohighlight">\(d_2=-1\)</span>, then the last deviation must be</p>
+<div class="math notranslate nohighlight">
+\[d_3=-(2+(-1))=-1\]</div>
+<p>So the third deviation is not free once the first two are fixed.</p>
+<p>What this example shows conceptually is that centering the data at <span class="math notranslate nohighlight">\(\bar{X}\)</span> removes one dimension of variability.
+One degree of freedom is used to locate the center, leaving <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom for spread.</p>
+</section>
+<section id="unbiasedness-why-n-1-gives-the-correct-long-run-level">
+<h2>Unbiasedness: why <span class="math notranslate nohighlight">\(n-1\)</span> gives the correct long-run level<a class="headerlink" href="#unbiasedness-why-n-1-gives-the-correct-long-run-level" title="Link to this heading"></a></h2>
+<p>The degrees-of-freedom argument explains why <span class="math notranslate nohighlight">\(n-1\)</span> appears naturally when measuring spread around the sample mean.
+The second argument explains why <span class="math notranslate nohighlight">\(n-1\)</span> is also the correct scaling if the goal is to estimate <span class="math notranslate nohighlight">\(\sigma^2\)</span>.</p>
+<p>Assume an i.i.d. sample with</p>
+<ul class="simple">
+<li><p>population mean <span class="math notranslate nohighlight">\(\mu\)</span></p></li>
+<li><p>population variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></p></li>
+</ul>
+<p>A standard result is</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\!\left[\sum_{i=1}^{n}(X_i-\bar{X})^2\right]=(n-1)\sigma^2\]</div>
+<p>Interpretation.
+If sampling could be repeated many times, the average value of the total squared deviation around <span class="math notranslate nohighlight">\(\bar{X}\)</span> would be <span class="math notranslate nohighlight">\((n-1)\sigma^2\)</span>, not <span class="math notranslate nohighlight">\(n\sigma^2\)</span>.
+The reason is that using <span class="math notranslate nohighlight">\(\bar{X}\)</span> rather than <span class="math notranslate nohighlight">\(\mu\)</span> makes the deviations slightly smaller on average, because <span class="math notranslate nohighlight">\(\bar{X}\)</span> is chosen from the data to be the best-fitting center for that sample.</p>
+<p>Dividing by <span class="math notranslate nohighlight">\(n-1\)</span> converts this expected total into the variance level</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}[S^2]=\sigma^2\]</div>
+<p>So <span class="math notranslate nohighlight">\(S^2\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span> under the i.i.d. model.
+In other words, <span class="math notranslate nohighlight">\(S^2\)</span> has the correct long-run target when the model assumptions hold.</p>
+</section>
+<section id="a-brief-contrast-what-if-we-divide-by-n">
+<h2>A brief contrast: what if we divide by <span class="math notranslate nohighlight">\(n\)</span><a class="headerlink" href="#a-brief-contrast-what-if-we-divide-by-n" title="Link to this heading"></a></h2>
+<p>Sometimes we also see the alternative quantity</p>
+<div class="math notranslate nohighlight">
+\[\frac{1}{n}\sum_{i=1}^{n}(X_i-\bar{X})^2\]</div>
+<p>This quantity is the average squared deviation from the sample mean using <span class="math notranslate nohighlight">\(n\)</span> in the denominator.
+Under i.i.d. sampling, its expectation is</p>
+<div class="math notranslate nohighlight">
+\[\mathbb{E}\!\left[\frac{1}{n}\sum_{i=1}^{n}(X_i-\bar{X})^2\right]=\frac{n-1}{n}\sigma^2\]</div>
+<p>So it tends to underestimate <span class="math notranslate nohighlight">\(\sigma^2\)</span> on average for finite <span class="math notranslate nohighlight">\(n\)</span>.</p>
+<p>This does not make it useless.
+It is often used as a descriptive measure of within-sample spread, and it also appears naturally in some optimization settings.
+However, when the goal is inference about <span class="math notranslate nohighlight">\(\sigma^2\)</span>, the <span class="math notranslate nohighlight">\(n-1\)</span> version is the standard choice because it removes this systematic downward bias.</p>
+</section>
+<section id="key-takeaways">
+<h2>Key takeaways<a class="headerlink" href="#key-takeaways" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Deviations around the sample mean satisfy <span class="math notranslate nohighlight">\(\sum_{i=1}^{n}(X_i-\bar{X})=0\)</span></p></li>
+<li><p>This constraint means only <span class="math notranslate nohighlight">\(n-1\)</span> deviations can vary independently</p></li>
+<li><p>Estimating the mean uses one degree of freedom, leaving <span class="math notranslate nohighlight">\(n-1\)</span> degrees of freedom for spread</p></li>
+<li><p>Dividing by <span class="math notranslate nohighlight">\(n-1\)</span> makes <span class="math notranslate nohighlight">\(S^2\)</span> unbiased for <span class="math notranslate nohighlight">\(\sigma^2\)</span> under i.i.d. sampling</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2026, Hendri Sutrisno.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
