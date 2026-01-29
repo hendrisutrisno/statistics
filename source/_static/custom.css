@@ -1,0 +1,6 @@
+.compact-notation table td,
+.compact-notation table th {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  line-height: 2.5;
+}
